@@ -25,3 +25,4 @@ Karena statis, dapat ditempatkan di layanan static hosting (Netlify, Vercel, Git
 ## Lisensi
 Pribadi. Hubungi pemilik untuk penggunaan lebih lanjut.
 
+

@@ -322,10 +322,10 @@
           <h2>Portfolio Highlights</h2>
           <div class="portfolio">
             <div class="card">
-              <img src="images/porto1.png" alt="Hospital CMS dashboard preview" />
-              <h3>Hospital CMS Platform</h3>
+              <img src="images/porto1.png" alt="School CMS dashboard preview" />
+              <h3>School CMS Platform</h3>
               <p class="meta">React, PHP</p>
-              <p>Clinical CMS with role-based access, patient records, and streamlined workflows for hospital operations.</p>
+              <p>Clinical CMS with role-based access, patient records, and streamlined workflows for School operations.</p>
             </div>
             <div class="card">
               <img src="images/porto2.png" alt="Sustainability platform preview" />
