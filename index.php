@@ -315,6 +315,7 @@
             <span class="badge">Redis & Queues</span>
             <span class="badge">CI/CD</span>
             <span class="badge">Cloud & Containers</span>
+            <span class="badge">Vue.js</span>
           </div>
         </section>
 
