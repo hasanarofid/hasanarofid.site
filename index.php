@@ -365,7 +365,7 @@
               <p class="meta">Laravel</p>
               <p>Compliance and supervision system for schools with audit trails, scheduling, and actionable dashboards.</p>
             </div>
-          </div>
+          </div> 
         </section>
       </main>
 
