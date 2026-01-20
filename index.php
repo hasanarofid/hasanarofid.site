@@ -320,7 +320,32 @@
         </section>
 
         <section>
-          <h2>Portfolio Highlights</h2>
+          <h2>Featured Product</h2>
+          <div class="card" style="grid-template-columns: 1fr; border-color: var(--accent); background: linear-gradient(145deg, var(--card), rgba(56, 189, 248, 0.05)); margin-bottom: 32px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: center;">
+              <div>
+                <h3 style="font-size: 1.5rem; margin-bottom: 8px; color: var(--text);">Operra — Multi-CRM & WhatsApp Solution</h3>
+                <p style="color: var(--muted); margin-bottom: 16px;">
+                  Sistem CRM enterprise-grade yang mengintegrasikan manajemen lead, sales pipeline, dan WhatsApp automation dalam satu dashboard terpusat untuk efisiensi bisnis maksimal.
+                </p>
+                <div class="badges" style="margin-bottom: 20px;">
+                  <span class="badge">Laravel 11</span>
+                  <span class="badge">WhatsApp API</span>
+                  <span class="badge">Multi-Tenant</span>
+                  <span class="badge">Redis Queues</span>
+                  <span class="badge">PostgreSQL</span>
+                </div>
+                <a href="http://operra.hasanarofid.site/" target="_blank" class="btn primary">Kunjungi Operra →</a>
+              </div>
+              <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--stroke);">
+                <img src="images/porto-operra.png" alt="Operra Dashboard Preview" style="height: auto; cursor: zoom-in; width: 100%; display: block;" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Other Portfolio Highlights</h2>
           <div class="portfolio">
             <div class="card">
               <img src="images/porto1.png" alt="School CMS dashboard preview" />
@@ -345,7 +370,7 @@
       </main>
 
       <footer>
-        © 2025 Hasan Arofid — Built with intention, not hype.
+        © 2026 Hasan Arofid — Built with intention, not hype.
       </footer>
     </div>
   </div>

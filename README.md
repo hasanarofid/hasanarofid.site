@@ -26,3 +26,4 @@ Karena statis, dapat ditempatkan di layanan static hosting (Netlify, Vercel, Git
 Pribadi. Hubungi pemilik untuk penggunaan lebih lanjut.
 
 
+
