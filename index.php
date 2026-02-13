@@ -1,3 +1,28 @@
+<?php
+// Visitor Tracking Logic
+$dbFile = __DIR__ . '/stats.db';
+try {
+    $db = new PDO('sqlite:' . $dbFile);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    
+    // Create table if it doesn't exist
+    $db->exec("CREATE TABLE IF NOT EXISTS visits (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        visit_date DATE DEFAULT (date('now')),
+        ip_hash TEXT,
+        user_agent TEXT,
+        created_at DATETIME DEFAULT (datetime('now'))
+    )");
+
+    // Log the visit
+    $ipHash = hash('sha256', $_SERVER['REMOTE_ADDR'] ?? 'unknown');
+    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
+    $stmt = $db->prepare("INSERT INTO visits (ip_hash, user_agent) VALUES (?, ?)");
+    $stmt->execute([$ipHash, $userAgent]);
+} catch (PDOException $e) {
+    // Silently fail to not disrupt the user experience
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
