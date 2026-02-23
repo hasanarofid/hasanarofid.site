@@ -5,22 +5,59 @@ try {
     $db = new PDO('sqlite:' . $dbFile);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // Create table if it doesn't exist
+    // Create table with expanded columns
     $db->exec("CREATE TABLE IF NOT EXISTS visits (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         visit_date DATE DEFAULT (date('now')),
         ip_hash TEXT,
+        ip_address TEXT,
         user_agent TEXT,
+        country TEXT,
+        city TEXT,
+        is_bot INTEGER DEFAULT 0,
+        device_type TEXT,
         created_at DATETIME DEFAULT (datetime('now'))
     )");
 
-    // Log the visit
-    $ipHash = hash('sha256', $_SERVER['REMOTE_ADDR'] ?? 'unknown');
-    $userAgent = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
-    $stmt = $db->prepare("INSERT INTO visits (ip_hash, user_agent) VALUES (?, ?)");
-    $stmt->execute([$ipHash, $userAgent]);
+    // Capture visitor data
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+    $ipHash = hash('sha256', $ip);
+    $ua = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
+    
+    // Simple Bot/SEO detection
+    $isBot = 0;
+    if (preg_match('/(googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebookexternalhit|ia_archiver)/i', $ua)) {
+        $isBot = 1;
+    }
+
+    // Device detection
+    $device = 'Desktop';
+    if (preg_match('/(android|iphone|ipad|mobile)/i', $ua)) {
+        $device = 'Mobile';
+    }
+
+    // Geo-location (Simple caching to avoid per-visit API hits could be added, but for now simple)
+    $country = 'Unknown';
+    $city = 'Unknown';
+    
+    // To avoid slowing down the site, we only do GeoIP for new IPs or occasionally
+    // For this implementation, we'll try to fetch it but with a short timeout
+    if ($ip !== '127.0.0.1' && $ip !== '::1' && !empty($ip)) {
+        $ctx = stream_context_create(['http' => ['timeout' => 1]]);
+        $geo = @file_get_contents("http://ip-api.com/json/$ip?fields=status,country,city", false, $ctx);
+        if ($geo) {
+            $geoData = json_decode($geo, true);
+            if (($geoData['status'] ?? '') === 'success') {
+                $country = $geoData['country'] ?? 'Unknown';
+                $city = $geoData['city'] ?? 'Unknown';
+            }
+        }
+    }
+
+    $stmt = $db->prepare("INSERT INTO visits (ip_hash, ip_address, user_agent, country, city, is_bot, device_type) VALUES (?, ?, ?, ?, ?, ?, ?)");
+    $stmt->execute([$ipHash, $ip, $ua, $country, $city, $isBot, $device]);
 } catch (PDOException $e) {
-    // Silently fail to not disrupt the user experience
+    // Silently fail
 }
 ?>
 <!DOCTYPE html>
@@ -28,9 +65,60 @@ try {
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hasan Arofid | Senior Fullstack Engineer</title>
+  <title>Hasan Arofid | Senior Fullstack Engineer & Web Designing Services</title>
 
-  <meta name="description" content="Hasan Arofid – Senior Fullstack Engineer with 10+ years experience building scalable web systems." />
+  <meta name="description" content="Hasan Arofid – Senior Fullstack Engineer with 10+ years experience providing premium web designing services in Delhi, India, the UK, and globally." />
+  <meta name="keywords" content="web designing services, web designing services near me, web designing services in delhi, web designing services india, web designing services uk, fullstack engineer, PHP, Laravel, Node.js, React" />
+  <meta name="geo.region" content="ID-JB" />
+  <meta name="geo.placename" content="Bekasi" />
+  <meta name="geo.position" content="-6.2383;106.9756" />
+  <meta name="ICBM" content="-6.2383, 106.9756" />
+
+  <!-- Open Graph / SEO -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hasanarofid.site/" />
+  <meta property="og:title" content="Hasan Arofid | Premium Web Designing Services" />
+  <meta property="og:description" content="Senior Fullstack Engineer offering scalable web systems and specialized web designing services globally, including Delhi, India, and the UK." />
+  <meta property="og:image" content="images/porto-operra.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Hasan Arofid - Web Designing Services",
+    "image": "https://hasanarofid.site/images/porto-operra.png",
+    "@id": "https://hasanarofid.site/",
+    "url": "https://hasanarofid.site/",
+    "telephone": "+628123456789", 
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Delhi",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 28.6139,
+      "longitude": 77.2090
+    },
+    "servesCrawl": true,
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Delhi"
+      },
+      {
+        "@type": "Country",
+        "name": "India"
+      },
+      {
+        "@type": "Country",
+        "name": "United Kingdom"
+      }
+    ],
+    "description": "Premium web designing services and fullstack engineering for businesses globally, specializing in scalable systems and CRM solutions."
+  }
+  </script>
 
   <style>
     :root {
@@ -114,6 +202,8 @@ try {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      cursor: pointer;
+      font-size: 1rem;
     }
 
     .btn:hover {
@@ -213,6 +303,44 @@ try {
       margin: 0;
     }
 
+    /* Form Styles */
+    .contact-form {
+      display: grid;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .form-group label {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .form-group input, 
+    .form-group textarea, 
+    .form-group select {
+      background: var(--card);
+      border: 1px solid var(--stroke);
+      border-radius: 10px;
+      padding: 12px;
+      color: var(--text);
+      font-size: 1rem;
+      transition: border-color 120ms ease;
+    }
+
+    .form-group input:focus, 
+    .form-group textarea:focus, 
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
     .social-links {
       display: flex;
       gap: 14px;
@@ -294,6 +422,27 @@ try {
       background: rgba(56, 189, 248, 0.15);
       border-color: var(--accent);
     }
+
+    #form-status {
+      margin-top: 16px;
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+    }
+
+    #form-status.success {
+      display: block;
+      background: rgba(34, 197, 94, 0.1);
+      color: #4ade80;
+      border: 1px solid rgba(34, 197, 94, 0.2);
+    }
+
+    #form-status.error {
+      display: block;
+      background: rgba(239, 68, 68, 0.1);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.2);
+    }
   </style>
 </head>
 
@@ -305,10 +454,10 @@ try {
         <p class="subtitle">Senior Fullstack Engineer • 10+ Years Experience</p>
         <p class="lede">
           I build resilient web systems and ship reliable features. From backend-heavy platforms to end-to-end delivery,
-          I turn complex business workflows into dependable software with a calm, production-first mindset.
+          I turn complex business workflows into dependable software with a calm, production-first mindset. Providing professional web designing services globally.
         </p>
         <div class="actions">
-          <a class="btn primary" href="mailto:hasanarofid@gmail.com">Book a call</a>
+          <a class="btn primary" href="#request-form">Start a Project</a>
           <a class="btn" href="https://github.com/hasanarofid" target="_blank">View GitHub</a>
         </div>
         <div class="social-links">
@@ -325,6 +474,7 @@ try {
             <div class="item">Backend architecture, API integration, and data flows</div>
             <div class="item">Performance tuning, observability, and incident recovery</div>
             <div class="item">Technical consulting for growing products and teams</div>
+            <div class="item">Premium web designing services for Delhi, India, UK, and beyond</div>
           </div>
         </section>
 
@@ -351,7 +501,7 @@ try {
               <div>
                 <h3 style="font-size: 1.5rem; margin-bottom: 8px; color: var(--text);">Operra — Multi-CRM & WhatsApp Solution</h3>
                 <p style="color: var(--muted); margin-bottom: 16px;">
-                  Sistem CRM enterprise-grade yang mengintegrasikan manajemen lead, sales pipeline, dan WhatsApp automation dalam satu dashboard terpusat untuk efisiensi bisnis maksimal.
+                  An enterprise-grade CRM system integrating lead management, sales pipeline, and WhatsApp automation into one centralized dashboard for maximum business efficiency.
                 </p>
                 <div class="badges" style="margin-bottom: 20px;">
                   <span class="badge">Laravel 11</span>
@@ -360,7 +510,7 @@ try {
                   <span class="badge">Redis Queues</span>
                   <span class="badge">PostgreSQL</span>
                 </div>
-                <a href="http://operra.hasanarofid.site/" target="_blank" class="btn primary">Kunjungi Operra →</a>
+                <a href="http://operra.hasanarofid.site/" target="_blank" class="btn primary">Visit Operra →</a>
               </div>
               <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--stroke);">
                 <img src="images/porto-operra.png" alt="Operra Dashboard Preview" style="height: auto; cursor: zoom-in; width: 100%; display: block;" />
@@ -376,7 +526,7 @@ try {
               <img src="images/porto1.png" alt="School CMS dashboard preview" />
               <h3>School CMS Platform</h3>
               <p class="meta">React, PHP</p>
-              <p>Clinical CMS with role-based access, patient records, and streamlined workflows for School operations.</p>
+              <p>A comprehensive CMS with role-based access, student records, and streamlined workflows for educational operations.</p>
             </div>
             <div class="card">
               <img src="images/porto2.png" alt="Sustainability platform preview" />
@@ -392,10 +542,50 @@ try {
             </div>
           </div> 
         </section>
+
+        <section id="request-form">
+          <h2>Request Web Development</h2>
+          <p>Looking for professional web designing services? Fill out the form below to share your project details, and I'll get back to you shortly.</p>
+          <form class="contact-form" id="dev-request-form">
+            <div class="form-group">
+              <label for="name">Full Name</label>
+              <input type="text" id="name" name="name" placeholder="John Doe" required />
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="john@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="service">Service Needed</label>
+              <select id="service" name="service" required>
+                <option value="" disabled selected>Select a service</option>
+                <option value="web-design">Web Designing Services</option>
+                <option value="fullstack-dev">Fullstack Development</option>
+                <option value="backend-api">Backend & API Integration</option>
+                <option value="consulting">Technical Consulting</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="location">Your Location (Optional)</label>
+              <select id="location" name="location">
+                <option value="international">Other / International</option>
+                <option value="delhi">Delhi, India</option>
+                <option value="india">India (Other)</option>
+                <option value="uk">United Kingdom</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="description">Project Description</label>
+              <textarea id="description" name="description" rows="5" placeholder="Tell me about your project, goals, and any specific requirements..." required></textarea>
+            </div>
+            <button type="submit" class="btn primary" style="justify-content: center;">Send Request</button>
+          </form>
+          <div id="form-status"></div>
+        </section>
       </main>
 
       <footer>
-        © 2026 Hasan Arofid — Built with intention, not hype.
+        © 2026 Hasan Arofid — Professional Web Designing Services in Delhi, India, UK, and Globally.
       </footer>
     </div>
   </div>
@@ -443,6 +633,46 @@ try {
       });
       window.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeLightbox();
+      });
+
+      // Form Submission Logic
+      const form = document.getElementById('dev-request-form');
+      const status = document.getElementById('form-status');
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const submitBtn = form.querySelector('button[type="submit"]');
+        
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending...';
+        status.className = '';
+        status.textContent = '';
+        status.style.display = 'none';
+
+        try {
+          const response = await fetch('mail.php', {
+            method: 'POST',
+            body: formData
+          });
+          const result = await response.json();
+
+          if (result.success) {
+            status.className = 'success';
+            status.textContent = 'Thank you! Your request has been sent successfully.';
+            form.reset();
+          } else {
+            status.className = 'error';
+            status.textContent = 'Oops! ' + (result.message || 'Something went wrong. Please try again.');
+          }
+        } catch (error) {
+          status.className = 'error';
+          status.textContent = 'Could not connect to the server. Please check your connection.';
+        } finally {
+          status.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send Request';
+        }
       });
     })();
   </script>
