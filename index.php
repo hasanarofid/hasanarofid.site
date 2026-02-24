@@ -297,6 +297,40 @@ try {
       letter-spacing: -0.01em;
     }
 
+    /* Featured Hero Card */
+    .featured-card {
+      grid-template-columns: 1fr;
+      border-color: var(--accent);
+      background: linear-gradient(145deg, var(--card), rgba(56, 189, 248, 0.05));
+      margin-bottom: 32px;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      align-items: center;
+    }
+
+    .featured-content h3 {
+      font-size: 1.5rem;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+
+    .featured-image {
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid var(--stroke);
+    }
+
+    .featured-image img {
+      height: auto;
+      cursor: zoom-in;
+      width: 100%;
+      display: block;
+    }
+
     .meta {
       color: var(--muted);
       font-size: 0.95rem;
@@ -443,6 +477,39 @@ try {
       color: #f87171;
       border: 1px solid rgba(239, 68, 68, 0.2);
     }
+
+    /* Responsive Queries */
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 16px 64px;
+      }
+      .panel {
+        padding: 24px 20px;
+      }
+      header h1 {
+        font-size: 2.2rem;
+      }
+      .featured-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .actions {
+        flex-direction: column;
+      }
+      .portfolio {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 
@@ -496,10 +563,10 @@ try {
 
         <section>
           <h2>Featured Product</h2>
-          <div class="card" style="grid-template-columns: 1fr; border-color: var(--accent); background: linear-gradient(145deg, var(--card), rgba(56, 189, 248, 0.05)); margin-bottom: 32px;">
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; align-items: center;">
-              <div>
-                <h3 style="font-size: 1.5rem; margin-bottom: 8px; color: var(--text);">Operra — Multi-CRM & WhatsApp Solution</h3>
+          <div class="card featured-card">
+            <div class="featured-grid">
+              <div class="featured-content">
+                <h3>Operra — Multi-CRM & WhatsApp Solution</h3>
                 <p style="color: var(--muted); margin-bottom: 16px;">
                   An enterprise-grade CRM system integrating lead management, sales pipeline, and WhatsApp automation into one centralized dashboard for maximum business efficiency.
                 </p>
@@ -512,8 +579,8 @@ try {
                 </div>
                 <a href="http://operra.hasanarofid.site/" target="_blank" class="btn primary">Visit Operra →</a>
               </div>
-              <div style="border-radius: 12px; overflow: hidden; border: 1px solid var(--stroke);">
-                <img src="images/porto-operra.png" alt="Operra Dashboard Preview" style="height: auto; cursor: zoom-in; width: 100%; display: block;" />
+              <div class="featured-image">
+                <img src="images/porto-operra.png" alt="Operra Dashboard Preview" />
               </div>
             </div>
           </div>
