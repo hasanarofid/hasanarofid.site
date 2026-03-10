@@ -566,21 +566,21 @@ try {
           <div class="card featured-card">
             <div class="featured-grid">
               <div class="featured-content">
-                <h3>Operra — Multi-CRM & WhatsApp Solution</h3>
+                <h3>Studio.hasanarofid</h3>
                 <p style="color: var(--muted); margin-bottom: 16px;">
-                  An enterprise-grade CRM system integrating lead management, sales pipeline, and WhatsApp automation into one centralized dashboard for maximum business efficiency.
+                  Launch website Anda dalam 1 jam dengan template siap pakai. Desain minimalis, SaaS style, dan konversi tinggi.
                 </p>
                 <div class="badges" style="margin-bottom: 20px;">
-                  <span class="badge">Laravel 11</span>
-                  <span class="badge">WhatsApp API</span>
-                  <span class="badge">Multi-Tenant</span>
-                  <span class="badge">Redis Queues</span>
-                  <span class="badge">PostgreSQL</span>
+                  <span class="badge">Vite</span>
+                  <span class="badge">Vanilla JS</span>
+                  <span class="badge">CSS3</span>
+                  <span class="badge">SEO Optimized</span>
+                  <span class="badge">Responsive</span>
                 </div>
-                <a href="http://operra.hasanarofid.site/" target="_blank" class="btn primary">Visit Operra →</a>
+                <a href="https://studio.hasanarofid.site/" target="_blank" class="btn primary">Visit Studio →</a>
               </div>
               <div class="featured-image">
-                <img src="images/porto-operra.png" alt="Operra Dashboard Preview" />
+                <img src="images/studio-preview.png" alt="Studio Hasanarofid Preview" />
               </div>
             </div>
           </div>
