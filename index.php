@@ -593,19 +593,25 @@ try {
               <img src="images/porto1.png" alt="School CMS dashboard preview" />
               <h3>School CMS Platform</h3>
               <p class="meta">React, PHP</p>
-              <p>A comprehensive CMS with role-based access, student records, and streamlined workflows for educational operations.</p>
+              <p>A comprehensive CMS with role-based access, student records, and streamlined workflows for educational operations.
+                <a href="https://aicjatibening.com/" target="_blank">Visit</a>
+              </p>
             </div>
-            <div class="card">
-              <img src="images/porto2.png" alt="Sustainability platform preview" />
-              <h3>Empowering Sustainability Platform</h3>
-              <p class="meta">React, Node.js</p>
-              <p>Data-driven sustainability suite that tracks impact, surfaces insights, and automates stakeholder reporting.</p>
+            <div class="card"  style="cursor: pointer;">
+              <img src="images/amtechev.png" alt="Amtech EV platform preview" title="Visit Amtech EV" />
+              <h3>Amtech EV - EV Charger Specialist</h3>
+              <p class="meta">Laravel, React, Tailwind CSS</p>
+              <p>Malaysia's leading EV charging specialist, providing end-to-end solutions for charging infrastructure and management.
+                              <a href="https://amtechev.com/" target="_blank">Visit</a>
+              </p>
             </div>
             <div class="card">
               <img src="images/porto3.png" alt="School oversight system preview" />
               <h3>School Oversight System</h3>
               <p class="meta">Laravel</p>
-              <p>Compliance and supervision system for schools with audit trails, scheduling, and actionable dashboards.</p>
+              <p>Compliance and supervision system for schools with audit trails, scheduling, and actionable dashboards.
+
+              </p>
             </div>
           </div> 
         </section>
