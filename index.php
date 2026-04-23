@@ -5,7 +5,6 @@ try {
     $db = new PDO('sqlite:' . $dbFile);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
-    // Create table with expanded columns
     $db->exec("CREATE TABLE IF NOT EXISTS visits (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         visit_date DATE DEFAULT (date('now')),
@@ -19,29 +18,23 @@ try {
         created_at DATETIME DEFAULT (datetime('now'))
     )");
 
-    // Capture visitor data
     $ip = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
     $ipHash = hash('sha256', $ip);
     $ua = $_SERVER['HTTP_USER_AGENT'] ?? 'unknown';
     
-    // Simple Bot/SEO detection
     $isBot = 0;
     if (preg_match('/(googlebot|bingbot|slurp|duckduckbot|baiduspider|yandexbot|sogou|exabot|facebookexternalhit|ia_archiver)/i', $ua)) {
         $isBot = 1;
     }
 
-    // Device detection
     $device = 'Desktop';
     if (preg_match('/(android|iphone|ipad|mobile)/i', $ua)) {
         $device = 'Mobile';
     }
 
-    // Geo-location (Simple caching to avoid per-visit API hits could be added, but for now simple)
     $country = 'Unknown';
     $city = 'Unknown';
     
-    // To avoid slowing down the site, we only do GeoIP for new IPs or occasionally
-    // For this implementation, we'll try to fetch it but with a short timeout
     if ($ip !== '127.0.0.1' && $ip !== '::1' && !empty($ip)) {
         $ctx = stream_context_create(['http' => ['timeout' => 1]]);
         $geo = @file_get_contents("http://ip-api.com/json/$ip?fields=status,country,city", false, $ctx);
@@ -56,698 +49,650 @@ try {
 
     $stmt = $db->prepare("INSERT INTO visits (ip_hash, ip_address, user_agent, country, city, is_bot, device_type) VALUES (?, ?, ?, ?, ?, ?, ?)");
     $stmt->execute([$ipHash, $ip, $ua, $country, $city, $isBot, $device]);
-} catch (PDOException $e) {
-    // Silently fail
-}
+
+    // Language Detection
+    session_start();
+    if (isset($_GET['lang'])) {
+        $_SESSION['lang'] = $_GET['lang'] === 'id' ? 'id' : 'en';
+    }
+
+    if (!isset($_SESSION['lang'])) {
+        if ($country === 'Indonesia') {
+            $_SESSION['lang'] = 'id';
+        } else {
+            $browserLang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? 'en', 0, 2);
+            $_SESSION['lang'] = ($browserLang === 'id') ? 'id' : 'en';
+        }
+    }
+    $lang = $_SESSION['lang'];
+
+    $translations = [
+        'en' => [
+            'meta_title' => 'Hasan Arofid | Senior Fullstack Engineer & Systems Architect',
+            'meta_desc' => 'Senior Fullstack Engineer with 10+ years of experience building scalable, production-ready systems for enterprises and global startups.',
+            'hero_head' => 'I build scalable, <span>production-ready</span> systems.',
+            'hero_sub' => 'Senior Fullstack Engineer specializing in high-performance backend architecture, reliable system design, and enterprise-grade reliability.',
+            'cta_book' => 'Book a Call',
+            'cta_projects' => 'View Projects',
+            'trust_exp' => '10+ Years Experience',
+            'trust_projects' => '50+ Projects Delivered',
+            'trust_uptime' => '99.9% System Reliability',
+            'about_title' => 'The Mindset Behind the Code',
+            'about_story' => 'With over a decade in the trenches, I don\'t just write features—I solve business problems. My focus is on high-availability systems that survive real-world production stress and scale elegantly as you grow.',
+            'expertise_title' => 'Core Expertise',
+            'exp_backend' => 'Backend Architecture',
+            'exp_backend_desc' => 'Designing distributed systems that are fast, secure, and maintainable.',
+            'exp_api' => 'API & Integrations',
+            'exp_api_desc' => 'Complex API orchestration and third-party ecosystem connectivity.',
+            'exp_scaling' => 'System Scaling',
+            'exp_scaling_desc' => 'Optimizing performance for high-traffic applications and large datasets.',
+            'exp_devops' => 'DevOps & CI/CD',
+            'exp_devops_desc' => 'Automating deployments and ensuring robust production observability.',
+            'how_work_title' => 'How I Work',
+            'how_work_step1' => 'Discovery & Deep Audit',
+            'how_work_step2' => 'Strategic Architecture Design',
+            'how_work_step3' => 'Resilient Implementation',
+            'how_work_step4' => 'Optimization & Scaling',
+            'systems_title' => 'Systems I\'ve Built',
+            'systems_desc' => 'Highlighting technical complexity and business impact for enterprise grade solutions.',
+            'project_impact' => 'Impact',
+            'project_problem' => 'Problem',
+            'project_solution' => 'Solution',
+            'tech_title' => 'Trusted Tech Stack',
+            'cta_foot' => 'Let’s build something impactful.',
+            'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Built for performance and reliability.',
+        ],
+        'id' => [
+            'meta_title' => 'Hasan Arofid | Senior Fullstack Engineer & Arsitek Sistem',
+            'meta_desc' => 'Senior Fullstack Engineer dengan 10+ tahun pengalaman membangun sistem skala besar yang siap produksi untuk perusahaan dan startup global.',
+            'hero_head' => 'Saya membangun sistem skala besar yang <span>siap produksi</span>.',
+            'hero_sub' => 'Senior Fullstack Engineer spesialis arsitektur backend performa tinggi, desain sistem handal, dan reliabilitas kelas enterprise.',
+            'cta_book' => 'Jadwalkan Konsultasi',
+            'cta_projects' => 'Lihat Proyek',
+            'trust_exp' => '10+ Tahun Pengalaman',
+            'trust_projects' => '50+ Proyek Selesai',
+            'trust_uptime' => '99.9% Reliabilitas Sistem',
+            'about_title' => 'Mindset di Balik Kode',
+            'about_story' => 'Lebih dari satu dekade di industri, saya tidak hanya menulis fitur—saya menyelesaikan masalah bisnis. Fokus saya adalah sistem ketersediaan tinggi yang mampu bertahan di stres produksi nyata.',
+            'expertise_title' => 'Keahlian Utama',
+            'exp_backend' => 'Arsitektur Backend',
+            'exp_backend_desc' => 'Merancang sistem terdistribusi yang cepat, aman, dan mudah dikelola.',
+            'exp_api' => 'API & Integrasi',
+            'exp_api_desc' => 'Orkestrasi API kompleks dan konektivitas ekosistem pihak ketiga.',
+            'exp_scaling' => 'Skalabilitas Sistem',
+            'exp_scaling_desc' => 'Optimasi performa untuk aplikasi traffic tinggi dan data skala besar.',
+            'exp_devops' => 'DevOps & CI/CD',
+            'exp_devops_desc' => 'Otomasi deployment dan memastikan observabilitas produksi yang kuat.',
+            'how_work_title' => 'Bagaimana Saya Bekerja',
+            'how_work_step1' => 'Discovery & Audit Mendalam',
+            'how_work_step2' => 'Desain Arsitektur Strategis',
+            'how_work_step3' => 'Implementasi Resilien',
+            'how_work_step4' => 'Optimasi & Skalabilitas',
+            'systems_title' => 'Sistem Yang Saya Bangun',
+            'systems_desc' => 'Menyoroti kompleksitas teknis dan dampak bisnis untuk solusi kelas enterprise.',
+            'project_impact' => 'Dampak',
+            'project_problem' => 'Masalah',
+            'project_solution' => 'Solusi',
+            'tech_title' => 'Tech Stack Terpercaya',
+            'cta_foot' => 'Mari bangun sesuatu yang berdampak.',
+            'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Dibangun untuk performa dan reliabilitas.',
+        ]
+    ];
+    $t = $translations[$lang];
+} catch (PDOException $e) { }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="<?= $lang ?>">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hasan Arofid | Senior Fullstack Engineer & Web Designing Services</title>
+  <title><?= $t['meta_title'] ?></title>
 
-  <meta name="description" content="Hasan Arofid – Senior Fullstack Engineer with 10+ years experience providing premium web designing services in Delhi, India, the UK, and globally." />
-  <meta name="keywords" content="web designing services, web designing services near me, web designing services in delhi, web designing services india, web designing services uk, fullstack engineer, PHP, Laravel, Node.js, React" />
-  <meta name="geo.region" content="ID-JB" />
-  <meta name="geo.placename" content="Bekasi" />
-  <meta name="geo.position" content="-6.2383;106.9756" />
-  <meta name="ICBM" content="-6.2383, 106.9756" />
+  <meta name="description" content="<?= $t['meta_desc'] ?>" />
+  <meta name="keywords" content="fullstack engineer, web architecture, Laravel, Node.js, React, System Scaling, Enterprise Software" />
 
-  <!-- Open Graph / SEO -->
+  <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://hasanarofid.site/" />
-  <meta property="og:title" content="Hasan Arofid | Premium Web Designing Services" />
-  <meta property="og:description" content="Senior Fullstack Engineer offering scalable web systems and specialized web designing services globally, including Delhi, India, and the UK." />
-  <meta property="og:image" content="images/porto-operra.png" />
+  <meta property="og:title" content="<?= $t['meta_title'] ?>" />
+  <meta property="og:description" content="<?= $t['meta_desc'] ?>" />
+  <meta property="og:image" content="https://hasanarofid.site/images/hasanarofid.png" />
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Hasan Arofid - Web Designing Services",
-    "image": "https://hasanarofid.site/images/porto-operra.png",
-    "@id": "https://hasanarofid.site/",
-    "url": "https://hasanarofid.site/",
-    "telephone": "+628123456789", 
-    "priceRange": "$$",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Delhi",
-      "addressCountry": "IN"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": 28.6139,
-      "longitude": 77.2090
-    },
-    "servesCrawl": true,
-    "areaServed": [
-      {
-        "@type": "City",
-        "name": "Delhi"
-      },
-      {
-        "@type": "Country",
-        "name": "India"
-      },
-      {
-        "@type": "Country",
-        "name": "United Kingdom"
-      }
-    ],
-    "description": "Premium web designing services and fullstack engineering for businesses globally, specializing in scalable systems and CRM solutions."
-  }
-  </script>
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://hasanarofid.site/" />
+  <meta property="twitter:title" content="<?= $t['meta_title'] ?>" />
+  <meta property="twitter:description" content="<?= $t['meta_desc'] ?>" />
+  <meta property="twitter:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
       color-scheme: dark;
-      --bg: #0b1224;
-      --panel: rgba(255, 255, 255, 0.04);
-      --card: rgba(255, 255, 255, 0.06);
-      --stroke: rgba(255, 255, 255, 0.08);
-      --text: #e5e7eb;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-2: #a855f7;
-      --shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
+      --bg: #030712;
+      --surface: #0f172a;
+      --surface-hover: #1e293b;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-secondary: #8b5cf6;
+      --gradient: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+      --glass: rgba(15, 23, 42, 0.8);
     }
 
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    html, body {
       margin: 0;
       padding: 0;
-      background: radial-gradient(circle at 20% 20%, rgba(56, 189, 248, 0.08), transparent 30%),
-        radial-gradient(circle at 80% 0%, rgba(168, 85, 247, 0.08), transparent 25%),
-        var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      min-height: 100vh;
-    }
-
-    .container {
-      max-width: 980px;
-      margin: 0 auto;
-      padding: 64px 24px 96px;
-    }
-
-    .panel {
-      background: var(--panel);
-      border: 1px solid var(--stroke);
-      border-radius: 18px;
-      padding: 32px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-
-    header h1 {
-      font-size: 2.8rem;
-      letter-spacing: -0.02em;
-      margin: 0 0 8px;
-    }
-
-    .subtitle {
-      color: var(--muted);
-      margin: 0 0 20px;
-      font-size: 1.05rem;
-    }
-
-    .lede {
-      margin: 0 0 28px;
-      font-size: 1.05rem;
-      color: #cbd5e1;
-      max-width: 680px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 16px;
-    }
-
-    .btn {
-      padding: 12px 16px;
-      border-radius: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      border: 1px solid var(--stroke);
-      color: var(--text);
-      transition: transform 120ms ease, border-color 120ms ease, background 120ms ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      cursor: pointer;
-      font-size: 1rem;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-      border-color: var(--accent);
-      background: rgba(56, 189, 248, 0.08);
-    }
-
-    .btn.primary {
-      background: linear-gradient(120deg, var(--accent), var(--accent-2));
-      color: #0b1224;
-      border: none;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-      letter-spacing: -0.01em;
-      margin: 32px 0 12px;
-      color: var(--accent);
-    }
-
-    p {
-      font-size: 1rem;
-      margin: 0 0 12px;
-    }
-
-    .list {
-      display: grid;
-      gap: 8px;
-    }
-
-    .list .item {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: 12px;
-      padding: 12px 14px;
-    }
-
-    .badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 12px 0 0;
-    }
-
-    .badge {
-      padding: 8px 10px;
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: 999px;
-      color: #cbd5e1;
-      font-size: 0.9rem;
-    }
-
-    .portfolio {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      margin-top: 12px;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: 14px;
-      padding: 14px;
-      display: grid;
-      gap: 10px;
-      transition: border-color 120ms ease, transform 120ms ease, box-shadow 120ms ease;
-    }
-
-    .card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
-    }
-
-    .card img {
       width: 100%;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 10px;
-      border: 1px solid var(--stroke);
-      background: #0b1224;
-      cursor: zoom-in;
+      overflow-x: hidden;
+      position: relative;
     }
-
-    .card h3 {
-      margin: 0;
-      font-size: 1.05rem;
-      letter-spacing: -0.01em;
-    }
-
-    /* Featured Hero Card */
-    .featured-card {
-      grid-template-columns: 1fr;
-      border-color: var(--accent);
-      background: linear-gradient(145deg, var(--card), rgba(56, 189, 248, 0.05));
-      margin-bottom: 32px;
-    }
-
-    .featured-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      align-items: center;
-    }
-
-    .featured-content h3 {
-      font-size: 1.5rem;
-      margin-bottom: 8px;
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
       color: var(--text);
+      line-height: 1.6;
     }
 
-    .featured-image {
-      border-radius: 12px;
-      overflow: hidden;
-      border: 1px solid var(--stroke);
-    }
+    h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; margin: 0; }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 2; }
 
-    .featured-image img {
-      height: auto;
-      cursor: zoom-in;
-      width: 100%;
-      display: block;
+    nav {
+      position: fixed; top: 0; left: 0; width: 100%; height: 72px;
+      background: var(--glass); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border); z-index: 1000;
+      display: flex; align-items: center;
     }
-
-    .meta {
-      color: var(--muted);
-      font-size: 0.95rem;
-      margin: 0;
+    .nav-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+    .logo { 
+        font-weight: 800; 
+        font-size: 1.5rem; 
+        letter-spacing: -0.03em;
+        background: var(--gradient); 
+        -webkit-background-clip: text; 
+        background-clip: text; 
+        -webkit-text-fill-color: transparent; 
+        text-decoration: none;
+        transition: 0.3s;
     }
+    .logo:hover { opacity: 0.8; transform: scale(0.98); }
 
-    /* Form Styles */
-    .contact-form {
-      display: grid;
-      gap: 16px;
-      margin-top: 24px;
+    .nav-links { display: flex; gap: 32px; align-items: center; }
+    .nav-links a { 
+        color: var(--text-muted); 
+        text-decoration: none; 
+        font-size: 0.95rem; 
+        font-weight: 500; 
+        transition: 0.2s;
+        position: relative;
     }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gradient);
+        transition: 0.3s;
     }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
 
-    .form-group label {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--muted);
-    }
+    .lang-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 4px 14px; border-radius: 999px; font-size: 0.85rem; cursor: pointer; text-decoration: none; font-weight: 600; }
 
-    .form-group input, 
-    .form-group textarea, 
-    .form-group select {
-      background: var(--card);
-      border: 1px solid var(--stroke);
-      border-radius: 10px;
-      padding: 12px;
-      color: var(--text);
-      font-size: 1rem;
-      transition: border-color 120ms ease;
-    }
-
-    .form-group input:focus, 
-    .form-group textarea:focus, 
-    .form-group select:focus {
-      outline: none;
-      border-color: var(--accent);
-    }
-
-    .social-links {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-
-    .social-links a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-    }
-
-    .social-links a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      margin-top: 40px;
-      font-size: 0.95rem;
-      color: var(--muted);
-      text-align: left;
-    }
-
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.75);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      z-index: 999;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 150ms ease;
-    }
-
-    .lightbox.is-open {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .lightbox-content {
-      background: var(--panel);
-      border: 1px solid var(--stroke);
-      border-radius: 16px;
-      padding: 12px;
-      max-width: 960px;
-      width: min(960px, 90vw);
-      max-height: 90vh;
-      overflow: auto;
-      box-shadow: var(--shadow);
-    }
-
-    .lightbox img {
-      width: 100%;
-      height: auto;
-      border-radius: 12px;
-      display: block;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: 20px;
-      right: 24px;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid var(--stroke);
-      color: var(--text);
-      border-radius: 999px;
-      padding: 8px 12px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background 120ms ease, border-color 120ms ease;
-    }
-
-    .lightbox-close:hover {
-      background: rgba(56, 189, 248, 0.15);
-      border-color: var(--accent);
-    }
-
-    #form-status {
-      margin-top: 16px;
-      padding: 12px;
-      border-radius: 10px;
-      display: none;
-    }
-
-    #form-status.success {
-      display: block;
-      background: rgba(34, 197, 94, 0.1);
-      color: #4ade80;
-      border: 1px solid rgba(34, 197, 94, 0.2);
-    }
-
-    #form-status.error {
-      display: block;
-      background: rgba(239, 68, 68, 0.1);
-      color: #f87171;
-      border: 1px solid rgba(239, 68, 68, 0.2);
-    }
-
-    /* Responsive Queries */
-    @media (max-width: 768px) {
-      .container {
-        padding: 40px 16px 64px;
-      }
-      .panel {
-        padding: 24px 20px;
-      }
-      header h1 {
-        font-size: 2.2rem;
-      }
-      .featured-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      header h1 {
-        font-size: 1.8rem;
-      }
-      .btn {
-        width: 100%;
-        justify-content: center;
-      }
-      .actions {
+    /* Mobile Menu Toggle */
+    .menu-toggle {
+        display: none;
         flex-direction: column;
-      }
-      .portfolio {
-        grid-template-columns: 1fr;
-      }
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        z-index: 1100;
+        width: 40px;
+        height: 40px;
+        border-radius: 8px;
+        background: var(--surface);
+        border: 1px solid var(--border);
     }
+    .menu-toggle span {
+        width: 20px;
+        height: 2px;
+        background: var(--text);
+        transition: 0.3s;
+        border-radius: 2px;
+    }
+
+
+
+    .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--gradient); z-index: 1001; width: 0%; transition: width 0.1s; }
+
+    .btn { display: inline-flex; align-items: center; padding: 12px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s; cursor: pointer; }
+    .btn-primary { background: var(--gradient); color: white; border: none; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,0.05); }
+    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--accent); }
+
+    section { padding: 120px 0; }
+    .section-title { font-size: 2.5rem; margin-bottom: 16px; text-align: center; }
+    .section-subtitle { color: var(--text-muted); text-align: center; max-width: 700px; margin: 0 auto 64px; font-size: 1.1rem; }
+
+    [data-reveal] { opacity: 0; transform: translateY(20px); transition: 0.8s cubic-bezier(0.2, 0, 0, 1); }
+    [data-reveal].active { opacity: 1; transform: translateY(0); }
+
+    .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 72px; }
+    .hero-content { max-width: 850px; }
+    .hero-title { font-size: clamp(2.2rem, 10vw, 4.2rem); line-height: 1.1; margin-bottom: 24px; word-wrap: break-word; }
+
+    .hero-title span { background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .hero-sub { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; max-width: 650px; }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-bg { position: absolute; inset: 0; z-index: 1; background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1), transparent 40%); }
+
+    .trust-bar { padding: 48px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.01); }
+    .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; }
+
+    .trust-item { text-align: center; }
+    .trust-item h4 { font-size: 2.5rem; margin-bottom: 8px; background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+    .trust-item p { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+    .exp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+    .exp-card { padding: 48px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; transition: 0.3s; }
+    .exp-card:hover { border-color: var(--accent); transform: translateY(-5px); }
+    .exp-icon { font-size: 2rem; margin-bottom: 24px; display: block; }
+
+    .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; margin-top: 48px; }
+    .process-item { position: relative; padding-left: 32px; border-left: 2px solid var(--border); }
+    .process-item::before { content: ''; position: absolute; left: -7px; top: 0; width: 12px; height: 12px; border-radius: 50%; background: var(--accent); }
+
+    .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 350px), 1fr)); gap: 24px; }
+
+    .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: 0.4s; }
+    .project-card:hover { border-color: var(--accent); transform: translateY(-8px); }
+    .project-img { width: 100%; height: 260px; object-fit: cover; cursor: zoom-in; transition: 0.3s; }
+    .project-img:hover { opacity: 0.8; }
+    .project-content { padding: 32px; }
+    .project-tag { display: inline-block; padding: 4px 12px; background: rgba(59, 130, 246, 0.1); color: var(--accent); border-radius: 99px; font-size: 0.8rem; font-weight: 600; margin-bottom: 16px; }
+
+    /* Lightbox */
+    .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(3, 7, 18, 0.95);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        padding: 40px;
+        backdrop-filter: blur(8px);
+    }
+    .lightbox.active { display: flex; }
+    .lightbox img {
+        max-width: 100%;
+        max-height: 90vh;
+        border-radius: 12px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+    .lightbox-close {
+        position: absolute;
+        top: 24px;
+        right: 24px;
+        color: white;
+        font-size: 2rem;
+        cursor: pointer;
+        opacity: 0.7;
+    }
+    .lightbox-close:hover { opacity: 1; }
+
+
+    .marquee { overflow: hidden; white-space: nowrap; padding: 64px 0; background: rgba(255,255,255,0.02); }
+    .marquee-content { display: inline-block; animation: marquee 40s linear infinite; }
+    .marquee-content span { font-size: 1.8rem; font-weight: 800; margin-right: 64px; color: var(--text-muted); opacity: 0.3; }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    footer { padding: 80px 0; border-top: 1px solid var(--border); color: var(--text-muted); text-align: center; }
+    .social-links { display: flex; justify-content: center; gap: 32px; margin-top: 32px; }
+    .social-links a { color: var(--text-muted); text-decoration: none; font-weight: 500; transition: 0.2s; }
+    .social-links a:hover { color: var(--accent); }
+
+    .contact-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .form-input { padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: white; width: 100%; font-family: inherit; }
+    .form-input:focus { outline: none; border-color: var(--accent); }
+
+
+    @media (max-width: 768px) {
+      .hero-title { font-size: clamp(2rem, 12vw, 2.5rem); }
+
+      
+      .menu-toggle { display: flex; }
+      
+      .nav-links {
+          position: fixed;
+          top: 0;
+          right: 0;
+          width: 80%;
+          height: 100vh;
+          background: #030712;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 40px;
+          transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          z-index: 1050;
+          border-left: 1px solid var(--border);
+          box-shadow: -20px 0 40px rgba(0,0,0,0.5);
+          transform: translateX(120%);
+          display: flex;
+      }
+      
+      .nav-links.active { transform: translateX(0); }
+
+      
+      .nav-links a { font-size: 1.5rem; }
+
+      .menu-toggle.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+      .menu-toggle.active span:nth-child(2) { opacity: 0; }
+      .menu-toggle.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+
+      section { padding: 80px 0; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .contact-form-grid { grid-template-columns: 1fr; }
+    }
+
+
   </style>
 </head>
-
 <body>
-  <div class="container">
-    <div class="panel">
-      <header>
-        <h1>Hasan Arofid</h1>
-        <p class="subtitle">Senior Fullstack Engineer • 10+ Years Experience</p>
-        <p class="lede">
-          I build resilient web systems and ship reliable features. From backend-heavy platforms to end-to-end delivery,
-          I turn complex business workflows into dependable software with a calm, production-first mindset. Providing professional web designing services globally.
-        </p>
-        <div class="actions">
-          <a class="btn primary" href="#request-form">Start a Project</a>
-          <a class="btn" href="https://github.com/hasanarofid" target="_blank">View GitHub</a>
+  <div class="scroll-progress" id="scrollProgress"></div>
+  
+  <div class="lightbox" id="imageLightbox">
+    <span class="lightbox-close">&times;</span>
+    <img src="" alt="Preview">
+  </div>
+  
+  <nav>
+    <div class="container nav-content">
+      <a href="#" class="logo">Hasan Arofid</a>
+      
+      <div class="nav-links" id="navLinks">
+        <a href="#about"><?= $lang === 'id' ? 'Tentang' : 'About' ?></a>
+        <a href="#expertise"><?= $lang === 'id' ? 'Keahlian' : 'Expertise' ?></a>
+        <a href="#projects"><?= $lang === 'id' ? 'Proyek' : 'Projects' ?></a>
+        <a href="#contact"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+        <a href="?lang=<?= $lang === 'id' ? 'en' : 'id' ?>" class="lang-toggle"><?= $lang === 'id' ? 'EN' : 'ID' ?></a>
+      </div>
+
+      <div class="menu-toggle" id="mobileMenuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </nav>
+
+
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="container">
+      <div class="hero-content" data-reveal>
+        <h1 class="hero-title"><?= $t['hero_head'] ?></h1>
+        <p class="hero-sub"><?= $t['hero_sub'] ?></p>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary"><?= $t['cta_book'] ?></a>
+          <a href="#projects" class="btn btn-outline"><?= $t['cta_projects'] ?></a>
         </div>
-        <div class="social-links">
-          <a href="https://www.linkedin.com/in/hasan-arofid-47869a130/" target="_blank">LinkedIn</a>
-          <a href="https://www.instagram.com/hasanarofid/" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="trust-bar">
+    <div class="container">
+      <div class="trust-grid">
+        <div class="trust-item" data-reveal>
+          <h4>10+</h4>
+          <p><?= $t['trust_exp'] ?></p>
         </div>
-      </header>
-
-      <main>
-        <section>
-          <h2>What I Do</h2>
-          <div class="list">
-            <div class="item">Fullstack web application development</div>
-            <div class="item">Backend architecture, API integration, and data flows</div>
-            <div class="item">Performance tuning, observability, and incident recovery</div>
-            <div class="item">Technical consulting for growing products and teams</div>
-            <div class="item">Premium web designing services for Delhi, India, UK, and beyond</div>
-          </div>
-        </section>
-
-        <section>
-          <h2>Core Stack</h2>
-          <div class="badges">
-            <span class="badge">Node.js</span>
-            <span class="badge">PHP / Laravel</span>
-            <span class="badge">TypeScript</span>
-            <span class="badge">React</span>
-            <span class="badge">PostgreSQL</span>
-            <span class="badge">Microservices</span>
-            <span class="badge">Redis & Queues</span>
-            <span class="badge">CI/CD</span>
-            <span class="badge">Cloud & Containers</span>
-            <span class="badge">Vue.js</span>
-          </div>
-        </section>
-
-        <section>
-          <h2>Featured Product</h2>
-          <div class="card featured-card">
-            <div class="featured-grid">
-              <div class="featured-content">
-                <h3>Studio.hasanarofid</h3>
-                <p style="color: var(--muted); margin-bottom: 16px;">
-                  Launch website Anda dalam 1 jam dengan template siap pakai. Desain minimalis, SaaS style, dan konversi tinggi.
-                </p>
-                <div class="badges" style="margin-bottom: 20px;">
-                  <span class="badge">Vite</span>
-                  <span class="badge">Vanilla JS</span>
-                  <span class="badge">CSS3</span>
-                  <span class="badge">SEO Optimized</span>
-                  <span class="badge">Responsive</span>
-                </div>
-                <a href="https://studio.hasanarofid.site/" target="_blank" class="btn primary">Visit Studio →</a>
-              </div>
-              <div class="featured-image">
-                <img src="images/studio-preview.png" alt="Studio Hasanarofid Preview" />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <h2>Other Portfolio Highlights</h2>
-          <div class="portfolio">
-            <div class="card">
-              <img src="images/porto1.png" alt="School CMS dashboard preview" />
-              <h3>School CMS Platform</h3>
-              <p class="meta">React, PHP</p>
-              <p>A comprehensive CMS with role-based access, student records, and streamlined workflows for educational operations.
-                <a href="https://aicjatibening.com/" target="_blank">Visit</a>
-              </p>
-            </div>
-            <div class="card"  style="cursor: pointer;">
-              <img src="images/amtechev.png" alt="Amtech EV platform preview" title="Visit Amtech EV" />
-              <h3>Amtech EV - EV Charger Specialist</h3>
-              <p class="meta">Laravel, React, Tailwind CSS</p>
-              <p>Malaysia's leading EV charging specialist, providing end-to-end solutions for charging infrastructure and management.
-                              <a href="https://amtechev.com/" target="_blank">Visit</a>
-              </p>
-            </div>
-            <div class="card">
-              <img src="images/porto3.png" alt="School oversight system preview" />
-              <h3>School Oversight System</h3>
-              <p class="meta">Laravel</p>
-              <p>Compliance and supervision system for schools with audit trails, scheduling, and actionable dashboards.
-
-              </p>
-            </div>
-          </div> 
-        </section>
-
-        <section id="request-form">
-          <h2>Request Web Development</h2>
-          <p>Looking for professional web designing services? Fill out the form below to share your project details, and I'll get back to you shortly.</p>
-          <form class="contact-form" id="dev-request-form">
-            <div class="form-group">
-              <label for="name">Full Name</label>
-              <input type="text" id="name" name="name" placeholder="John Doe" required />
-            </div>
-            <div class="form-group">
-              <label for="email">Email Address</label>
-              <input type="email" id="email" name="email" placeholder="john@example.com" required />
-            </div>
-            <div class="form-group">
-              <label for="service">Service Needed</label>
-              <select id="service" name="service" required>
-                <option value="" disabled selected>Select a service</option>
-                <option value="web-design">Web Designing Services</option>
-                <option value="fullstack-dev">Fullstack Development</option>
-                <option value="backend-api">Backend & API Integration</option>
-                <option value="consulting">Technical Consulting</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="location">Your Location (Optional)</label>
-              <select id="location" name="location">
-                <option value="international">Other / International</option>
-                <option value="delhi">Delhi, India</option>
-                <option value="india">India (Other)</option>
-                <option value="uk">United Kingdom</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="description">Project Description</label>
-              <textarea id="description" name="description" rows="5" placeholder="Tell me about your project, goals, and any specific requirements..." required></textarea>
-            </div>
-            <button type="submit" class="btn primary" style="justify-content: center;">Send Request</button>
-          </form>
-          <div id="form-status"></div>
-        </section>
-      </main>
-
-      <footer>
-        © 2026 Hasan Arofid — Professional Web Designing Services in Delhi, India, UK, and Globally.
-      </footer>
+        <div class="trust-item" data-reveal data-delay="100">
+          <h4>50+</h4>
+          <p><?= $t['trust_projects'] ?></p>
+        </div>
+        <div class="trust-item" data-reveal data-delay="200">
+          <h4>99.9%</h4>
+          <p><?= $t['trust_uptime'] ?></p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="lightbox" id="lightbox" aria-hidden="true">
-    <button class="lightbox-close" id="lightbox-close" aria-label="Close full image">✕</button>
-    <div class="lightbox-content">
-      <img id="lightbox-image" src="" alt="Full preview" />
+  <section id="about">
+    <div class="container">
+      <div class="section-title" data-reveal><?= $t['about_title'] ?></div>
+      <div class="section-subtitle" data-reveal><?= $t['about_story'] ?></div>
+      
+      <div class="process-grid">
+        <div class="process-item" data-reveal>
+          <h3>01</h3>
+          <p><strong><?= $t['how_work_step1'] ?></strong></p>
+        </div>
+        <div class="process-item" data-reveal data-delay="100">
+          <h3>02</h3>
+          <p><strong><?= $t['how_work_step2'] ?></strong></p>
+        </div>
+        <div class="process-item" data-reveal data-delay="200">
+          <h3>03</h3>
+          <p><strong><?= $t['how_work_step3'] ?></strong></p>
+        </div>
+        <div class="process-item" data-reveal data-delay="300">
+          <h3>04</h3>
+          <p><strong><?= $t['how_work_step4'] ?></strong></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="expertise" style="background: rgba(255,255,255,0.01);">
+    <div class="container">
+      <div class="section-title" data-reveal><?= $t['expertise_title'] ?></div>
+      <div class="exp-grid">
+        <div class="exp-card" data-reveal>
+          <span class="exp-icon">🏗️</span>
+          <h3><?= $t['exp_backend'] ?></h3>
+          <p><?= $t['exp_backend_desc'] ?></p>
+        </div>
+        <div class="exp-card" data-reveal data-delay="100">
+          <span class="exp-icon">🔗</span>
+          <h3><?= $t['exp_api'] ?></h3>
+          <p><?= $t['exp_api_desc'] ?></p>
+        </div>
+        <div class="exp-card" data-reveal data-delay="200">
+          <span class="exp-icon">⚖️</span>
+          <h3><?= $t['exp_scaling'] ?></h3>
+          <p><?= $t['exp_scaling_desc'] ?></p>
+        </div>
+        <div class="exp-card" data-reveal data-delay="300">
+          <span class="exp-icon">🛡️</span>
+          <h3><?= $t['exp_devops'] ?></h3>
+          <p><?= $t['exp_devops_desc'] ?></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="container">
+      <div class="section-title" data-reveal><?= $t['systems_title'] ?></div>
+      <div class="section-subtitle" data-reveal><?= $t['systems_desc'] ?></div>
+      
+      <div class="projects-grid">
+        <div class="project-card" data-reveal onclick="window.open('https://amtechev.com/', '_blank')">
+          <img src="images/amtechev.png" class="project-img" alt="Amtech EV">
+          <div class="project-content">
+            <span class="project-tag">Enterprise SaaS</span>
+            <h3>Amtech EV Infrastructure</h3>
+            <p>Built a unified management system for Malaysia's leading EV network. Handling real-time hardware telemetry and multi-tenant billing.</p>
+            <div style="margin-top: 16px; font-weight: 600; color: var(--accent);"><?= $t['project_impact'] ?>: 100% Automated Billing & Monitoring</div>
+          </div>
+        </div>
+        <div class="project-card" data-reveal data-delay="100">
+          <img src="images/porto3.png" class="project-img preview-trigger" alt="School oversight system preview">
+          <div class="project-content">
+            <span class="project-tag">Laravel</span>
+            <h3>School Oversight System</h3>
+            <p>Compliance and supervision system for schools with audit trails, scheduling, and actionable dashboards.</p>
+            <div style="margin-top: 16px; font-weight: 600; color: var(--accent);"><?= $t['project_impact'] ?>: 40% Operational Efficiency Increase</div>
+          </div>
+        </div>
+
+        <div class="project-card" data-reveal data-delay="200">
+          <img src="images/nitajaya.png" class="project-img preview-trigger" alt="Nitajaya system preview">
+          <div class="project-content">
+            <span class="project-tag">PHP • POS</span>
+            <h3>Nitajaya Catering & POS</h3>
+            <p>Integrated catering management and point-of-sale system. Streamlining order processing and inventory tracking.</p>
+            <div style="margin-top: 16px; font-weight: 600; color: var(--accent);"><?= $t['project_impact'] ?>: Optimized Order Lifecycle</div>
+          </div>
+        </div>
+
+
+
+      </div>
+    </div>
+  </section>
+
+  <div class="marquee">
+    <div class="marquee-content">
+      <span>LARAVEL</span><span>NODE.JS</span><span>REACT</span><span>POSTGRESQL</span><span>DOCKER</span><span>REDIS</span><span>TYPESCRIPT</span>
+      <span>LARAVEL</span><span>NODE.JS</span><span>REACT</span><span>POSTGRESQL</span><span>DOCKER</span><span>REDIS</span><span>TYPESCRIPT</span>
     </div>
   </div>
+
+  <section id="contact">
+    <div class="container" style="max-width: 700px;">
+      <div class="section-title" data-reveal><?= $t['cta_foot'] ?></div>
+      <form id="dev-request-form" style="display: grid; gap: 20px; margin-top: 48px;">
+        <div class="contact-form-grid">
+          <input type="text" name="name" placeholder="<?= $lang === 'id' ? 'Nama' : 'Name' ?>" required class="form-input">
+          <input type="email" name="email" placeholder="Email" required class="form-input">
+        </div>
+        <textarea name="description" placeholder="<?= $lang === 'id' ? 'Ceritakan tantangan teknis Anda...' : 'Tell me about your technical challenge...' ?>" rows="6" required class="form-input"></textarea>
+        <input type="hidden" name="service" value="enterprise-consulting">
+        <button type="submit" class="btn btn-primary" style="justify-content: center; font-size: 1.1rem; width: 100%;"><?= $lang === 'id' ? 'Kirim Pesan Strategis' : 'Send Strategic Message' ?></button>
+      </form>
+
+      <div id="form-status" style="margin-top: 24px; text-align: center; font-weight: 500;"></div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p><?= $t['footer_copy'] ?></p>
+      <div class="social-links">
+        <a href="https://github.com/hasanarofid" target="_blank">GitHub</a>
+        <a href="https://www.linkedin.com/in/hasan-arofid-47869a130/" target="_blank">LinkedIn</a>
+        <a href="https://www.instagram.com/hasanarofid/" target="_blank">Instagram</a>
+      </div>
+    </div>
+  </footer>
 
   <script>
-    (function () {
-      const lightbox = document.getElementById("lightbox");
-      const lightboxImg = document.getElementById("lightbox-image");
-      const closeBtn = document.getElementById("lightbox-close");
-      const cards = document.querySelectorAll(".card img");
+    // Scroll Progress
+    window.addEventListener('scroll', () => {
+      const winScroll = document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolled = (winScroll / height) * 100;
+      document.getElementById("scrollProgress").style.width = scrolled + "%";
+    });
 
-      function openLightbox(src, alt) {
-        lightboxImg.src = src;
-        lightboxImg.alt = alt || "Full preview";
-        lightbox.classList.add("is-open");
-        lightbox.setAttribute("aria-hidden", "false");
-      }
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('mobileMenuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuToggle.addEventListener('click', () => {
+        menuToggle.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    });
 
-      function closeLightbox() {
-        lightbox.classList.remove("is-open");
-        lightbox.setAttribute("aria-hidden", "true");
-        lightboxImg.src = "";
-        lightboxImg.alt = "Full preview";
-      }
-
-      cards.forEach((img) => {
-        img.addEventListener("click", () => openLightbox(img.src, img.alt));
-        img.addEventListener("keypress", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            openLightbox(img.src, img.alt);
-          }
+    // Close menu when link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
         });
-      });
+    });
 
-      closeBtn.addEventListener("click", closeLightbox);
-      lightbox.addEventListener("click", (e) => {
-        if (e.target === lightbox) closeLightbox();
-      });
-      window.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeLightbox();
-      });
+    // Reveal Animations
 
-      // Form Submission Logic
-      const form = document.getElementById('dev-request-form');
-      const status = document.getElementById('form-status');
-
-      form.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const formData = new FormData(form);
-        const submitBtn = form.querySelector('button[type="submit"]');
-        
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending...';
-        status.className = '';
-        status.textContent = '';
-        status.style.display = 'none';
-
-        try {
-          const response = await fetch('mail.php', {
-            method: 'POST',
-            body: formData
-          });
-          const result = await response.json();
-
-          if (result.success) {
-            status.className = 'success';
-            status.textContent = 'Thank you! Your request has been sent successfully.';
-            form.reset();
-          } else {
-            status.className = 'error';
-            status.textContent = 'Oops! ' + (result.message || 'Something went wrong. Please try again.');
-          }
-        } catch (error) {
-          status.className = 'error';
-          status.textContent = 'Could not connect to the server. Please check your connection.';
-        } finally {
-          status.style.display = 'block';
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Send Request';
+    const observerOptions = { threshold: 0.1 };
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.getAttribute('data-delay') || 0;
+          setTimeout(() => { entry.target.classList.add('active'); }, delay);
         }
       });
-    })();
+    }, observerOptions);
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+    // Form Handler
+    const form = document.getElementById('dev-request-form');
+    const status = document.getElementById('form-status');
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      submitBtn.disabled = true;
+      submitBtn.textContent = '<?= $lang === 'id' ? 'Mengirim...' : 'Sending...' ?>';
+      
+      try {
+        const response = await fetch('mail.php', { method: 'POST', body: new FormData(form) });
+        const result = await response.json();
+        if (result.success) {
+          status.style.color = '#4ade80';
+          status.textContent = '<?= $lang === 'id' ? 'Berhasil! Saya akan segera merespons.' : 'Success! I will respond shortly.' ?>';
+          form.reset();
+        } else {
+          status.style.color = '#f87171';
+          status.textContent = result.message;
+        }
+      } catch (error) {
+        status.style.color = '#f87171';
+        status.textContent = 'Connection failed.';
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '<?= $lang === 'id' ? 'Kirim Pesan Strategis' : 'Send Strategic Message' ?>';
+      }
+    });
+
+    // Lightbox Logic
+    const lightbox = document.getElementById('imageLightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const closeLightbox = lightbox.querySelector('.lightbox-close');
+
+    document.querySelectorAll('.preview-trigger').forEach(img => {
+        img.addEventListener('click', () => {
+            lightboxImg.src = img.src;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target !== lightboxImg) {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+    });
+
   </script>
 </body>
 </html>
