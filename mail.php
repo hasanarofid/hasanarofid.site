@@ -36,23 +36,29 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 $mail = new PHPMailer(true);
 
 try {
-    // Load .env
-    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-    $dotenv->load();
+    // Load .env if exists
+    if (file_exists(__DIR__ . '/.env')) {
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+    }
 
     // Server settings
-    // $mail->SMTPDebug = SMTP::DEBUG_SERVER;                
     $mail->isSMTP();                                         
     $mail->Host       = $_ENV['SMTP_HOST'] ?? 'smtp.gmail.com'; 
     $mail->SMTPAuth   = true;                                
-    $mail->Username   = $_ENV['SMTP_USER'];                  
-    $mail->Password   = $_ENV['SMTP_PASS'];                  
+    $mail->Username   = $_ENV['SMTP_USER'] ?? '';                  
+    $mail->Password   = $_ENV['SMTP_PASS'] ?? '';                  
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;      
     $mail->Port       = $_ENV['SMTP_PORT'] ?? 587;          
 
+    // Validation
+    if (empty($mail->Username) || empty($mail->Password)) {
+        throw new Exception("Konfigurasi SMTP di file .env belum lengkap atau tidak terbaca.");
+    }
+
     // Recipients
-    $mail->setFrom($_ENV['SMTP_USER'], 'Hasan Arofid Web');
-    $mail->addAddress($_ENV['SMTP_TO'] ?? $_ENV['SMTP_USER']);
+    $mail->setFrom($mail->Username, 'Hasan Arofid Web');
+    $mail->addAddress($_ENV['SMTP_TO'] ?? $mail->Username);
     $mail->addReplyTo($email, $name);
 
     // Content
