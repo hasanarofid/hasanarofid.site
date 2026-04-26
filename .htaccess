@@ -1,2 +1,4 @@
 RewriteEngine On
 RewriteRule ^trafik$ trafik.php [L]
+RewriteRule ^form$ form.php [L]
+RewriteRule ^products$ products.php [L]

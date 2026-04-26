@@ -100,6 +100,9 @@ try {
             'project_solution' => 'Solution',
             'tech_title' => 'Trusted Tech Stack',
             'cta_foot' => 'Let’s build something impactful.',
+            'products_title' => 'Digital Products',
+            'products_subtitle' => 'Premium tools and resources to accelerate your development workflow.',
+            'more_products' => 'View All Products',
             'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Built for performance and reliability.',
         ],
         'id' => [
@@ -135,11 +138,19 @@ try {
             'project_solution' => 'Solusi',
             'tech_title' => 'Tech Stack Terpercaya',
             'cta_foot' => 'Mari bangun sesuatu yang berdampak.',
+            'products_title' => 'Produk Digital',
+            'products_subtitle' => 'Alat dan sumber daya premium untuk mempercepat workflow pengembangan Anda.',
+            'more_products' => 'Lihat Semua Produk',
             'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Dibangun untuk performa dan reliabilitas.',
         ]
     ];
     $t = $translations[$lang];
-} catch (PDOException $e) { }
+
+    // Fetch latest products
+    $stmtProducts = $db->prepare("SELECT * FROM products ORDER BY created_at DESC LIMIT 3");
+    $stmtProducts->execute();
+    $latestProducts = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
+} catch (PDOException $e) { $latestProducts = []; }
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
@@ -172,7 +183,6 @@ try {
 
   <style>
     :root {
-      color-scheme: dark;
       --bg: #030712;
       --surface: #0f172a;
       --surface-hover: #1e293b;
@@ -183,6 +193,16 @@ try {
       --accent-secondary: #8b5cf6;
       --gradient: linear-gradient(135deg, var(--accent), var(--accent-secondary));
       --glass: rgba(15, 23, 42, 0.8);
+    }
+
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --surface: #ffffff;
+      --surface-hover: #f1f5f9;
+      --border: rgba(0, 0, 0, 0.08);
+      --text: #0f172a;
+      --text-muted: #475569;
+      --glass: rgba(255, 255, 255, 0.8);
     }
 
     * { box-sizing: border-box; scroll-behavior: smooth; }
@@ -246,6 +266,22 @@ try {
     .nav-links a:hover::after { width: 100%; }
 
     .lang-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 4px 14px; border-radius: 999px; font-size: 0.85rem; cursor: pointer; text-decoration: none; font-weight: 600; }
+
+    .theme-toggle {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        color: var(--text);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 1.1rem;
+    }
+    .theme-toggle:hover { transform: scale(1.1); border-color: var(--accent); }
 
     /* Mobile Menu Toggle */
     .menu-toggle {
@@ -426,7 +462,9 @@ try {
         <a href="#about"><?= $lang === 'id' ? 'Tentang' : 'About' ?></a>
         <a href="#expertise"><?= $lang === 'id' ? 'Keahlian' : 'Expertise' ?></a>
         <a href="#projects"><?= $lang === 'id' ? 'Proyek' : 'Projects' ?></a>
+        <a href="#digital-products"><?= $lang === 'id' ? 'Produk' : 'Products' ?></a>
         <a href="#contact"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+        <div class="theme-toggle" id="themeToggle">🌓</div>
         <a href="?lang=<?= $lang === 'id' ? 'en' : 'id' ?>" class="lang-toggle"><?= $lang === 'id' ? 'EN' : 'ID' ?></a>
       </div>
 
@@ -568,6 +606,40 @@ try {
     </div>
   </section>
 
+  <?php if (!empty($latestProducts)): ?>
+  <section id="digital-products" style="background: rgba(255,255,255,0.01);">
+    <div class="container">
+      <div class="section-title" data-reveal><?= $t['products_title'] ?></div>
+      <div class="section-subtitle" data-reveal><?= $t['products_subtitle'] ?></div>
+      
+      <div class="projects-grid">
+        <?php foreach ($latestProducts as $p): ?>
+          <div class="project-card" data-reveal>
+            <?php if ($p['image_url']): ?>
+              <img src="<?= htmlspecialchars($p['image_url']) ?>" class="project-img" alt="<?= htmlspecialchars($p['name']) ?>">
+            <?php else: ?>
+              <div class="project-img" style="display: flex; align-items: center; justify-content: center; font-size: 3rem; background: #1e293b;">📦</div>
+            <?php endif; ?>
+            <div class="project-content">
+              <span class="project-tag"><?= strtoupper(htmlspecialchars($p['platform'])) ?></span>
+              <h3><?= htmlspecialchars($p['name']) ?></h3>
+              <p><?= htmlspecialchars(substr($p['description'], 0, 100)) . (strlen($p['description']) > 100 ? '...' : '') ?></p>
+              <div style="margin-top: 16px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700; color: var(--accent);"><?= htmlspecialchars($p['price']) ?></span>
+                <a href="<?= htmlspecialchars($p['link']) ?>" target="_blank" style="color: var(--text); text-decoration: none; font-weight: 600; font-size: 0.9rem;"><?= $lang === 'id' ? 'Beli Sekarang' : 'Buy Now' ?> →</a>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+
+      <div style="text-align: center; margin-top: 64px;" data-reveal>
+        <a href="products.php" class="btn btn-outline"><?= $t['more_products'] ?></a>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
+
   <div class="marquee">
     <div class="marquee-content">
       <span>LARAVEL</span><span>NODE.JS</span><span>REACT</span><span>POSTGRESQL</span><span>DOCKER</span><span>REDIS</span><span>TYPESCRIPT</span>
@@ -604,6 +676,28 @@ try {
   </footer>
 
   <script>
+    // Theme Logic
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    
+    if (currentTheme === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+        themeToggle.textContent = '☀️';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'light') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'dark');
+            themeToggle.textContent = '🌓';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            localStorage.setItem('theme', 'light');
+            themeToggle.textContent = '☀️';
+        }
+    });
+
     // Scroll Progress
     window.addEventListener('scroll', () => {
       const winScroll = document.documentElement.scrollTop;
