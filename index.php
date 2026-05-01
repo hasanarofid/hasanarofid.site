@@ -175,6 +175,59 @@ try {
   <meta property="twitter:title" content="<?= $t['meta_title'] ?>" />
   <meta property="twitter:description" content="<?= $t['meta_desc'] ?>" />
   <meta property="twitter:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+  <link rel="canonical" href="https://hasanarofid.site/" />
+
+  <!-- GEO Tags -->
+  <meta name="geo.region" content="ID-JI" />
+  <meta name="geo.placename" content="Surabaya" />
+  <meta name="geo.position" content="-7.323285;112.727786" />
+  <meta name="ICBM" content="-7.323285, 112.727786" />
+
+  <!-- Schema.org Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hasan Arofid",
+    "url": "https://hasanarofid.site/",
+    "image": "https://hasanarofid.site/images/hasanarofid.png",
+    "sameAs": [
+      "https://github.com/hasanarofid",
+      "https://www.linkedin.com/in/hasan-arofid-47869a130/",
+      "https://www.instagram.com/hasanarofid/"
+    ],
+    "jobTitle": "Senior Fullstack Engineer",
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Freelance / Self-Employed"
+    },
+    "description": "Senior Fullstack Engineer with 10+ years of experience building scalable, production-ready systems."
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Hasan Arofid - Systems Architect",
+    "image": "https://hasanarofid.site/images/hasanarofid.png",
+    "@id": "https://hasanarofid.site/",
+    "url": "https://hasanarofid.site/",
+    "telephone": "+6285767113554",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ketintang",
+      "addressLocality": "Surabaya",
+      "postalCode": "60231",
+      "addressCountry": "ID"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -7.323285,
+      "longitude": 112.727786
+    }
+  }
+  </script>
 
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -445,6 +498,8 @@ try {
 
 
   </style>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7190047001129861"
+     crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="scroll-progress" id="scrollProgress"></div>

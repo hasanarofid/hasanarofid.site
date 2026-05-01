@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /vendor/
+Disallow: /stats.db
+
+Sitemap: https://hasanarofid.site/sitemap.xml
