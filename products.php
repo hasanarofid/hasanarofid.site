@@ -35,25 +35,28 @@ $active_t = $t[$lang];
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
+
   <style>
     :root {
-      --bg: #030712;
-      --surface: #0f172a;
-      --border: rgba(255, 255, 255, 0.08);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #3b82f6;
-      --accent-secondary: #8b5cf6;
-      --gradient: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-    }
-
-    [data-theme="light"] {
       --bg: #f8fafc;
       --surface: #ffffff;
       --border: rgba(0, 0, 0, 0.08);
       --text: #0f172a;
       --text-muted: #475569;
+      --accent: #3b82f6;
+      --accent-secondary: #8b5cf6;
+      --gradient: linear-gradient(135deg, var(--accent), var(--accent-secondary));
     }
+
+    [data-theme="dark"] {
+      --bg: #030712;
+      --surface: #0f172a;
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+    }
+
 
     body {
       font-family: 'Inter', sans-serif;
@@ -74,6 +77,9 @@ $active_t = $t[$lang];
     }
 
     .logo { 
+        display: flex;
+        align-items: center;
+        gap: 12px;
         font-weight: 800; 
         font-size: 1.5rem; 
         background: var(--gradient); 
@@ -82,6 +88,12 @@ $active_t = $t[$lang];
         -webkit-text-fill-color: transparent; 
         text-decoration: none;
     }
+    .logo-img {
+        height: 42px;
+        width: auto;
+        -webkit-text-fill-color: initial;
+    }
+
 
     .back-link {
         color: var(--text-muted);
@@ -222,13 +234,20 @@ $active_t = $t[$lang];
     @media (max-width: 768px) {
         .products-grid { grid-template-columns: 1fr; }
         header h1 { font-size: 2.5rem; }
+        .logo { font-size: 1.2rem; gap: 8px; }
+        .logo-img { height: 32px; }
     }
+
   </style>
 </head>
 <body>
   <div class="container">
     <nav>
-      <a href="index.php" class="logo">Hasan Arofid</a>
+      <a href="index.php" class="logo">
+        <img src="images/logohasanarofid.png" alt="Hasan Arofid Logo" class="logo-img">
+        <span>Hasan Arofid</span>
+      </a>
+
       <div style="display: flex; align-items: center; gap: 20px;">
         <div class="theme-toggle" id="themeToggle">🌓</div>
         <a href="index.php" class="back-link">← <?= $active_t['back'] ?></a>
@@ -271,25 +290,28 @@ $active_t = $t[$lang];
   <script>
     // Theme Logic
     const themeToggle = document.getElementById('themeToggle');
-    const currentTheme = localStorage.getItem('theme') || 'dark';
+    const currentTheme = localStorage.getItem('theme') || 'light';
     
-    if (currentTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
         themeToggle.textContent = '☀️';
+    } else {
+        themeToggle.textContent = '🌓';
     }
 
     themeToggle.addEventListener('click', () => {
         const theme = document.documentElement.getAttribute('data-theme');
-        if (theme === 'light') {
+        if (theme === 'dark') {
             document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'dark');
+            localStorage.setItem('theme', 'light');
             themeToggle.textContent = '🌓';
         } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
             themeToggle.textContent = '☀️';
         }
     });
+
   </script>
 </body>
 </html>

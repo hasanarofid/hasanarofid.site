@@ -63,9 +63,23 @@ try {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Analytics Dashboard | Hasan Arofid</title>
+  <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
     :root {
+      --bg: #f8fafc;
+      --panel: rgba(0, 0, 0, 0.03);
+      --card: #ffffff;
+      --stroke: rgba(0, 0, 0, 0.05);
+      --text: #1e293b;
+      --muted: #64748b;
+      --accent: #3b82f6;
+      --purple: #8b5cf6;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    }
+
+    [data-theme="dark"] {
       color-scheme: dark;
       --bg: #0b1224;
       --panel: rgba(255, 255, 255, 0.04);
@@ -77,8 +91,10 @@ try {
       --purple: #a855f7;
       --shadow: 0 20px 70px rgba(0, 0, 0, 0.35);
     }
+
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
       margin: 0;
       background: var(--bg);
       color: var(--text);
@@ -152,17 +168,40 @@ try {
     }
     .btn-back:hover { color: var(--accent); }
 
+    .theme-toggle {
+        background: var(--panel);
+        border: 1px solid var(--stroke);
+        color: var(--text);
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: 0.3s;
+        font-size: 1.1rem;
+    }
+    .theme-toggle:hover { transform: scale(1.1); border-color: var(--accent); }
+
+
     @media (max-width: 900px) {
       .charts-main { grid-template-columns: 1fr; }
+      h1 { font-size: 1.5rem; }
     }
+
   </style>
 </head>
 <body>
   <div class="container">
     <div class="header">
       <h1>Traffic & SEO Analytics</h1>
-      <a href="index.php" class="btn-back">← Back to Site</a>
+      <div style="display: flex; align-items: center; gap: 20px;">
+        <div class="theme-toggle" id="themeToggle">🌓</div>
+        <a href="index.php" class="btn-back">← Back to Site</a>
+      </div>
     </div>
+
 
     <div class="stats-grid">
       <div class="stat-card">
@@ -298,6 +337,31 @@ try {
       }
     });
     <?php endif; ?>
+
+    // Theme Logic
+    const themeToggle = document.getElementById('themeToggle');
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    
+    if (currentTheme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        themeToggle.textContent = '☀️';
+    } else {
+        themeToggle.textContent = '🌓';
+    }
+
+    themeToggle.addEventListener('click', () => {
+        const theme = document.documentElement.getAttribute('data-theme');
+        if (theme === 'dark') {
+            document.documentElement.removeAttribute('data-theme');
+            localStorage.setItem('theme', 'light');
+            themeToggle.textContent = '🌓';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
+            themeToggle.textContent = '☀️';
+        }
+    });
   </script>
+
 </body>
 </html>

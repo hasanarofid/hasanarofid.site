@@ -68,88 +68,106 @@ try {
 
     $translations = [
         'en' => [
-            'meta_title' => 'Hasan Arofid | Senior Fullstack Engineer & Systems Architect',
-            'meta_desc' => 'Senior Fullstack Engineer with 10+ years of experience building scalable, production-ready systems for enterprises and global startups.',
-            'hero_head' => 'I build scalable, <span>production-ready</span> systems.',
-            'hero_sub' => 'Senior Fullstack Engineer specializing in high-performance backend architecture, reliable system design, and enterprise-grade reliability.',
-            'cta_book' => 'Book a Call',
-            'cta_projects' => 'View Projects',
-            'trust_exp' => '10+ Years Experience',
-            'trust_projects' => '50+ Projects Delivered',
-            'trust_uptime' => '99.9% System Reliability',
-            'about_title' => 'The Mindset Behind the Code',
-            'about_story' => 'With over a decade in the trenches, I don\'t just write features—I solve business problems. My focus is on high-availability systems that survive real-world production stress and scale elegantly as you grow.',
-            'expertise_title' => 'Core Expertise',
-            'exp_backend' => 'Backend Architecture',
-            'exp_backend_desc' => 'Designing distributed systems that are fast, secure, and maintainable.',
-            'exp_api' => 'API & Integrations',
-            'exp_api_desc' => 'Complex API orchestration and third-party ecosystem connectivity.',
-            'exp_scaling' => 'System Scaling',
-            'exp_scaling_desc' => 'Optimizing performance for high-traffic applications and large datasets.',
-            'exp_devops' => 'DevOps & CI/CD',
-            'exp_devops_desc' => 'Automating deployments and ensuring robust production observability.',
-            'how_work_title' => 'How I Work',
-            'how_work_step1' => 'Discovery & Deep Audit',
-            'how_work_step2' => 'Strategic Architecture Design',
-            'how_work_step3' => 'Resilient Implementation',
-            'how_work_step4' => 'Optimization & Scaling',
-            'systems_title' => 'Systems I\'ve Built',
-            'systems_desc' => 'Highlighting technical complexity and business impact for enterprise grade solutions.',
-            'project_impact' => 'Impact',
-            'project_problem' => 'Problem',
+            'meta_title' => 'Hasan Arofid | Professional Web Development Services',
+            'meta_desc' => 'Transform your business with high-performance, professional websites. Expert in Landing Pages, Company Profiles, and Custom Systems.',
+            'hero_head' => 'Professional Web Solutions for <span>Business Growth</span>.',
+            'hero_sub' => 'We help your brand stand out digitally with modern, responsive, and functional designs focused on the best conversion & user experience.',
+            'cta_book' => 'Free WhatsApp Consultation',
+            'cta_projects' => 'View Our Portfolio',
+            'trust_exp' => '10+ Years of Excellence',
+            'trust_projects' => '50+ Businesses Helped',
+            'trust_uptime' => '99.9% Reliability Guaranteed',
+            'about_title' => 'Why Partner With Us?',
+            'about_story' => 'With over a decade of experience, we don\'t just build websites; we create digital assets that solve business problems and drive growth. Our focus is on high-performance solutions that deliver results.',
+            'expertise_title' => 'Our Specialized Services',
+            'exp_backend' => 'Landing Page Design',
+            'exp_backend_desc' => 'High-converting landing pages tailored to turn visitors into loyal customers.',
+            'exp_api' => 'Company Profile',
+            'exp_api_desc' => 'Establish a professional digital presence that builds trust and credibility.',
+            'exp_scaling' => 'Custom Web Systems',
+            'exp_scaling_desc' => 'Tailor-made systems (POS, ERP, SaaS) designed to streamline your business operations.',
+            'exp_devops' => 'E-Commerce Solutions',
+            'exp_devops_desc' => 'Scalable online stores with seamless payment integration and management.',
+            'how_work_title' => 'Our Simple Process',
+            'how_work_step1' => 'Consultation & Discovery',
+            'how_work_step2' => 'Strategic Design & UI/UX',
+            'how_work_step3' => 'Development & Testing',
+            'how_work_step4' => 'Launch & Ongoing Support',
+            'systems_title' => 'Successful Projects',
+            'systems_desc' => 'A showcase of high-impact digital solutions we\'ve built for businesses across various industries.',
+            'project_impact' => 'Business Result',
+            'project_problem' => 'Challenge',
             'project_solution' => 'Solution',
-            'tech_title' => 'Trusted Tech Stack',
-            'cta_foot' => 'Let’s build something impactful.',
-            'products_title' => 'Digital Products',
-            'products_subtitle' => 'Premium tools and resources to accelerate your development workflow.',
-            'more_products' => 'View All Products',
-            'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Built for performance and reliability.',
+            'tech_title' => 'Our Tech Excellence',
+            'cta_foot' => 'Ready to grow your business?',
+            'testimonials_title' => 'What Our Clients Say',
+            'testimonials_sub' => 'Hear from the business owners and partners who have grown their digital presence with us.',
+            'products_title' => 'Digital Assets',
+            'products_subtitle' => 'Ready-to-use tools and resources to accelerate your business growth.',
+            'more_products' => 'Browse All Products',
+            'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Expertly crafted for performance.',
         ],
         'id' => [
-            'meta_title' => 'Hasan Arofid | Senior Fullstack Engineer & Arsitek Sistem',
-            'meta_desc' => 'Senior Fullstack Engineer dengan 10+ tahun pengalaman membangun sistem skala besar yang siap produksi untuk perusahaan dan startup global.',
-            'hero_head' => 'Saya membangun sistem skala besar yang <span>siap produksi</span>.',
-            'hero_sub' => 'Senior Fullstack Engineer spesialis arsitektur backend performa tinggi, desain sistem handal, dan reliabilitas kelas enterprise.',
-            'cta_book' => 'Jadwalkan Konsultasi',
-            'cta_projects' => 'Lihat Proyek',
+            'meta_title' => 'Hasan Arofid | Jasa Pembuatan Website Profesional',
+            'meta_desc' => 'Transformasi bisnis Anda dengan website profesional berperforma tinggi. Spesialis Landing Page, Company Profile, dan Sistem Kustom.',
+            'hero_head' => 'Solusi Web Profesional untuk <span>Pertumbuhan Bisnis</span>.',
+            'hero_sub' => 'Kami membantu brand Anda tampil menonjol secara digital dengan desain modern, responsif, dan fungsional yang fokus pada konversi & user experience terbaik.',
+            'cta_book' => 'Konsultasi WhatsApp Gratis',
+            'cta_projects' => 'Lihat Portofolio',
             'trust_exp' => '10+ Tahun Pengalaman',
-            'trust_projects' => '50+ Proyek Selesai',
-            'trust_uptime' => '99.9% Reliabilitas Sistem',
-            'about_title' => 'Mindset di Balik Kode',
-            'about_story' => 'Lebih dari satu dekade di industri, saya tidak hanya menulis fitur—saya menyelesaikan masalah bisnis. Fokus saya adalah sistem ketersediaan tinggi yang mampu bertahan di stres produksi nyata.',
-            'expertise_title' => 'Keahlian Utama',
-            'exp_backend' => 'Arsitektur Backend',
-            'exp_backend_desc' => 'Merancang sistem terdistribusi yang cepat, aman, dan mudah dikelola.',
-            'exp_api' => 'API & Integrasi',
-            'exp_api_desc' => 'Orkestrasi API kompleks dan konektivitas ekosistem pihak ketiga.',
-            'exp_scaling' => 'Skalabilitas Sistem',
-            'exp_scaling_desc' => 'Optimasi performa untuk aplikasi traffic tinggi dan data skala besar.',
-            'exp_devops' => 'DevOps & CI/CD',
-            'exp_devops_desc' => 'Otomasi deployment dan memastikan observabilitas produksi yang kuat.',
-            'how_work_title' => 'Bagaimana Saya Bekerja',
-            'how_work_step1' => 'Discovery & Audit Mendalam',
-            'how_work_step2' => 'Desain Arsitektur Strategis',
-            'how_work_step3' => 'Implementasi Resilien',
-            'how_work_step4' => 'Optimasi & Skalabilitas',
-            'systems_title' => 'Sistem Yang Saya Bangun',
-            'systems_desc' => 'Menyoroti kompleksitas teknis dan dampak bisnis untuk solusi kelas enterprise.',
-            'project_impact' => 'Dampak',
-            'project_problem' => 'Masalah',
+            'trust_projects' => '50+ Bisnis Terbantu',
+            'trust_uptime' => '99.9% Garansi Reliabilitas',
+            'about_title' => 'Mengapa Bermitra Dengan Kami?',
+            'about_story' => 'Dengan pengalaman lebih dari satu dekade, kami tidak hanya membuat website; kami menciptakan aset digital yang menyelesaikan masalah bisnis dan mendorong pertumbuhan.',
+            'expertise_title' => 'Layanan Spesialis Kami',
+            'exp_backend' => 'Desain Landing Page',
+            'exp_backend_desc' => 'Halaman landas konversi tinggi yang dirancang khusus untuk mengubah pengunjung menjadi pelanggan.',
+            'exp_api' => 'Company Profile',
+            'exp_api_desc' => 'Bangun citra digital profesional yang membangun kepercayaan dan kredibilitas brand Anda.',
+            'exp_scaling' => 'Sistem Web Kustom',
+            'exp_scaling_desc' => 'Sistem yang dibuat khusus (POS, ERP, SaaS) untuk menyederhanakan operasional bisnis Anda.',
+            'exp_devops' => 'Solusi E-Commerce',
+            'exp_devops_desc' => 'Toko online yang skalabel dengan integrasi pembayaran dan manajemen yang mulus.',
+            'how_work_title' => 'Proses Kerja Kami',
+            'how_work_step1' => 'Konsultasi & Penemuan',
+            'how_work_step2' => 'Desain Strategis & UI/UX',
+            'how_work_step3' => 'Pengembangan & Testing',
+            'how_work_step4' => 'Peluncuran & Dukungan',
+            'systems_title' => 'Proyek Yang Berhasil',
+            'systems_desc' => 'Kumpulan solusi digital berdampak tinggi yang telah kami bangun untuk berbagai industri bisnis.',
+            'project_impact' => 'Hasil Bisnis',
+            'project_problem' => 'Tantangan',
             'project_solution' => 'Solusi',
-            'tech_title' => 'Tech Stack Terpercaya',
-            'cta_foot' => 'Mari bangun sesuatu yang berdampak.',
+            'tech_title' => 'Keunggulan Teknologi',
+            'cta_foot' => 'Siap menumbuhkan bisnis Anda?',
+            'testimonials_title' => 'Apa Kata Klien Kami',
+            'testimonials_sub' => 'Dengarkan pengalaman para pemilik bisnis dan mitra yang telah tumbuh bersama solusi digital kami.',
             'products_title' => 'Produk Digital',
-            'products_subtitle' => 'Alat dan sumber daya premium untuk mempercepat workflow pengembangan Anda.',
+            'products_subtitle' => 'Alat dan sumber daya siap pakai untuk mempercepat pertumbuhan bisnis Anda.',
             'more_products' => 'Lihat Semua Produk',
-            'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Dibangun untuk performa dan reliabilitas.',
+            'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Dibuat secara ahli untuk performa tinggi.',
         ]
     ];
     $t = $translations[$lang];
 
     // Fetch latest products
-    $stmtProducts = $db->prepare("SELECT * FROM products ORDER BY created_at DESC LIMIT 3");
-    $stmtProducts->execute();
-    $latestProducts = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        $stmtProducts = $db->prepare("SELECT * FROM products ORDER BY created_at DESC LIMIT 3");
+        $stmtProducts->execute();
+        $latestProducts = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) {
+        // Fallback for demo if table doesn't exist
+        $latestProducts = [
+            [
+                'name' => 'High-Conversion Landing Page Template',
+                'platform' => 'Laravel',
+                'description' => 'Premium landing page template optimized for conversion and speed.',
+                'price' => 'Rp 250.000',
+                'link' => '#',
+                'image_url' => 'images/porto3.png'
+            ]
+        ];
+    }
 } catch (PDOException $e) { $latestProducts = []; }
 ?>
 <!DOCTYPE html>
@@ -176,6 +194,8 @@ try {
   <meta property="twitter:description" content="<?= $t['meta_desc'] ?>" />
   <meta property="twitter:image" content="https://hasanarofid.site/images/hasanarofid.png" />
   <link rel="canonical" href="https://hasanarofid.site/" />
+  <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
+
 
   <!-- GEO Tags -->
   <meta name="geo.region" content="ID-JI" />
@@ -209,11 +229,11 @@ try {
   {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
-    "name": "Hasan Arofid - Systems Architect",
+    "name": "Hasan Arofid - Jasa Pembuatan Website Profesional",
     "image": "https://hasanarofid.site/images/hasanarofid.png",
     "@id": "https://hasanarofid.site/",
     "url": "https://hasanarofid.site/",
-    "telephone": "+6285767113554",
+    "telephone": "+628814959247",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Ketintang",
@@ -224,8 +244,11 @@ try {
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": -7.323285,
-      "longitude": 112.727786
-    }
+      "longitude": -7.323285
+    },
+    "serviceType": "Web Development, SEO, E-commerce",
+    "areaServed": "Indonesia",
+    "priceRange": "$$"
   }
   </script>
 
@@ -236,26 +259,25 @@ try {
 
   <style>
     :root {
-      --bg: #030712;
-      --surface: #0f172a;
-      --surface-hover: #1e293b;
-      --border: rgba(255, 255, 255, 0.08);
-      --text: #f8fafc;
-      --text-muted: #94a3b8;
-      --accent: #3b82f6;
-      --accent-secondary: #8b5cf6;
-      --gradient: linear-gradient(135deg, var(--accent), var(--accent-secondary));
-      --glass: rgba(15, 23, 42, 0.8);
-    }
-
-    [data-theme="light"] {
       --bg: #f8fafc;
       --surface: #ffffff;
       --surface-hover: #f1f5f9;
-      --border: rgba(0, 0, 0, 0.08);
       --text: #0f172a;
-      --text-muted: #475569;
+      --text-muted: #64748b;
+      --border: rgba(0,0,0,0.05);
+      --accent: #3b82f6;
+      --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
       --glass: rgba(255, 255, 255, 0.8);
+    }
+
+    [data-theme="dark"] {
+      --bg: #030712;
+      --surface: #0f172a;
+      --surface-hover: #1e293b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: rgba(255,255,255,0.05);
+      --glass: rgba(15, 23, 42, 0.8);
     }
 
     * { box-sizing: border-box; scroll-behavior: smooth; }
@@ -284,6 +306,9 @@ try {
     }
     .nav-content { display: flex; justify-content: space-between; align-items: center; width: 100%; }
     .logo { 
+        display: flex;
+        align-items: center;
+        gap: 12px;
         font-weight: 800; 
         font-size: 1.5rem; 
         letter-spacing: -0.03em;
@@ -294,13 +319,28 @@ try {
         text-decoration: none;
         transition: 0.3s;
     }
+    .logo-img {
+        height: 42px;
+        width: auto;
+        -webkit-text-fill-color: initial; /* Reset gradient clip for image */
+    }
+    .logo-subtitle {
+        font-size: 0.9rem; 
+        font-weight: 400; 
+        opacity: 0.7; 
+        margin-left: 8px; 
+        color: var(--text-muted); 
+        -webkit-text-fill-color: var(--text-muted);
+    }
     .logo:hover { opacity: 0.8; transform: scale(0.98); }
 
-    .nav-links { display: flex; gap: 32px; align-items: center; }
+
+
+    .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a { 
         color: var(--text-muted); 
         text-decoration: none; 
-        font-size: 0.95rem; 
+        font-size: 0.9rem; 
         font-weight: 500; 
         transition: 0.2s;
         position: relative;
@@ -317,6 +357,9 @@ try {
     }
     .nav-links a:hover { color: var(--text); }
     .nav-links a:hover::after { width: 100%; }
+
+    .nav-actions { display: flex; gap: 16px; align-items: center; }
+    .btn-nav { padding: 8px 20px; font-size: 0.85rem; border-radius: 99px; }
 
     .lang-toggle { background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 4px 14px; border-radius: 999px; font-size: 0.85rem; cursor: pointer; text-decoration: none; font-weight: 600; }
 
@@ -364,10 +407,10 @@ try {
     .scroll-progress { position: fixed; top: 0; left: 0; height: 3px; background: var(--gradient); z-index: 1001; width: 0%; transition: width 0.1s; }
 
     .btn { display: inline-flex; align-items: center; padding: 12px 28px; border-radius: 8px; font-weight: 600; text-decoration: none; transition: 0.3s; cursor: pointer; }
-    .btn-primary { background: var(--gradient); color: white; border: none; }
+    .btn-primary { background: var(--gradient); color: #ffffff !important; border: none; }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3); }
-    .btn-outline { border: 1px solid var(--border); color: var(--text); background: rgba(255,255,255,0.05); }
-    .btn-outline:hover { background: rgba(255,255,255,0.1); border-color: var(--accent); }
+    .btn-outline { border: 1px solid var(--border); color: var(--text); background: rgba(0,0,0,0.02); }
+    .btn-outline:hover { background: rgba(0,0,0,0.05); border-color: var(--accent); }
 
     section { padding: 120px 0; }
     .section-title { font-size: 2.5rem; margin-bottom: 16px; text-align: center; }
@@ -377,16 +420,69 @@ try {
     [data-reveal].active { opacity: 1; transform: translateY(0); }
 
     .hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 72px; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: center; width: 100%; }
     .hero-content { max-width: 850px; }
-    .hero-title { font-size: clamp(2.2rem, 10vw, 4.2rem); line-height: 1.1; margin-bottom: 24px; word-wrap: break-word; }
-
+    .hero-title { font-size: clamp(2.2rem, 5vw, 4rem); line-height: 1.1; margin-bottom: 24px; word-wrap: break-word; }
     .hero-title span { background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-    .hero-sub { font-size: 1.25rem; color: var(--text-muted); margin-bottom: 40px; max-width: 650px; }
+    .hero-sub { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 40px; max-width: 600px; }
     .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-    .hero-bg { position: absolute; inset: 0; z-index: 1; background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1), transparent 40%); }
+    
+    .hero-visual { position: relative; display: flex; justify-content: center; align-items: center; padding: 20px; }
+    .mockup-container { position: relative; width: 100%; max-width: 550px; perspective: 1200px; height: 450px; display: flex; align-items: center; }
+    .mockup-laptop { 
+        width: 100%; 
+        height: 340px; 
+        object-fit: cover; 
+        object-position: top; 
+        border-radius: 12px; 
+        box-shadow: 0 30px 60px rgba(0,0,0,0.1); 
+        transform: rotateY(-15deg) rotateX(5deg); 
+        position: relative; 
+        z-index: 2; 
+        border: 4px solid var(--surface-hover);
+    }
+    .mockup-phone { 
+        position: absolute; 
+        bottom: 40px; 
+        left: -30px; 
+        width: 150px; 
+        height: 300px; 
+        object-fit: cover; 
+        object-position: top;
+        border-radius: 28px; 
+        border: 7px solid var(--surface-hover); 
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1); 
+        z-index: 3; 
+        transform: rotateY(15deg); 
+    }
 
-    .trust-bar { padding: 48px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(255,255,255,0.01); }
-    .trust-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 24px; }
+    .hero-bg { position: absolute; inset: 0; z-index: 1; background: radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.1), transparent 50%); }
+
+    /* Floating WhatsApp */
+    .whatsapp-float {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #25d366;
+        color: white;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32px;
+        box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+        z-index: 2000;
+        text-decoration: none;
+        transition: 0.3s;
+    }
+    .whatsapp-float:hover { transform: scale(1.1) translateY(-5px); box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4); }
+
+    .trust-bar { padding: 60px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(0,0,0,0.01); }
+    .trust-title { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 32px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; }
+    .trust-grid { display: flex; justify-content: center; align-items: center; gap: 60px; flex-wrap: wrap; opacity: 0.6; filter: grayscale(1); }
+    .trust-grid img { height: 32px; width: auto; }
 
     .trust-item { text-align: center; }
     .trust-item h4 { font-size: 2.5rem; margin-bottom: 8px; background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
@@ -414,7 +510,7 @@ try {
     .lightbox {
         position: fixed;
         inset: 0;
-        background: rgba(3, 7, 18, 0.95);
+        background: rgba(0, 0, 0, 0.9);
         display: none;
         align-items: center;
         justify-content: center;
@@ -427,7 +523,7 @@ try {
         max-width: 100%;
         max-height: 90vh;
         border-radius: 12px;
-        box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     }
     .lightbox-close {
         position: absolute;
@@ -441,7 +537,7 @@ try {
     .lightbox-close:hover { opacity: 1; }
 
 
-    .marquee { overflow: hidden; white-space: nowrap; padding: 64px 0; background: rgba(255,255,255,0.02); }
+    .marquee { overflow: hidden; white-space: nowrap; padding: 64px 0; background: rgba(0,0,0,0.02); }
     .marquee-content { display: inline-block; animation: marquee 40s linear infinite; }
     .marquee-content span { font-size: 1.8rem; font-weight: 800; margin-right: 64px; color: var(--text-muted); opacity: 0.3; }
     @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -452,8 +548,17 @@ try {
     .social-links a:hover { color: var(--accent); }
 
     .contact-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .form-input { padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: white; width: 100%; font-family: inherit; }
+    .form-input { padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); width: 100%; font-family: inherit; }
     .form-input:focus { outline: none; border-color: var(--accent); }
+
+    .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; }
+    .testi-card { padding: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: 24px; position: relative; }
+    .testi-quote { font-size: 1.1rem; font-style: italic; color: var(--text); margin-bottom: 24px; position: relative; z-index: 2; }
+    .testi-quote::before { content: '"'; font-size: 4rem; position: absolute; top: -20px; left: -10px; color: var(--accent); opacity: 0.1; z-index: 1; }
+    .testi-author { display: flex; align-items: center; gap: 16px; }
+    .testi-avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--gradient); display: flex; align-items: center; justify-content: center; font-weight: 700; color: white; }
+    .testi-info h4 { font-size: 1rem; margin-bottom: 2px; }
+    .testi-info p { font-size: 0.85rem; color: var(--text-muted); }
 
 
     @media (max-width: 768px) {
@@ -468,7 +573,7 @@ try {
           right: 0;
           width: 80%;
           height: 100vh;
-          background: #030712;
+          background: var(--bg);
           flex-direction: column;
           justify-content: center;
           align-items: center;
@@ -476,7 +581,7 @@ try {
           transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           z-index: 1050;
           border-left: 1px solid var(--border);
-          box-shadow: -20px 0 40px rgba(0,0,0,0.5);
+          box-shadow: -20px 0 40px rgba(0,0,0,0.05);
           transform: translateX(120%);
           display: flex;
       }
@@ -492,9 +597,20 @@ try {
 
 
       section { padding: 80px 0; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+      .hero-content { margin: 0 auto; }
+      .hero-actions { justify-content: center; }
+      .mockup-container { max-width: 320px; height: 350px; margin: 0 auto; }
+      .mockup-laptop { height: 240px; }
+      .mockup-phone { width: 110px; height: 220px; left: -15px; bottom: 30px; border-width: 4px; }
       .projects-grid { grid-template-columns: 1fr; }
       .contact-form-grid { grid-template-columns: 1fr; }
+      
+      .logo { font-size: 1.2rem; gap: 8px; }
+      .logo-img { height: 32px; }
+      .logo-subtitle { display: none; }
     }
+
 
 
   </style>
@@ -511,16 +627,20 @@ try {
   
   <nav>
     <div class="container nav-content">
-      <a href="#" class="logo">Hasan Arofid</a>
+      <a href="#" class="logo">
+        <img src="images/logohasanarofid.png" alt="Hasan Arofid Logo" class="logo-img">
+        <span>Hasan Arofid <span class="logo-subtitle">| <?= $lang === 'id' ? 'Jasa Website' : 'Web Services' ?></span></span>
+      </a>
+
       
       <div class="nav-links" id="navLinks">
         <a href="#about"><?= $lang === 'id' ? 'Tentang' : 'About' ?></a>
-        <a href="#expertise"><?= $lang === 'id' ? 'Keahlian' : 'Expertise' ?></a>
-        <a href="#projects"><?= $lang === 'id' ? 'Proyek' : 'Projects' ?></a>
-        <a href="#digital-products"><?= $lang === 'id' ? 'Produk' : 'Products' ?></a>
-        <a href="#contact"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+        <a href="#expertise"><?= $lang === 'id' ? 'Layanan' : 'Services' ?></a>
+        <a href="#projects"><?= $lang === 'id' ? 'Portofolio' : 'Portfolio' ?></a>
+        <a href="#testimonials"><?= $lang === 'id' ? 'Testimoni' : 'Testimonials' ?></a>
         <div class="theme-toggle" id="themeToggle">🌓</div>
         <a href="?lang=<?= $lang === 'id' ? 'en' : 'id' ?>" class="lang-toggle"><?= $lang === 'id' ? 'EN' : 'ID' ?></a>
+        <a href="https://wa.me/628814959247" class="btn btn-primary btn-nav"><?= $lang === 'id' ? 'Hubungi Kami' : 'Contact Us' ?></a>
       </div>
 
       <div class="menu-toggle" id="mobileMenuToggle">
@@ -533,15 +653,27 @@ try {
 
 
 
+  <a href="https://wa.me/628814959247?text=Halo%20Hasan,%20saya%20ingin%20konsultasi%20mengenai%20pembuatan%20website" class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
+    <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+  </a>
+
   <section class="hero">
     <div class="hero-bg"></div>
     <div class="container">
-      <div class="hero-content" data-reveal>
-        <h1 class="hero-title"><?= $t['hero_head'] ?></h1>
-        <p class="hero-sub"><?= $t['hero_sub'] ?></p>
-        <div class="hero-actions">
-          <a href="#contact" class="btn btn-primary"><?= $t['cta_book'] ?></a>
-          <a href="#projects" class="btn btn-outline"><?= $t['cta_projects'] ?></a>
+      <div class="hero-grid">
+        <div class="hero-content" data-reveal>
+          <h1 class="hero-title"><?= $t['hero_head'] ?></h1>
+          <p class="hero-sub"><?= $t['hero_sub'] ?></p>
+          <div class="hero-actions">
+            <a href="https://wa.me/628814959247?text=Halo%20Hasan,%20saya%20ingin%20konsultasi%20mengenai%20pembuatan%20website" class="btn btn-primary" target="_blank"><?= $t['cta_book'] ?></a>
+            <a href="#projects" class="btn btn-outline"><?= $t['cta_projects'] ?></a>
+          </div>
+        </div>
+        <div class="hero-visual" data-reveal data-delay="200">
+          <div class="mockup-container">
+            <img src="images/amtechev.png" alt="Laptop Mockup" class="mockup-laptop">
+            <img src="images/porto3.png" alt="Phone Mockup" class="mockup-phone">
+          </div>
         </div>
       </div>
     </div>
@@ -549,19 +681,11 @@ try {
 
   <div class="trust-bar">
     <div class="container">
+      <div class="trust-title"><?= $lang === 'id' ? 'Dipercaya oleh Bisnis & Industri Terkemuka' : 'Trusted by Leading Businesses & Industries' ?></div>
       <div class="trust-grid">
-        <div class="trust-item" data-reveal>
-          <h4>10+</h4>
-          <p><?= $t['trust_exp'] ?></p>
-        </div>
-        <div class="trust-item" data-reveal data-delay="100">
-          <h4>50+</h4>
-          <p><?= $t['trust_projects'] ?></p>
-        </div>
-        <div class="trust-item" data-reveal data-delay="200">
-          <h4>99.9%</h4>
-          <p><?= $t['trust_uptime'] ?></p>
-        </div>
+        <div class="trust-item" data-reveal><h4>10+</h4><p><?= $t['trust_exp'] ?></p></div>
+        <div class="trust-item" data-reveal data-delay="100"><h4>50+</h4><p><?= $t['trust_projects'] ?></p></div>
+        <div class="trust-item" data-reveal data-delay="200"><h4>99.9%</h4><p><?= $t['trust_uptime'] ?></p></div>
       </div>
     </div>
   </div>
@@ -575,46 +699,54 @@ try {
         <div class="process-item" data-reveal>
           <h3>01</h3>
           <p><strong><?= $t['how_work_step1'] ?></strong></p>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;"><?= $lang === 'id' ? 'Diskusi mendalam untuk memahami visi dan target bisnis Anda.' : 'Deep discussion to understand your business vision and targets.' ?></p>
         </div>
         <div class="process-item" data-reveal data-delay="100">
           <h3>02</h3>
           <p><strong><?= $t['how_work_step2'] ?></strong></p>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;"><?= $lang === 'id' ? 'Perancangan UI/UX yang fokus pada pengalaman pengguna dan konversi.' : 'UI/UX design focused on user experience and conversion.' ?></p>
         </div>
         <div class="process-item" data-reveal data-delay="200">
           <h3>03</h3>
           <p><strong><?= $t['how_work_step3'] ?></strong></p>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;"><?= $lang === 'id' ? 'Pengembangan sistem yang cepat, aman, dan mudah dikelola.' : 'Fast, secure, and easy-to-manage system development.' ?></p>
         </div>
         <div class="process-item" data-reveal data-delay="300">
           <h3>04</h3>
           <p><strong><?= $t['how_work_step4'] ?></strong></p>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 8px;"><?= $lang === 'id' ? 'Website live dan siap membantu pertumbuhan bisnis Anda.' : 'Website live and ready to help your business grow.' ?></p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="expertise" style="background: rgba(255,255,255,0.01);">
+  <section id="expertise" style="background: rgba(0,0,0,0.01);">
     <div class="container">
       <div class="section-title" data-reveal><?= $t['expertise_title'] ?></div>
       <div class="exp-grid">
         <div class="exp-card" data-reveal>
-          <span class="exp-icon">🏗️</span>
+          <span class="exp-icon">🎯</span>
           <h3><?= $t['exp_backend'] ?></h3>
           <p><?= $t['exp_backend_desc'] ?></p>
+          <a href="https://wa.me/628814959247?text=Halo%20Hasan,%20saya%20tertarik%20dengan%20paket%20Landing%20Page" class="btn btn-outline" style="margin-top: 24px; width: 100%; justify-content: center;"><?= $lang === 'id' ? 'Pelajari Selengkapnya' : 'Learn More' ?></a>
         </div>
         <div class="exp-card" data-reveal data-delay="100">
-          <span class="exp-icon">🔗</span>
+          <span class="exp-icon">🏢</span>
           <h3><?= $t['exp_api'] ?></h3>
           <p><?= $t['exp_api_desc'] ?></p>
+          <a href="https://wa.me/628814959247?text=Halo%20Hasan,%20saya%20tertarik%20dengan%20paket%20Company%20Profile" class="btn btn-outline" style="margin-top: 24px; width: 100%; justify-content: center;"><?= $lang === 'id' ? 'Pelajari Selengkapnya' : 'Learn More' ?></a>
         </div>
         <div class="exp-card" data-reveal data-delay="200">
-          <span class="exp-icon">⚖️</span>
+          <span class="exp-icon">⚙️</span>
           <h3><?= $t['exp_scaling'] ?></h3>
           <p><?= $t['exp_scaling_desc'] ?></p>
+          <a href="https://wa.me/628814959247?text=Halo%20Hasan,%20saya%20tertarik%20dengan%20sistem%20Web%20Custom" class="btn btn-outline" style="margin-top: 24px; width: 100%; justify-content: center;"><?= $lang === 'id' ? 'Pelajari Selengkapnya' : 'Learn More' ?></a>
         </div>
         <div class="exp-card" data-reveal data-delay="300">
-          <span class="exp-icon">🛡️</span>
+          <span class="exp-icon">🛍️</span>
           <h3><?= $t['exp_devops'] ?></h3>
           <p><?= $t['exp_devops_desc'] ?></p>
+          <a href="https://wa.me/628814959247?text=Halo%20Hasan,%20saya%20tertarik%20dengan%20solusi%20E-Commerce" class="btn btn-outline" style="margin-top: 24px; width: 100%; justify-content: center;"><?= $lang === 'id' ? 'Pelajari Selengkapnya' : 'Learn More' ?></a>
         </div>
       </div>
     </div>
@@ -662,7 +794,7 @@ try {
   </section>
 
   <?php if (!empty($latestProducts)): ?>
-  <section id="digital-products" style="background: rgba(255,255,255,0.01);">
+  <section id="digital-products" style="background: rgba(0,0,0,0.01);">
     <div class="container">
       <div class="section-title" data-reveal><?= $t['products_title'] ?></div>
       <div class="section-subtitle" data-reveal><?= $t['products_subtitle'] ?></div>
@@ -673,7 +805,7 @@ try {
             <?php if ($p['image_url']): ?>
               <img src="<?= htmlspecialchars($p['image_url']) ?>" class="project-img" alt="<?= htmlspecialchars($p['name']) ?>">
             <?php else: ?>
-              <div class="project-img" style="display: flex; align-items: center; justify-content: center; font-size: 3rem; background: #1e293b;">📦</div>
+              <div class="project-img" style="display: flex; align-items: center; justify-content: center; font-size: 3rem; background: var(--surface-hover);">📦</div>
             <?php endif; ?>
             <div class="project-content">
               <span class="project-tag"><?= strtoupper(htmlspecialchars($p['platform'])) ?></span>
@@ -695,6 +827,46 @@ try {
   </section>
   <?php endif; ?>
 
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-title" data-reveal><?= $t['testimonials_title'] ?></div>
+      <div class="section-subtitle" data-reveal><?= $t['testimonials_sub'] ?></div>
+      
+      <div class="testi-grid">
+        <div class="testi-card" data-reveal>
+          <p class="testi-quote"><?= $lang === 'id' ? 'Sistem infrastruktur yang dibangun Hasan sangat stabil. Operasional jaringan EV kami di Malaysia menjadi 100% otomatis dan sangat efisien.' : 'The infrastructure system built by Hasan is incredibly stable. Our EV network operations in Malaysia are now 100% automated and highly efficient.' ?></p>
+          <div class="testi-author">
+            <div class="testi-avatar">A</div>
+            <div class="testi-info">
+              <h4>Amtech EV Team</h4>
+              <p>Enterprise SaaS Partner</p>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card" data-reveal data-delay="100">
+          <p class="testi-quote"><?= $lang === 'id' ? 'Manajemen pesanan kami sekarang jauh lebih cepat dan terintegrasi. Penjualan meningkat karena website sangat mudah digunakan oleh pelanggan.' : 'Our order management is now much faster and integrated. Sales increased because the website is so easy for customers to use.' ?></p>
+          <div class="testi-author">
+            <div class="testi-avatar">N</div>
+            <div class="testi-info">
+              <h4>Owner Nitajaya Catering</h4>
+              <p>F&B Business Owner</p>
+            </div>
+          </div>
+        </div>
+        <div class="testi-card" data-reveal data-delay="200">
+          <p class="testi-quote"><?= $lang === 'id' ? 'Solusi digital yang diberikan benar-benar menjawab masalah operasional kami. Sistem pengawasan sekolah kami menjadi jauh lebih transparan.' : 'The digital solution provided truly addressed our operational challenges. Our school oversight system has become much more transparent.' ?></p>
+          <div class="testi-author">
+            <div class="testi-avatar">S</div>
+            <div class="testi-info">
+              <h4>Education Oversight</h4>
+              <p>Government/Institutional Client</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <div class="marquee">
     <div class="marquee-content">
       <span>LARAVEL</span><span>NODE.JS</span><span>REACT</span><span>POSTGRESQL</span><span>DOCKER</span><span>REDIS</span><span>TYPESCRIPT</span>
@@ -704,14 +876,15 @@ try {
 
   <section id="contact">
     <div class="container" style="max-width: 700px;">
-      <div class="section-title" data-reveal><?= $t['cta_foot'] ?></div>
+      <div class="section-title" data-reveal><?= $lang === 'id' ? 'Dapatkan Penawaran Gratis' : 'Get a Free Quote' ?></div>
+      <div class="section-subtitle" data-reveal><?= $lang === 'id' ? 'Siap memulai proyek Anda? Beritahu kami kebutuhan Anda.' : 'Ready to start your project? Tell us your needs.' ?></div>
       <form id="dev-request-form" style="display: grid; gap: 20px; margin-top: 48px;">
         <div class="contact-form-grid">
           <input type="text" name="name" placeholder="<?= $lang === 'id' ? 'Nama' : 'Name' ?>" required class="form-input">
           <input type="email" name="email" placeholder="Email" required class="form-input">
         </div>
         <textarea name="description" placeholder="<?= $lang === 'id' ? 'Ceritakan tantangan teknis Anda...' : 'Tell me about your technical challenge...' ?>" rows="6" required class="form-input"></textarea>
-        <input type="hidden" name="service" value="enterprise-consulting">
+        <input type="hidden" name="service" value="web-development-service">
         <button type="submit" class="btn btn-primary" style="justify-content: center; font-size: 1.1rem; width: 100%;"><?= $lang === 'id' ? 'Kirim Pesan Strategis' : 'Send Strategic Message' ?></button>
       </form>
 
@@ -733,22 +906,25 @@ try {
   <script>
     // Theme Logic
     const themeToggle = document.getElementById('themeToggle');
-    const currentTheme = localStorage.getItem('theme') || 'dark';
+    const body = document.body;
+    const currentTheme = localStorage.getItem('theme') || 'light';
     
-    if (currentTheme === 'light') {
-        document.documentElement.setAttribute('data-theme', 'light');
-        themeToggle.textContent = '☀️';
+    if (currentTheme === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      themeToggle.textContent = '☀️';
+    } else {
+      themeToggle.textContent = '🌓';
     }
 
     themeToggle.addEventListener('click', () => {
         const theme = document.documentElement.getAttribute('data-theme');
-        if (theme === 'light') {
+        if (theme === 'dark') {
             document.documentElement.removeAttribute('data-theme');
-            localStorage.setItem('theme', 'dark');
+            localStorage.setItem('theme', 'light');
             themeToggle.textContent = '🌓';
         } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            localStorage.setItem('theme', 'light');
+            document.documentElement.setAttribute('data-theme', 'dark');
+            localStorage.setItem('theme', 'dark');
             themeToggle.textContent = '☀️';
         }
     });

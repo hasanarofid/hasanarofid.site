@@ -31,9 +31,12 @@ if (!isset($_SESSION['admin_logged_in'])) {
     <head>
         <meta charset="UTF-8">
         <title>403 Forbidden</title>
+        <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
+
         <style>
-            :root { --bg: #030712; --surface: #0f172a; --border: rgba(255, 255, 255, 0.08); --text: #f8fafc; }
-            [data-theme="light"] { --bg: #f8fafc; --surface: #ffffff; --border: rgba(0, 0, 0, 0.08); --text: #0f172a; }
+            :root { --bg: #f8fafc; --surface: #ffffff; --border: rgba(0, 0, 0, 0.08); --text: #0f172a; }
+            [data-theme="dark"] { --bg: #030712; --surface: #0f172a; --border: rgba(255, 255, 255, 0.08); --text: #f8fafc; }
+
             body { background: var(--bg); color: var(--text); font-family: 'Inter', sans-serif; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
             .container { text-align: center; }
             h1 { cursor: pointer; user-select: none; }
@@ -58,13 +61,22 @@ if (!isset($_SESSION['admin_logged_in'])) {
         <script>
             {
                 const themeToggle = document.getElementById('themeToggle');
-                const currentTheme = localStorage.getItem('theme') || 'dark';
-                if (currentTheme === 'light') { document.documentElement.setAttribute('data-theme', 'light'); themeToggle.textContent = '☀️'; }
+                const currentTheme = localStorage.getItem('theme') || 'light';
+                if (currentTheme === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); themeToggle.textContent = '☀️'; }
+                else { themeToggle.textContent = '🌓'; }
                 themeToggle.addEventListener('click', () => {
                     const theme = document.documentElement.getAttribute('data-theme');
-                    if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'dark'); themeToggle.textContent = '🌓'; }
-                    else { document.documentElement.setAttribute('data-theme', 'light'); localStorage.setItem('theme', 'light'); themeToggle.textContent = '☀️'; }
+                    if (theme === 'dark') {
+                        document.documentElement.removeAttribute('data-theme');
+                        localStorage.setItem('theme', 'light');
+                        themeToggle.textContent = '🌓';
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        themeToggle.textContent = '☀️';
+                    }
                 });
+
             }
         </script>
     </body>
@@ -129,10 +141,13 @@ $products = $db->query("SELECT * FROM products ORDER BY created_at DESC")->fetch
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Digital Products | Hasan Arofid</title>
+    <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #030712; --surface: #0f172a; --border: rgba(255,255,255,0.08); --text: #f8fafc; --accent: #3b82f6; }
-        [data-theme="light"] { --bg: #f8fafc; --surface: #ffffff; --border: rgba(0,0,0,0.08); --text: #0f172a; }
+        :root { --bg: #f8fafc; --surface: #ffffff; --border: rgba(0,0,0,0.08); --text: #0f172a; --accent: #3b82f6; }
+        [data-theme="dark"] { --bg: #030712; --surface: #0f172a; --border: rgba(255,255,255,0.08); --text: #f8fafc; }
+
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 40px 20px; }
         .container { max-width: 800px; margin: 0 auto; }
         header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
@@ -230,13 +245,22 @@ $products = $db->query("SELECT * FROM products ORDER BY created_at DESC")->fetch
     <script>
         {
             const themeToggle = document.getElementById('themeToggle');
-            const currentTheme = localStorage.getItem('theme') || 'dark';
-            if (currentTheme === 'light') { document.documentElement.setAttribute('data-theme', 'light'); themeToggle.textContent = '☀️'; }
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            if (currentTheme === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); themeToggle.textContent = '☀️'; }
+            else { themeToggle.textContent = '🌓'; }
             themeToggle.addEventListener('click', () => {
                 const theme = document.documentElement.getAttribute('data-theme');
-                if (theme === 'light') { document.documentElement.removeAttribute('data-theme'); localStorage.setItem('theme', 'dark'); themeToggle.textContent = '🌓'; }
-                else { document.documentElement.setAttribute('data-theme', 'light'); localStorage.setItem('theme', 'light'); themeToggle.textContent = '☀️'; }
+                if (theme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.textContent = '🌓';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.textContent = '☀️';
+                }
             });
+
         }
     </script>
 </body>
