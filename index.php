@@ -156,19 +156,28 @@ try {
         $stmtProducts->execute();
         $latestProducts = $stmtProducts->fetchAll(PDO::FETCH_ASSOC);
     } catch (Exception $e) {
-        // Fallback for demo if table doesn't exist
-        $latestProducts = [
-            [
-                'name' => 'High-Conversion Landing Page Template',
-                'platform' => 'Laravel',
-                'description' => 'Premium landing page template optimized for conversion and speed.',
-                'price' => 'Rp 250.000',
-                'link' => '#',
-                'image_url' => 'images/porto3.png'
-            ]
-        ];
+        $latestProducts = [];
     }
-} catch (PDOException $e) { $latestProducts = []; }
+
+    // Fetch SEO Settings
+    try {
+        $seoData = $db->query("SELECT * FROM seo_settings WHERE page_name = 'homepage'")->fetch(PDO::FETCH_ASSOC);
+        if ($seoData) {
+            $t['meta_title'] = $seoData['title'];
+            $t['meta_desc'] = $seoData['description'];
+            $t['meta_keywords'] = $seoData['keywords'];
+        }
+    } catch (Exception $e) {}
+
+    // Fetch Articles
+    try {
+        $latestArticles = $db->query("SELECT * FROM articles WHERE status = 'published' ORDER BY created_at DESC LIMIT 3")->fetchAll(PDO::FETCH_ASSOC);
+    } catch (Exception $e) { $latestArticles = []; }
+
+} catch (PDOException $e) { 
+    $latestProducts = []; 
+    $latestArticles = [];
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
@@ -176,9 +185,10 @@ try {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><?= $t['meta_title'] ?></title>
+  <meta name="google-site-verification" content="E-tyAYsOQMugMAc2KAkBnFdVc9mAbKbId7ZOAK3gpDQ" />
 
   <meta name="description" content="<?= $t['meta_desc'] ?>" />
-  <meta name="keywords" content="fullstack engineer, web architecture, Laravel, Node.js, React, System Scaling, Enterprise Software" />
+  <meta name="keywords" content="<?= $t['meta_keywords'] ?? 'fullstack engineer, web architecture, Laravel, Node.js, React, System Scaling, Enterprise Software' ?>" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
@@ -613,6 +623,17 @@ try {
 
 
 
+    .article-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 32px; margin-top: 48px; }
+    .article-card { background: var(--surface); border: 1px solid var(--border); border-radius: 24px; padding: 40px; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none; color: inherit; display: flex; flex-direction: column; position: relative; overflow: hidden; }
+    .article-card::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--gradient); opacity: 0; transition: 0.3s; }
+    .article-card:hover { border-color: var(--accent); transform: translateY(-8px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+    .article-card:hover::after { opacity: 1; }
+    .article-date { font-size: 0.85rem; color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; display: block; }
+    .article-card h3 { font-size: 1.5rem; margin-bottom: 16px; line-height: 1.3; font-family: 'Poppins', sans-serif; }
+    .article-card p { font-size: 1rem; color: var(--text-muted); margin-bottom: 32px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+    .article-link { color: var(--text); font-weight: 700; font-size: 0.95rem; display: flex; align-items: center; gap: 12px; transition: 0.3s; }
+    .article-card:hover .article-link { color: var(--accent); gap: 16px; }
+
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7190047001129861"
      crossorigin="anonymous"></script>
@@ -891,6 +912,26 @@ try {
       <div id="form-status" style="margin-top: 24px; text-align: center; font-weight: 500;"></div>
     </div>
   </section>
+
+  <?php if (!empty($latestArticles)): ?>
+  <section id="blog" style="background: rgba(0,0,0,0.01);">
+    <div class="container">
+      <div class="section-title" data-reveal><?= $lang === 'id' ? 'Wawasan & Strategi Digital' : 'Insights & Digital Strategy' ?></div>
+      <div class="section-subtitle" data-reveal><?= $lang === 'id' ? 'Artikel terbaru untuk membantu Anda memahami tren teknologi dan strategi pertumbuhan bisnis online.' : 'Latest articles to help you understand tech trends and online business growth strategies.' ?></div>
+      
+      <div class="article-grid">
+        <?php foreach ($latestArticles as $a): ?>
+        <a href="blog.php?slug=<?= $a['slug'] ?>" class="article-card" data-reveal>
+          <span class="article-date"><?= date('M d, Y', strtotime($a['created_at'])) ?></span>
+          <h3><?= htmlspecialchars($a['title']) ?></h3>
+          <p><?= htmlspecialchars($a['excerpt']) ?></p>
+          <span class="article-link"><?= $lang === 'id' ? 'Baca Selengkapnya' : 'Read Full Article' ?> <span>→</span></span>
+        </a>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
+  <?php endif; ?>
 
   <footer>
     <div class="container">

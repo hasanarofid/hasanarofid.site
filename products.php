@@ -32,6 +32,7 @@ $active_t = $t[$lang];
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><?= $active_t['title'] ?></title>
+  <meta name="google-site-verification" content="E-tyAYsOQMugMAc2KAkBnFdVc9mAbKbId7ZOAK3gpDQ" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
