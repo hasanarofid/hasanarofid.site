@@ -929,6 +929,9 @@ try {
         </a>
         <?php endforeach; ?>
       </div>
+      <div style="text-align: center; margin-top: 60px;" data-reveal>
+        <a href="articles.php" class="btn btn-outline" style="padding: 16px 40px;"><?= $lang === 'id' ? 'Lihat Semua Artikel' : 'View All Articles' ?></a>
+      </div>
     </div>
   </section>
   <?php endif; ?>
@@ -936,6 +939,11 @@ try {
   <footer>
     <div class="container">
       <p><?= $t['footer_copy'] ?></p>
+      <div style="margin: 20px 0; display: flex; justify-content: center; gap: 24px; font-size: 0.9rem;">
+        <a href="privacy-policy.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
+        <a href="terms-of-service.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
+        <a href="contact.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+      </div>
       <div class="social-links">
         <a href="https://github.com/hasanarofid" target="_blank">GitHub</a>
         <a href="https://www.linkedin.com/in/hasan-arofid-47869a130/" target="_blank">LinkedIn</a>
