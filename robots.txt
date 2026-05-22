@@ -3,4 +3,7 @@ Allow: /
 Disallow: /vendor/
 Disallow: /stats.db
 
+User-agent: Mediapartners-Google
+Allow: /
+
 Sitemap: https://hasanarofid.site/sitemap.xml
