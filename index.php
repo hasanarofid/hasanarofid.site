@@ -808,7 +808,15 @@ try {
           </div>
         </div>
 
-
+        <div class="project-card" data-reveal data-delay="300" onclick="window.open('https://gringgo.org/', '_blank')" style="cursor: pointer;">
+          <img src="images/gringgo.png" class="project-img preview-trigger" alt="Gringgo Platform">
+          <div class="project-content">
+            <span class="project-tag">Web Platform</span>
+            <h3>Gringgo</h3>
+            <p>A technology platform focusing on waste management and environmental solutions to empower communities.</p>
+            <div style="margin-top: 16px; font-weight: 600; color: var(--accent);"><?= $t['project_impact'] ?>: Sustainable Environmental Impact</div>
+          </div>
+        </div>
 
       </div>
     </div>
