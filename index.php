@@ -95,6 +95,7 @@ try {
       'how_work_step4' => 'Launch & Ongoing Support',
       'systems_title' => 'Successful Projects',
       'systems_desc' => 'A showcase of high-impact digital solutions we\'ve built for businesses across various industries.',
+      'more_portfolio' => 'Other Portfolio',
       'project_impact' => 'Business Result',
       'project_problem' => 'Challenge',
       'project_solution' => 'Solution',
@@ -135,6 +136,7 @@ try {
       'how_work_step4' => 'Peluncuran & Dukungan',
       'systems_title' => 'Proyek Yang Berhasil',
       'systems_desc' => 'Kumpulan solusi digital berdampak tinggi yang telah kami bangun untuk berbagai industri bisnis.',
+      'more_portfolio' => 'Portofolio Lainnya',
       'project_impact' => 'Hasil Bisnis',
       'project_problem' => 'Tantangan',
       'project_solution' => 'Solusi',
@@ -1450,16 +1452,11 @@ try {
           </div>
         </div>
 
-        <div class="project-card" data-reveal data-delay="300" onclick="window.open('https://gringgo.org/', '_blank')" style="cursor: pointer;">
-          <img src="images/gringgo.png" class="project-img preview-trigger" alt="Gringgo Platform">
-          <div class="project-content">
-            <span class="project-tag">Web Platform</span>
-            <h3>Gringgo</h3>
-            <p>A technology platform focusing on waste management and environmental solutions to empower communities.</p>
-            <div style="margin-top: 16px; font-weight: 600; color: var(--accent);"><?= $t['project_impact'] ?>: Sustainable Environmental Impact</div>
-          </div>
-        </div>
 
+
+      </div>
+      <div style="text-align: center; margin-top: 48px;" data-reveal>
+        <a href="/portofolio" class="btn btn-primary"><?= $t['more_portfolio'] ?></a>
       </div>
     </div>
   </section>
