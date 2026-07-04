@@ -1263,6 +1263,7 @@ try {
         <a href="#about"><?= $lang === 'id' ? 'Tentang' : 'About' ?></a>
         <a href="#expertise"><?= $lang === 'id' ? 'Layanan' : 'Services' ?></a>
         <a href="#projects"><?= $lang === 'id' ? 'Portofolio' : 'Portfolio' ?></a>
+        <a href="articles.php"><?= $lang === 'id' ? 'Artikel' : 'Blog' ?></a>
         <a href="#testimonials"><?= $lang === 'id' ? 'Testimoni' : 'Testimonials' ?></a>
         <div class="theme-toggle" id="themeToggle">🌓</div>
         <a href="?lang=<?= $lang === 'id' ? 'en' : 'id' ?>" class="lang-toggle"><?= $lang === 'id' ? 'EN' : 'ID' ?></a>
