@@ -29,6 +29,8 @@ $translations = [
     'desc_amtech' => 'Built a unified management system for Malaysia\'s leading EV network. Handling real-time hardware telemetry and multi-tenant billing.',
     'desc_gringgo' => 'A technology platform focusing on waste management and environmental solutions to empower communities.',
     'desc_afpro' => 'A modern public web application for Afpro Aquarium, featuring an intuitive user interface and interactive product displays.',
+    'share' => 'Share',
+    'copied' => 'Link copied to clipboard!',
   ],
   'id' => [
     'meta_title' => 'Portofolio | Hasan Arofid',
@@ -48,6 +50,8 @@ $translations = [
     'desc_amtech' => 'Membangun sistem manajemen terpadu untuk jaringan EV terkemuka di Malaysia. Menangani telemetri perangkat keras secara real-time dan penagihan multi-tenant.',
     'desc_gringgo' => 'Platform teknologi yang berfokus pada pengelolaan sampah dan solusi lingkungan untuk memberdayakan komunitas.',
     'desc_afpro' => 'Aplikasi web publik modern untuk Afpro Aquarium, menampilkan antarmuka pengguna yang intuitif dan tampilan produk yang interaktif.',
+    'share' => 'Bagikan',
+    'copied' => 'Tautan disalin ke papan klip!',
   ]
 ];
 $t = $translations[$lang];
@@ -192,8 +196,12 @@ $t = $translations[$lang];
     </nav>
 
     <div class="container header-spacing">
-        <div style="text-align: center; margin-bottom: 24px;" data-reveal>
+        <div style="text-align: center; margin-bottom: 24px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;" data-reveal>
             <a href="/" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem;">← <?= $t['back_home'] ?></a>
+            <button onclick="sharePortfolio()" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; background: var(--surface);">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+                <?= $t['share'] ?>
+            </button>
         </div>
 
         <div class="section-title" data-reveal><?= $t['portfolio_title'] ?></div>
@@ -355,6 +363,25 @@ $t = $translations[$lang];
         document.addEventListener('keydown', (e) => {
             if(e.key === 'Escape') closeModal();
         });
+
+        // Share Portfolio Logic
+        function sharePortfolio() {
+            if (navigator.share) {
+                navigator.share({
+                    title: '<?= $t['meta_title'] ?>',
+                    text: '<?= $t['portfolio_desc'] ?>',
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                const tempInput = document.createElement("input");
+                tempInput.value = window.location.href;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                alert("<?= $t['copied'] ?>");
+            }
+        }
     </script>
 
   <style>
