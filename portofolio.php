@@ -28,6 +28,7 @@ $translations = [
     'desc_nolimits' => 'A dynamic and engaging public-facing platform designed for training programs, showcasing modern UI, seamless user experience, and optimized conversion pathways.',
     'desc_amtech' => 'Built a unified management system for Malaysia\'s leading EV network. Handling real-time hardware telemetry and multi-tenant billing.',
     'desc_gringgo' => 'A technology platform focusing on waste management and environmental solutions to empower communities.',
+    'desc_afpro' => 'A modern public web application for Afpro Aquarium, featuring an intuitive user interface and interactive product displays.',
   ],
   'id' => [
     'meta_title' => 'Portofolio | Hasan Arofid',
@@ -46,6 +47,7 @@ $translations = [
     'desc_nolimits' => 'Platform publik yang dinamis dan interaktif untuk program pelatihan, menampilkan UI modern, pengalaman pengguna yang mulus, dan alur konversi yang dioptimalkan.',
     'desc_amtech' => 'Membangun sistem manajemen terpadu untuk jaringan EV terkemuka di Malaysia. Menangani telemetri perangkat keras secara real-time dan penagihan multi-tenant.',
     'desc_gringgo' => 'Platform teknologi yang berfokus pada pengelolaan sampah dan solusi lingkungan untuk memberdayakan komunitas.',
+    'desc_afpro' => 'Aplikasi web publik modern untuk Afpro Aquarium, menampilkan antarmuka pengguna yang intuitif dan tampilan produk yang interaktif.',
   ]
 ];
 $t = $translations[$lang];
@@ -243,6 +245,18 @@ $t = $translations[$lang];
         <p class="category-desc" data-reveal><?= $t['public_systems_desc'] ?></p>
 
         <div class="projects-grid" style="margin-bottom: 80px;">
+            <div class="project-card" data-reveal onclick="window.open('https://afproaquarium.com/', '_blank')" style="cursor: pointer;">
+                <div class="image-gallery gallery-2">
+                    <img src="images/afpro1.png" alt="Afpro Aquarium 1" loading="lazy">
+                    <img src="images/afpro2.png" alt="Afpro Aquarium 2" loading="lazy">
+                </div>
+                <div class="project-content">
+                    <span class="project-tag">Web App</span>
+                    <h3>Afpro Aquarium</h3>
+                    <p><?= $t['desc_afpro'] ?></p>
+                </div>
+            </div>
+
             <div class="project-card" data-reveal onclick="window.open('https://nolimitstraining.id/', '_blank')" style="cursor: pointer;">
                 <div class="image-gallery gallery-1">
                     <img src="images/nolimitstraining.png" alt="No Limits Training Platform" loading="lazy">
