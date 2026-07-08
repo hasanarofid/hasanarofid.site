@@ -56,6 +56,14 @@ $translations = [
 ];
 $t = $translations[$lang];
 
+function getShareText($title, $desc, $lang) {
+    if ($lang === 'id') {
+        return "🚀 Baru saja melihat project luar biasa: {$title}!\n\n{$desc}\n\n💡 Butuh solusi digital & sistem kustom profesional untuk bisnis Anda? Mari wujudkan bersama Hasan Arofid!\nCek portofolio lengkapnya di: https://hasanarofid.site/portofolio";
+    } else {
+        return "🚀 Just saw this amazing project: {$title}!\n\n{$desc}\n\n💡 Need a professional digital solution & custom system for your business? Let's build it with Hasan Arofid!\nCheck out the full portfolio at: https://hasanarofid.site/portofolio";
+    }
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
@@ -144,6 +152,16 @@ $t = $translations[$lang];
         .btn-outline { border: 1px solid var(--border); color: var(--text); background: rgba(0,0,0,0.02); }
         .btn-outline:hover { background: rgba(0,0,0,0.05); border-color: var(--accent); }
 
+        .card-share { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; border-top: 1px solid var(--border); padding-top: 16px; }
+        .share-btn { padding: 6px 12px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.75rem; transition: 0.3s; cursor: pointer; border: none; font-family: inherit; display: inline-flex; align-items: center; justify-content: center; }
+        .btn-wa { background: #25d366; color: white; }
+        .btn-th { background: #000000; color: white; border: 1px solid #333; }
+        [data-theme="light"] .btn-th { background: #ffffff; color: #000000; border: 1px solid #ccc; }
+        .btn-li { background: #0a66c2; color: white; }
+        .btn-copy { background: var(--surface-hover); color: var(--text); border: 1px solid var(--border); }
+        .share-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
+        .share-btn:active { transform: scale(0.95); }
+
         [data-reveal] { animation: fadeInUp 0.8s ease forwards; }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
         
@@ -216,6 +234,13 @@ $t = $translations[$lang];
                     <span class="project-tag">Education Tech</span>
                     <h3>School Management System</h3>
                     <p><?= $t['desc_school'] ?></p>
+                    <?php $shareSchool = getShareText('School Management System', $t['desc_school'], $lang); ?>
+                    <div class="card-share">
+                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareSchool) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
+                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareSchool) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
+                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareSchool), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+                    </div>
                 </div>
             </div>
 
@@ -230,6 +255,13 @@ $t = $translations[$lang];
                     <span class="project-tag">Enterprise ERP</span>
                     <h3>Mr. Lux Indonesia</h3>
                     <p><?= $t['desc_mrlux'] ?></p>
+                    <?php $shareMrlux = getShareText('Mr. Lux Indonesia', $t['desc_mrlux'], $lang); ?>
+                    <div class="card-share">
+                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareMrlux) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
+                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareMrlux) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
+                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareMrlux), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+                    </div>
                 </div>
             </div>
 
@@ -241,6 +273,13 @@ $t = $translations[$lang];
                     <span class="project-tag">PHP • POS</span>
                     <h3>Nitajaya Catering & POS</h3>
                     <p><?= $t['desc_nitajaya'] ?></p>
+                    <?php $shareNitajaya = getShareText('Nitajaya Catering & POS', $t['desc_nitajaya'], $lang); ?>
+                    <div class="card-share">
+                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareNitajaya) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
+                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareNitajaya) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
+                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareNitajaya), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -258,6 +297,13 @@ $t = $translations[$lang];
                     <span class="project-tag">Web App</span>
                     <h3>Afpro Aquarium</h3>
                     <p><?= $t['desc_afpro'] ?></p>
+                    <?php $shareAfpro = getShareText('Afpro Aquarium', $t['desc_afpro'], $lang); ?>
+                    <div class="card-share">
+                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareAfpro) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
+                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareAfpro) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
+                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareAfpro), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+                    </div>
                 </div>
             </div>
 
@@ -269,6 +315,13 @@ $t = $translations[$lang];
                     <span class="project-tag">Public Platform</span>
                     <h3>No Limits Training</h3>
                     <p><?= $t['desc_nolimits'] ?></p>
+                    <?php $shareNolimits = getShareText('No Limits Training', $t['desc_nolimits'], $lang); ?>
+                    <div class="card-share">
+                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareNolimits) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
+                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareNolimits) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
+                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareNolimits), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+                    </div>
                 </div>
             </div>
 
@@ -280,6 +333,13 @@ $t = $translations[$lang];
                     <span class="project-tag">Enterprise SaaS</span>
                     <h3>Amtech EV Infrastructure</h3>
                     <p><?= $t['desc_amtech'] ?></p>
+                    <?php $shareAmtech = getShareText('Amtech EV Infrastructure', $t['desc_amtech'], $lang); ?>
+                    <div class="card-share">
+                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareAmtech) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
+                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareAmtech) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
+                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareAmtech), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+                    </div>
                 </div>
             </div>
 
@@ -291,6 +351,13 @@ $t = $translations[$lang];
                     <span class="project-tag">Web Platform</span>
                     <h3>Gringgo</h3>
                     <p><?= $t['desc_gringgo'] ?></p>
+                    <?php $shareGringgo = getShareText('Gringgo', $t['desc_gringgo'], $lang); ?>
+                    <div class="card-share">
+                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareGringgo) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
+                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareGringgo) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
+                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
+                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareGringgo), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -376,6 +443,44 @@ $t = $translations[$lang];
                 document.execCommand("copy");
                 document.body.removeChild(tempInput);
                 alert("<?= $t['copied'] ?>");
+            }
+        }
+
+        function copyProjectLink(event, textToCopy) {
+            event.stopPropagation();
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    const btn = event.target;
+                    const originalText = btn.innerText;
+                    btn.innerText = '<?= $lang === 'id' ? 'Tersalin!' : 'Copied!' ?>';
+                    btn.style.background = '#10b981';
+                    btn.style.color = 'white';
+                    setTimeout(() => {
+                        btn.innerText = originalText;
+                        btn.style.background = '';
+                        btn.style.color = '';
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Failed to copy: ', err);
+                });
+            } else {
+                const tempInput = document.createElement("input");
+                tempInput.value = textToCopy;
+                document.body.appendChild(tempInput);
+                tempInput.select();
+                document.execCommand("copy");
+                document.body.removeChild(tempInput);
+                
+                const btn = event.target;
+                const originalText = btn.innerText;
+                btn.innerText = '<?= $lang === 'id' ? 'Tersalin!' : 'Copied!' ?>';
+                btn.style.background = '#10b981';
+                btn.style.color = 'white';
+                setTimeout(() => {
+                    btn.innerText = originalText;
+                    btn.style.background = '';
+                    btn.style.color = '';
+                }, 2000);
             }
         }
     </script>
