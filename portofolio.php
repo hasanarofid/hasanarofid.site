@@ -196,12 +196,8 @@ $t = $translations[$lang];
     </nav>
 
     <div class="container header-spacing">
-        <div style="text-align: center; margin-bottom: 24px; display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;" data-reveal>
+        <div style="text-align: center; margin-bottom: 24px;" data-reveal>
             <a href="/" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem;">← <?= $t['back_home'] ?></a>
-            <button onclick="sharePortfolio()" class="btn btn-outline" style="padding: 8px 16px; font-size: 0.9rem; cursor: pointer; display: inline-flex; align-items: center; gap: 8px; background: var(--surface);">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
-                <?= $t['share'] ?>
-            </button>
         </div>
 
         <div class="section-title" data-reveal><?= $t['portfolio_title'] ?></div>
@@ -408,7 +404,37 @@ $t = $translations[$lang];
       transform: scale(1.1) translateY(-5px);
       box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
     }
+    
+    /* Floating Share */
+    .share-float {
+      position: fixed;
+      bottom: 105px;
+      right: 30px;
+      background: var(--accent);
+      color: white;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+      z-index: 2000;
+      cursor: pointer;
+      border: none;
+      transition: 0.3s;
+    }
+    .share-float:hover {
+      transform: scale(1.1) translateY(-5px);
+      box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+    }
   </style>
+
+  <!-- Share Button -->
+  <button onclick="sharePortfolio()" class="share-float" aria-label="Share">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+  </button>
+
   <a href="https://wa.me/628814959247?text=Halo%20Hasan,%20saya%20ingin%20konsultasi%20mengenai%20pembuatan%20website"
     class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
     <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor">
