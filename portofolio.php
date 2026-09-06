@@ -22,13 +22,6 @@ $translations = [
     'public_systems_desc' => 'High-performance web platforms built for public engagement and scale.',
     'back_home' => 'Back to Home',
     'project_impact' => 'Business Result',
-    'desc_school' => 'Internal monitoring and management system for schools, streamlining operational tasks and audits. Ensuring high availability and efficiency for school administrators.',
-    'desc_mrlux' => 'Comprehensive enterprise resource planning software featuring delivery notes, inventory tracking, sales processing, and robust business logic for wholesale distribution.',
-    'desc_nitajaya' => 'Integrated catering management and point-of-sale system. Streamlining order processing and inventory tracking for improved operational efficiency.',
-    'desc_nolimits' => 'A dynamic and engaging public-facing platform designed for training programs, showcasing modern UI, seamless user experience, and optimized conversion pathways.',
-    'desc_amtech' => 'Built a unified management system for Malaysia\'s leading EV network. Handling real-time hardware telemetry and multi-tenant billing.',
-    'desc_gringgo' => 'A technology platform focusing on waste management and environmental solutions to empower communities.',
-    'desc_afpro' => 'A modern public web application for Afpro Aquarium, featuring an intuitive user interface and interactive product displays.',
     'share' => 'Share',
     'copied' => 'Link copied to clipboard!',
   ],
@@ -43,51 +36,198 @@ $translations = [
     'public_systems_desc' => 'Platform web berkinerja tinggi yang dibangun untuk keterlibatan publik dan skala besar.',
     'back_home' => 'Kembali ke Beranda',
     'project_impact' => 'Hasil Bisnis',
-    'desc_school' => 'Sistem pemantauan dan manajemen internal untuk sekolah, menyederhanakan tugas operasional dan audit. Memastikan ketersediaan dan efisiensi tinggi bagi pengelola sekolah.',
-    'desc_mrlux' => 'Perangkat lunak perencanaan sumber daya perusahaan (ERP) komprehensif yang dilengkapi surat jalan, pelacakan inventaris, pemrosesan penjualan, dan logika bisnis yang kuat untuk distribusi grosir.',
-    'desc_nitajaya' => 'Sistem manajemen katering dan point-of-sale yang terintegrasi. Menyederhanakan pemrosesan pesanan dan pelacakan inventaris untuk efisiensi operasional yang lebih baik.',
-    'desc_nolimits' => 'Platform publik yang dinamis dan interaktif untuk program pelatihan, menampilkan UI modern, pengalaman pengguna yang mulus, dan alur konversi yang dioptimalkan.',
-    'desc_amtech' => 'Membangun sistem manajemen terpadu untuk jaringan EV terkemuka di Malaysia. Menangani telemetri perangkat keras secara real-time dan penagihan multi-tenant.',
-    'desc_gringgo' => 'Platform teknologi yang berfokus pada pengelolaan sampah dan solusi lingkungan untuk memberdayakan komunitas.',
-    'desc_afpro' => 'Aplikasi web publik modern untuk Afpro Aquarium, menampilkan antarmuka pengguna yang intuitif dan tampilan produk yang interaktif.',
     'share' => 'Bagikan',
     'copied' => 'Tautan disalin ke papan klip!',
   ]
 ];
 $t = $translations[$lang];
 
-function getShareText($title, $desc, $lang) {
-    if ($lang === 'id') {
-        return "🚀 Baru saja melihat project luar biasa: {$title}!\n\n{$desc}\n\n💡 Butuh solusi digital & sistem kustom profesional untuk bisnis Anda? Mari wujudkan bersama Hasan Arofid!\nCek portofolio lengkapnya di: https://hasanarofid.site/portofolio";
-    } else {
-        return "🚀 Just saw this amazing project: {$title}!\n\n{$desc}\n\n💡 Need a professional digital solution & custom system for your business? Let's build it with Hasan Arofid!\nCheck out the full portfolio at: https://hasanarofid.site/portofolio";
-    }
+$projects = [
+  'school-system' => [
+    'category' => 'internal',
+    'tag' => 'Education Tech',
+    'title' => 'School Management System',
+    'desc' => [
+      'id' => 'Sistem pemantauan dan manajemen internal untuk sekolah, menyederhanakan tugas operasional dan audit. Memastikan ketersediaan dan efisiensi tinggi bagi pengelola sekolah.',
+      'en' => 'Internal monitoring and management system for schools, streamlining operational tasks and audits. Ensuring high availability and efficiency for school administrators.'
+    ],
+    'images' => [
+      'images/point-sekolah.png',
+      'images/point-sekolah2.png'
+    ],
+    'gallery_type' => 'gallery-2',
+    'link' => null,
+  ],
+  'mr-lux' => [
+    'category' => 'internal',
+    'tag' => 'Enterprise ERP',
+    'title' => 'Mr. Lux Indonesia',
+    'desc' => [
+      'id' => 'Perangkat lunak perencanaan sumber daya perusahaan (ERP) komprehensif yang dilengkapi surat jalan, pelacakan inventaris, pemrosesan penjualan, dan logika bisnis yang kuat untuk distribusi grosir.',
+      'en' => 'Comprehensive enterprise resource planning software featuring delivery notes, inventory tracking, sales processing, and robust business logic for wholesale distribution.'
+    ],
+    'images' => [
+      'images/mrluxindonesia.png',
+      'images/mrluxindonesia1.png',
+      'images/mrluxindonesia2.png',
+      'images/mrluxindonesia3.png'
+    ],
+    'gallery_type' => 'gallery-4',
+    'link' => null,
+  ],
+  'nitajaya' => [
+    'category' => 'internal',
+    'tag' => 'PHP • POS',
+    'title' => 'Nitajaya Catering & POS',
+    'desc' => [
+      'id' => 'Sistem manajemen katering dan point-of-sale yang terintegrasi. Menyederhanakan pemrosesan pesanan dan pelacakan inventaris untuk efisiensi operasional yang lebih baik.',
+      'en' => 'Integrated catering management and point-of-sale system. Streamlining order processing and inventory tracking for improved operational efficiency.'
+    ],
+    'images' => [
+      'images/nitajaya.png'
+    ],
+    'gallery_type' => 'gallery-1',
+    'link' => null,
+  ],
+  'mitrasyiar-baitullah' => [
+    'category' => 'public',
+    'tag' => 'Travel & Hajj Tech',
+    'title' => 'Mitra Syiar Baitullah',
+    'desc' => [
+      'id' => 'Platform digital pelayanan Umroh & Haji terpercaya dengan sistem pemesanan paket, informasi jadwal keberangkatan real-time, dan pendaftaran kemitraan yang terintegrasi.',
+      'en' => 'Trusted digital Umrah & Hajj travel platform featuring real-time package listings, departure schedules, and integrated partnership registration.'
+    ],
+    'images' => [
+      'images/mitrasyiarbaitullah.png'
+    ],
+    'gallery_type' => 'gallery-1',
+    'link' => 'https://www.mitrasyiarbaitullah.com/',
+  ],
+  'afpro-aquarium' => [
+    'category' => 'public',
+    'tag' => 'Web App',
+    'title' => 'Afpro Aquarium',
+    'desc' => [
+      'id' => 'Aplikasi web publik modern untuk Afpro Aquarium, menampilkan antarmuka pengguna yang intuitif dan tampilan produk yang interaktif.',
+      'en' => 'A modern public web application for Afpro Aquarium, featuring an intuitive user interface and interactive product displays.'
+    ],
+    'images' => [
+      'images/afpro1.png',
+      'images/afpro2.png'
+    ],
+    'gallery_type' => 'gallery-2',
+    'link' => 'https://afproaquarium.com/',
+  ],
+  'nolimits-training' => [
+    'category' => 'public',
+    'tag' => 'Public Platform',
+    'title' => 'No Limits Training',
+    'desc' => [
+      'id' => 'Platform publik yang dinamis dan interaktif untuk program pelatihan, menampilkan UI modern, pengalaman pengguna yang mulus, dan alur konversi yang dioptimalkan.',
+      'en' => 'A dynamic and engaging public-facing platform designed for training programs, showcasing modern UI, seamless user experience, and optimized conversion pathways.'
+    ],
+    'images' => [
+      'images/nolimitstraining.png'
+    ],
+    'gallery_type' => 'gallery-1',
+    'link' => 'https://nolimitstraining.id/',
+  ],
+  'amtech-ev' => [
+    'category' => 'public',
+    'tag' => 'Enterprise SaaS',
+    'title' => 'Amtech EV Infrastructure',
+    'desc' => [
+      'id' => 'Membangun sistem manajemen terpadu untuk jaringan EV terkemuka di Malaysia. Menangani telemetri perangkat keras secara real-time dan penagihan multi-tenant.',
+      'en' => 'Built a unified management system for Malaysia\'s leading EV network. Handling real-time hardware telemetry and multi-tenant billing.'
+    ],
+    'images' => [
+      'images/amtechev.png'
+    ],
+    'gallery_type' => 'gallery-1',
+    'link' => 'https://amtechev.com/',
+  ],
+  'gringgo' => [
+    'category' => 'public',
+    'tag' => 'Web Platform',
+    'title' => 'Gringgo',
+    'desc' => [
+      'id' => 'Platform teknologi yang berfokus pada pengelolaan sampah dan solusi lingkungan untuk memberdayakan komunitas.',
+      'en' => 'A technology platform focusing on waste management and environmental solutions to empower communities.'
+    ],
+    'images' => [
+      'images/gringgo.png'
+    ],
+    'gallery_type' => 'gallery-1',
+    'link' => 'https://gringgo.org/',
+  ],
+];
+
+$aliases = [
+  'school' => 'school-system',
+  'mrlux' => 'mr-lux',
+  'mitrasyiar' => 'mitrasyiar-baitullah',
+  'mitra-syiar' => 'mitrasyiar-baitullah',
+  'mitrasyiarbaitullah' => 'mitrasyiar-baitullah',
+  'afpro' => 'afpro-aquarium',
+  'nolimits' => 'nolimits-training',
+  'amtech' => 'amtech-ev',
+];
+
+$rawSlug = $_GET['project'] ?? $_GET['p'] ?? $_GET['slug'] ?? null;
+$selectedSlug = $rawSlug ? strtolower(trim($rawSlug)) : null;
+if ($selectedSlug && isset($aliases[$selectedSlug])) {
+  $selectedSlug = $aliases[$selectedSlug];
 }
 
+$activeProject = ($selectedSlug && isset($projects[$selectedSlug])) ? $projects[$selectedSlug] : null;
+
+if ($activeProject) {
+  $pTitle = htmlspecialchars($activeProject['title'], ENT_QUOTES);
+  $pDesc = htmlspecialchars($activeProject['desc'][$lang], ENT_QUOTES);
+  $pageTitle = $pTitle . ' - ' . ($lang === 'id' ? 'Portofolio Hasan Arofid' : 'Hasan Arofid Portfolio');
+  $metaDesc = $pDesc;
+  $metaImage = 'https://hasanarofid.site/' . $activeProject['images'][0];
+  $metaUrl = 'https://hasanarofid.site/portofolio?project=' . $selectedSlug;
+  $canonicalUrl = 'https://hasanarofid.site/portofolio?project=' . $selectedSlug;
+} else {
+  $pageTitle = htmlspecialchars($t['meta_title'], ENT_QUOTES);
+  $metaDesc = htmlspecialchars($t['meta_desc'], ENT_QUOTES);
+  $metaImage = 'https://hasanarofid.site/images/hasanarofid.png';
+  $metaUrl = 'https://hasanarofid.site/portofolio';
+  $canonicalUrl = 'https://hasanarofid.site/portofolio';
+}
+
+function getShareText($title, $desc, $lang, $projectUrl) {
+  if ($lang === 'id') {
+    return "🚀 Lihat project: {$title}!\n\n{$desc}\n\n💡 Butuh solusi digital & sistem kustom profesional untuk bisnis Anda? Mari wujudkan bersama Hasan Arofid!\nCek detailnya di: {$projectUrl}";
+  } else {
+    return "🚀 Check out this project: {$title}!\n\n{$desc}\n\n💡 Need a professional digital solution & custom system for your business? Let's build it with Hasan Arofid!\nView details at: {$projectUrl}";
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $t['meta_title'] ?></title>
-    <meta name="description" content="<?= $t['meta_desc'] ?>" />
+    <title><?= $pageTitle ?></title>
+    <meta name="description" content="<?= $metaDesc ?>" />
 
     <!-- Open Graph / LinkedIn / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://hasanarofid.site/portofolio" />
-    <meta property="og:title" content="<?= $t['meta_title'] ?>" />
-    <meta property="og:description" content="<?= $t['meta_desc'] ?>" />
-    <meta property="og:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+    <meta property="og:url" content="<?= $metaUrl ?>" />
+    <meta property="og:title" content="<?= $pageTitle ?>" />
+    <meta property="og:description" content="<?= $metaDesc ?>" />
+    <meta property="og:image" content="<?= $metaImage ?>" />
 
     <!-- Twitter / Threads -->
     <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://hasanarofid.site/portofolio" />
-    <meta property="twitter:title" content="<?= $t['meta_title'] ?>" />
-    <meta property="twitter:description" content="<?= $t['meta_desc'] ?>" />
-    <meta property="twitter:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+    <meta property="twitter:url" content="<?= $metaUrl ?>" />
+    <meta property="twitter:title" content="<?= $pageTitle ?>" />
+    <meta property="twitter:description" content="<?= $metaDesc ?>" />
+    <meta property="twitter:image" content="<?= $metaImage ?>" />
 
-    <link rel="canonical" href="https://hasanarofid.site/portofolio" />
+    <link rel="canonical" href="<?= $canonicalUrl ?>" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
     <style>
@@ -132,12 +272,17 @@ function getShareText($title, $desc, $lang) {
         .category-desc { color: var(--text-muted); margin-bottom: 32px; font-size: 1.05rem; }
 
         .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 32px; }
-        .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; }
+        .project-card { background: var(--surface); border: 1px solid var(--border); border-radius: 20px; overflow: hidden; transition: 0.3s; display: flex; flex-direction: column; scroll-margin-top: 100px; }
         .project-card:hover { transform: translateY(-8px); border-color: var(--accent); box-shadow: 0 20px 40px rgba(0,0,0,0.05); }
-        .project-content { padding: 32px; flex-grow: 1; }
-        .project-tag { display: inline-block; padding: 6px 16px; background: var(--surface-hover); color: var(--accent); border-radius: 99px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; }
+        .project-card.highlighted { animation: highlightPulse 2.5s ease-in-out 2; border-color: var(--accent); }
+        @keyframes highlightPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4); transform: scale(1); }
+            50% { box-shadow: 0 0 25px 6px rgba(59, 130, 246, 0.7); transform: scale(1.02); }
+        }
+        .project-content { padding: 32px; flex-grow: 1; display: flex; flex-direction: column; }
+        .project-tag { display: inline-block; padding: 6px 16px; background: var(--surface-hover); color: var(--accent); border-radius: 99px; font-size: 0.85rem; font-weight: 600; margin-bottom: 16px; align-self: flex-start; }
         .project-content h3 { font-size: 1.4rem; margin-bottom: 12px; }
-        .project-content p { color: var(--text-muted); font-size: 0.95rem; }
+        .project-content p { color: var(--text-muted); font-size: 0.95rem; flex-grow: 1; }
         
         .image-gallery { display: grid; gap: 8px; padding: 16px; background: var(--surface-hover); border-bottom: 1px solid var(--border); }
         .gallery-2 { grid-template-columns: 1fr 1fr; }
@@ -205,7 +350,7 @@ function getShareText($title, $desc, $lang) {
                 Hasan Arofid
             </a>
             <div class="nav-actions">
-                <a href="?lang=<?= $lang === 'en' ? 'id' : 'en' ?>" class="lang-toggle">
+                <a href="?lang=<?= $lang === 'en' ? 'id' : 'en' ?><?= $selectedSlug ? '&project='.$selectedSlug : '' ?>" class="lang-toggle">
                     <?= strtoupper($lang === 'en' ? 'id' : 'en') ?>
                 </a>
                 <button class="theme-toggle" id="theme-btn" aria-label="Toggle theme">🌓</button>
@@ -221,145 +366,72 @@ function getShareText($title, $desc, $lang) {
         <div class="section-title" data-reveal><?= $t['portfolio_title'] ?></div>
         <div class="section-subtitle" data-reveal><?= $t['portfolio_desc'] ?></div>
         
+        <!-- Internal Systems -->
         <h2 class="category-title" data-reveal><?= $t['internal_systems'] ?></h2>
         <p class="category-desc" data-reveal><?= $t['internal_systems_desc'] ?></p>
 
         <div class="projects-grid">
-            <div class="project-card" data-reveal>
-                <div class="image-gallery gallery-2">
-                    <img src="images/point-sekolah.png" alt="School System Dashboard 1" loading="lazy">
-                    <img src="images/point-sekolah2.png" alt="School System Dashboard 2" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <span class="project-tag">Education Tech</span>
-                    <h3>School Management System</h3>
-                    <p><?= $t['desc_school'] ?></p>
-                    <?php $shareSchool = getShareText('School Management System', $t['desc_school'], $lang); ?>
-                    <div class="card-share">
-                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareSchool) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
-                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareSchool) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
-                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareSchool), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+            <?php foreach ($projects as $slug => $project): ?>
+                <?php if ($project['category'] !== 'internal') continue; ?>
+                <?php 
+                    $pUrl = "https://hasanarofid.site/portofolio?project=" . $slug;
+                    $pDesc = $project['desc'][$lang];
+                    $shareText = getShareText($project['title'], $pDesc, $lang, $pUrl);
+                    $hasLink = !empty($project['link']);
+                ?>
+                <div class="project-card" id="project-<?= $slug ?>" data-reveal <?= $hasLink ? 'onclick="window.open(\''.$project['link'].'\', \'_blank\')"' : '' ?> style="<?= $hasLink ? 'cursor: pointer;' : '' ?>">
+                    <div class="image-gallery <?= $project['gallery_type'] ?>" <?= $hasLink && count($project['images']) === 1 ? 'style="padding: 0; border-bottom: 1px solid var(--border);"' : '' ?>>
+                        <?php foreach ($project['images'] as $idx => $imgSrc): ?>
+                            <img src="<?= $imgSrc ?>" alt="<?= htmlspecialchars($project['title'], ENT_QUOTES) ?> <?= $idx + 1 ?>" loading="lazy" <?= $hasLink && count($project['images']) === 1 ? 'style="border-radius: 20px 20px 0 0; border: none;"' : '' ?>>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-tag"><?= $project['tag'] ?></span>
+                        <h3><?= $project['title'] ?></h3>
+                        <p><?= $pDesc ?></p>
+                        <div class="card-share">
+                            <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareText) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
+                            <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareText) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?= urlencode($pUrl) ?>" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
+                            <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareText), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="project-card" data-reveal>
-                <div class="image-gallery gallery-4">
-                    <img src="images/mrluxindonesia.png" alt="Mr Lux Dashboard" loading="lazy">
-                    <img src="images/mrluxindonesia1.png" alt="Mr Lux Modules" loading="lazy">
-                    <img src="images/mrluxindonesia2.png" alt="Mr Lux Inventory" loading="lazy">
-                    <img src="images/mrluxindonesia3.png" alt="Mr Lux Reports" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <span class="project-tag">Enterprise ERP</span>
-                    <h3>Mr. Lux Indonesia</h3>
-                    <p><?= $t['desc_mrlux'] ?></p>
-                    <?php $shareMrlux = getShareText('Mr. Lux Indonesia', $t['desc_mrlux'], $lang); ?>
-                    <div class="card-share">
-                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareMrlux) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
-                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareMrlux) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
-                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareMrlux), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-reveal>
-                <div class="image-gallery gallery-1" style="padding: 0; border-bottom: 1px solid var(--border);">
-                    <img src="images/nitajaya.png" alt="Nitajaya Catering & POS" loading="lazy" style="border-radius: 20px 20px 0 0; border: none;">
-                </div>
-                <div class="project-content">
-                    <span class="project-tag">PHP • POS</span>
-                    <h3>Nitajaya Catering & POS</h3>
-                    <p><?= $t['desc_nitajaya'] ?></p>
-                    <?php $shareNitajaya = getShareText('Nitajaya Catering & POS', $t['desc_nitajaya'], $lang); ?>
-                    <div class="card-share">
-                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareNitajaya) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
-                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareNitajaya) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
-                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareNitajaya), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
 
+        <!-- Public Systems -->
         <h2 class="category-title" style="margin-top: 80px;" data-reveal><?= $t['public_systems'] ?></h2>
         <p class="category-desc" data-reveal><?= $t['public_systems_desc'] ?></p>
 
         <div class="projects-grid" style="margin-bottom: 80px;">
-            <div class="project-card" data-reveal onclick="window.open('https://afproaquarium.com/', '_blank')" style="cursor: pointer;">
-                <div class="image-gallery gallery-2">
-                    <img src="images/afpro1.png" alt="Afpro Aquarium 1" loading="lazy">
-                    <img src="images/afpro2.png" alt="Afpro Aquarium 2" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <span class="project-tag">Web App</span>
-                    <h3>Afpro Aquarium</h3>
-                    <p><?= $t['desc_afpro'] ?></p>
-                    <?php $shareAfpro = getShareText('Afpro Aquarium', $t['desc_afpro'], $lang); ?>
-                    <div class="card-share">
-                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareAfpro) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
-                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareAfpro) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
-                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareAfpro), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+            <?php foreach ($projects as $slug => $project): ?>
+                <?php if ($project['category'] !== 'public') continue; ?>
+                <?php 
+                    $pUrl = "https://hasanarofid.site/portofolio?project=" . $slug;
+                    $pDesc = $project['desc'][$lang];
+                    $shareText = getShareText($project['title'], $pDesc, $lang, $pUrl);
+                    $hasLink = !empty($project['link']);
+                ?>
+                <div class="project-card" id="project-<?= $slug ?>" data-reveal <?= $hasLink ? 'onclick="window.open(\''.$project['link'].'\', \'_blank\')"' : '' ?> style="<?= $hasLink ? 'cursor: pointer;' : '' ?>">
+                    <div class="image-gallery <?= $project['gallery_type'] ?>" <?= $hasLink && count($project['images']) === 1 ? 'style="padding: 0; border-bottom: 1px solid var(--border);"' : '' ?>>
+                        <?php foreach ($project['images'] as $idx => $imgSrc): ?>
+                            <img src="<?= $imgSrc ?>" alt="<?= htmlspecialchars($project['title'], ENT_QUOTES) ?> <?= $idx + 1 ?>" loading="lazy" <?= $hasLink && count($project['images']) === 1 ? 'style="border-radius: 20px 20px 0 0; border: none;"' : '' ?>>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-tag"><?= $project['tag'] ?></span>
+                        <h3><?= $project['title'] ?></h3>
+                        <p><?= $pDesc ?></p>
+                        <div class="card-share">
+                            <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareText) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
+                            <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareText) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
+                            <a href="https://www.linkedin.com/sharing/share-offsite/?url=<?= urlencode($pUrl) ?>" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
+                            <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareText), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="project-card" data-reveal onclick="window.open('https://nolimitstraining.id/', '_blank')" style="cursor: pointer;">
-                <div class="image-gallery gallery-1">
-                    <img src="images/nolimitstraining.png" alt="No Limits Training Platform" loading="lazy">
-                </div>
-                <div class="project-content">
-                    <span class="project-tag">Public Platform</span>
-                    <h3>No Limits Training</h3>
-                    <p><?= $t['desc_nolimits'] ?></p>
-                    <?php $shareNolimits = getShareText('No Limits Training', $t['desc_nolimits'], $lang); ?>
-                    <div class="card-share">
-                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareNolimits) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
-                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareNolimits) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
-                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareNolimits), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-reveal onclick="window.open('https://amtechev.com/', '_blank')" style="cursor: pointer;">
-                <div class="image-gallery gallery-1" style="padding: 0; border-bottom: 1px solid var(--border);">
-                    <img src="images/amtechev.png" alt="Amtech EV" loading="lazy" style="border-radius: 20px 20px 0 0; border: none;">
-                </div>
-                <div class="project-content">
-                    <span class="project-tag">Enterprise SaaS</span>
-                    <h3>Amtech EV Infrastructure</h3>
-                    <p><?= $t['desc_amtech'] ?></p>
-                    <?php $shareAmtech = getShareText('Amtech EV Infrastructure', $t['desc_amtech'], $lang); ?>
-                    <div class="card-share">
-                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareAmtech) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
-                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareAmtech) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
-                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareAmtech), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-card" data-reveal onclick="window.open('https://gringgo.org/', '_blank')" style="cursor: pointer;">
-                <div class="image-gallery gallery-1" style="padding: 0; border-bottom: 1px solid var(--border);">
-                    <img src="images/gringgo.png" alt="Gringgo Platform" loading="lazy" style="border-radius: 20px 20px 0 0; border: none;">
-                </div>
-                <div class="project-content">
-                    <span class="project-tag">Web Platform</span>
-                    <h3>Gringgo</h3>
-                    <p><?= $t['desc_gringgo'] ?></p>
-                    <?php $shareGringgo = getShareText('Gringgo', $t['desc_gringgo'], $lang); ?>
-                    <div class="card-share">
-                        <a href="https://api.whatsapp.com/send?text=<?= urlencode($shareGringgo) ?>" target="_blank" class="share-btn btn-wa" onclick="event.stopPropagation()">WA</a>
-                        <a href="https://www.threads.net/intent/post?text=<?= urlencode($shareGringgo) ?>" target="_blank" class="share-btn btn-th" onclick="event.stopPropagation()">Threads</a>
-                        <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/portofolio" target="_blank" class="share-btn btn-li" onclick="event.stopPropagation()">LinkedIn</a>
-                        <button onclick="copyProjectLink(event, '<?= htmlspecialchars(addslashes($shareGringgo), ENT_QUOTES) ?>')" class="share-btn btn-copy">Copy</button>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 
@@ -431,8 +503,8 @@ function getShareText($title, $desc, $lang) {
         function sharePortfolio() {
             if (navigator.share) {
                 navigator.share({
-                    title: '<?= $t['meta_title'] ?>',
-                    text: '<?= $t['portfolio_desc'] ?>',
+                    title: '<?= $pageTitle ?>',
+                    text: '<?= $metaDesc ?>',
                     url: window.location.href
                 }).catch(console.error);
             } else {
@@ -483,6 +555,40 @@ function getShareText($title, $desc, $lang) {
                 }, 2000);
             }
         }
+
+        // Auto Scroll & Highlight on Project URL visit
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            let projectSlug = urlParams.get('project') || urlParams.get('p') || urlParams.get('slug');
+            if (!projectSlug) {
+                const pathParts = window.location.pathname.split('/').filter(Boolean);
+                if (pathParts.length >= 2 && pathParts[0] === 'portofolio') {
+                    projectSlug = pathParts[1];
+                }
+            }
+            if (projectSlug) {
+                const aliases = {
+                    'school': 'school-system',
+                    'mrlux': 'mr-lux',
+                    'mitrasyiar': 'mitrasyiar-baitullah',
+                    'mitra-syiar': 'mitrasyiar-baitullah',
+                    'mitrasyiarbaitullah': 'mitrasyiar-baitullah',
+                    'afpro': 'afpro-aquarium',
+                    'nolimits': 'nolimits-training',
+                    'amtech': 'amtech-ev'
+                };
+                if (aliases[projectSlug]) {
+                    projectSlug = aliases[projectSlug];
+                }
+                const card = document.getElementById('project-' + projectSlug);
+                if (card) {
+                    setTimeout(() => {
+                        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        card.classList.add('highlighted');
+                    }, 300);
+                }
+            }
+        });
     </script>
 
   <style>

@@ -1,7 +1,9 @@
 RewriteEngine On
 RewriteRule ^blog/([a-zA-Z0-9-]+)$ blog.php?slug=$1 [L]
+RewriteRule ^portofolio/([a-zA-Z0-9-]+)$ portofolio.php?project=$1 [QSA,L]
 RewriteRule ^trafik$ trafik.php [L]
 RewriteRule ^admin$ admin.php [L]
 RewriteRule ^form$ form.php [L]
 RewriteRule ^products$ products.php [L]
 RewriteRule ^portofolio$ portofolio.php [L]
+

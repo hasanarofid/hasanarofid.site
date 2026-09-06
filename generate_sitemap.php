@@ -4,7 +4,17 @@ $baseUrl = 'https://hasanarofid.site/';
 $urls = [
     ['loc' => $baseUrl, 'lastmod' => date('Y-m-d'), 'changefreq' => 'daily', 'priority' => '1.0'],
     ['loc' => $baseUrl . 'articles.php', 'lastmod' => date('Y-m-d'), 'changefreq' => 'daily', 'priority' => '0.9'],
+    ['loc' => $baseUrl . 'portofolio', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.9'],
+    ['loc' => $baseUrl . 'portofolio?project=mitrasyiar-baitullah', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'portofolio?project=amtech-ev', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'portofolio?project=mr-lux', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'portofolio?project=school-system', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'portofolio?project=nitajaya', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'portofolio?project=afpro-aquarium', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'portofolio?project=nolimits-training', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'portofolio?project=gringgo', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
     ['loc' => $baseUrl . 'privacy-policy.php', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.5'],
+
     ['loc' => $baseUrl . 'terms-of-service.php', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.5'],
     ['loc' => $baseUrl . 'contact.php', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.8'],
 ];
