@@ -1,4 +1,6 @@
 RewriteEngine On
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
+RewriteRule ^index\.php$ / [R=301,L]
 RewriteRule ^blog/([a-zA-Z0-9-]+)$ blog.php?slug=$1 [L]
 RewriteRule ^portofolio/([a-zA-Z0-9-]+)$ portofolio.php?project=$1 [QSA,L]
 RewriteRule ^trafik$ trafik.php [L]

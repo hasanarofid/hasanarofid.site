@@ -40,6 +40,7 @@ $lang = $_SESSION['lang'] ?? 'en';
     <meta property="twitter:description" content="<?= htmlspecialchars($article['excerpt']) ?>">
     <meta property="twitter:image" content="https://hasanarofid.site/images/logohasanarofid.png">
 
+    <link rel="canonical" href="https://hasanarofid.site/blog/<?= $article['slug'] ?>" />
     <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>

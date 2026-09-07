@@ -187,8 +187,8 @@ if ($activeProject) {
   $pageTitle = $pTitle . ' - ' . ($lang === 'id' ? 'Portofolio Hasan Arofid' : 'Hasan Arofid Portfolio');
   $metaDesc = $pDesc;
   $metaImage = 'https://hasanarofid.site/' . $activeProject['images'][0];
-  $metaUrl = 'https://hasanarofid.site/portofolio?project=' . $selectedSlug;
-  $canonicalUrl = 'https://hasanarofid.site/portofolio?project=' . $selectedSlug;
+  $metaUrl = 'https://hasanarofid.site/portofolio/' . $selectedSlug;
+  $canonicalUrl = 'https://hasanarofid.site/portofolio/' . $selectedSlug;
 } else {
   $pageTitle = htmlspecialchars($t['meta_title'], ENT_QUOTES);
   $metaDesc = htmlspecialchars($t['meta_desc'], ENT_QUOTES);
