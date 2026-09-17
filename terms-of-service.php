@@ -8,6 +8,8 @@ $lang = $_SESSION['lang'] ?? 'en';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $lang === 'id' ? 'Syarat dan Ketentuan' : 'Terms of Service' ?> | Hasan Arofid</title>
+    <meta name="description" content="<?= $lang === 'id' ? 'Syarat dan ketentuan penggunaan layanan website Hasan Arofid.' : 'Terms of service and usage agreement for Hasan Arofid website.' ?>">
+    <link rel="canonical" href="https://hasanarofid.site/terms-of-service" />
     <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -30,11 +32,11 @@ $lang = $_SESSION['lang'] ?? 'en';
 <body>
     <div class="container">
         <nav>
-            <a href="index.php" class="logo">
+            <a href="/" class="logo">
                 <img src="images/logohasanarofid.png" alt="Logo">
                 <span>Hasan Arofid</span>
             </a>
-            <a href="index.php" class="back-link">← <?= $lang === 'id' ? 'Kembali' : 'Back' ?></a>
+            <a href="/" class="back-link">← <?= $lang === 'id' ? 'Kembali' : 'Back' ?></a>
         </nav>
 
         <article>
@@ -43,27 +45,21 @@ $lang = $_SESSION['lang'] ?? 'en';
                 <p>Selamat datang di hasanarofid.site!</p>
                 <p>Syarat dan ketentuan ini menguraikan aturan dan peraturan untuk penggunaan situs web Hasan Arofid.</p>
                 
-                <h2>Lisensi</h2>
-                <p>Kecuali dinyatakan lain, Hasan Arofid dan/atau pemberi lisensinya memiliki hak kekayaan intelektual untuk semua materi di hasanarofid.site. Semua hak kekayaan intelektual dilindungi undang-undang.</p>
-                
-                <h2>Tanggung Jawab Konten</h2>
-                <p>Kami tidak bertanggung jawab atas konten apa pun yang muncul di situs web Anda. Anda setuju untuk melindungi dan membela kami dari semua klaim yang muncul di situs web Anda.</p>
-                
-                <h2>Penafian</h2>
-                <p>Sejauh diizinkan oleh hukum yang berlaku, kami mengecualikan semua pernyataan, jaminan, dan ketentuan yang berkaitan dengan situs web kami dan penggunaan situs web ini.</p>
+                <h2>1. Ketentuan Umum</h2>
+                <p>Dengan mengakses situs web ini, kami menganggap Anda menerima syarat dan ketentuan ini secara penuh. Jangan melanjutkan penggunaan situs web Hasan Arofid jika Anda tidak menerima semua syarat dan ketentuan yang tercantum di halaman ini.</p>
+
+                <h2>2. Hak Kekayaan Intelektual</h2>
+                <p>Kecuali dinyatakan lain, Hasan Arofid dan/atau pemberi lisensinya memiliki hak kekayaan intelektual atas semua materi di hasanarofid.site. Semua hak kekayaan intelektual dilindungi undang-undang.</p>
             <?php else: ?>
                 <h1>Terms of Service</h1>
                 <p>Welcome to hasanarofid.site!</p>
-                <p>These terms and conditions outline the rules and regulations for the use of Hasan Arofid's Website.</p>
+                <p>These terms of service outline the rules and regulations for using Hasan Arofid's website.</p>
                 
-                <h2>License</h2>
+                <h2>1. General Terms</h2>
+                <p>By accessing this website, we assume you accept these terms and conditions in full. Do not continue to use Hasan Arofid's website if you do not agree to all terms and conditions stated on this page.</p>
+
+                <h2>2. Intellectual Property Rights</h2>
                 <p>Unless otherwise stated, Hasan Arofid and/or its licensors own the intellectual property rights for all material on hasanarofid.site. All intellectual property rights are reserved.</p>
-                
-                <h2>Content Liability</h2>
-                <p>We shall not be hold responsible for any content that appears on your Website. You agree to protect and defend us against all claims that is rising on your Website.</p>
-                
-                <h2>Disclaimer</h2>
-                <p>To the maximum extent permitted by applicable law, we exclude all representations, warranties and conditions relating to our website and the use of this website.</p>
             <?php endif; ?>
         </article>
     </div>
@@ -72,11 +68,11 @@ $lang = $_SESSION['lang'] ?? 'en';
         <div class="container">
             <p>&copy; <?= date('Y') ?> Hasan Arofid. All rights reserved.</p>
             <div style="margin: 20px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; font-size: 0.9rem;">
-                <a href="about.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
-                <a href="privacy-policy.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
-                <a href="terms-of-service.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
-                <a href="disclaimer.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
-                <a href="contact.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
+                <a href="/terms-of-service" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
+                <a href="/disclaimer" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
+                <a href="/contact" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
             </div>
         </div>
     </footer>

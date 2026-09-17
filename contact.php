@@ -8,6 +8,8 @@ $lang = $_SESSION['lang'] ?? 'en';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $lang === 'id' ? 'Hubungi Kami' : 'Contact Us' ?> | Hasan Arofid</title>
+    <meta name="description" content="<?= $lang === 'id' ? 'Hubungi Hasan Arofid untuk konsultasi dan pengembangan solusi digital serta sistem software.' : 'Contact Hasan Arofid for consultations and custom software solutions.' ?>">
+    <link rel="canonical" href="https://hasanarofid.site/contact" />
     <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -39,25 +41,25 @@ $lang = $_SESSION['lang'] ?? 'en';
 <body>
     <div class="container">
         <nav>
-            <a href="index.php" class="logo">
+            <a href="/" class="logo">
                 <img src="images/logohasanarofid.png" alt="Logo">
                 <span>Hasan Arofid</span>
             </a>
-            <a href="index.php" class="back-link">← <?= $lang === 'id' ? 'Kembali' : 'Back' ?></a>
+            <a href="/" class="back-link">← <?= $lang === 'id' ? 'Kembali' : 'Back' ?></a>
         </nav>
 
         <article>
             <h1><?= $lang === 'id' ? 'Mari Berdiskusi' : 'Let\'s Connect' ?></h1>
-            <p class="subtitle"><?= $lang === 'id' ? 'Siap membantu mewujudkan proyek impian Anda.' : 'Ready to help you build your dream project.' ?></p>
+            <p class="subtitle"><?= $lang === 'id' ? 'Punya proyek menarik atau ingin berkonsultasi? Kami siap membantu.' : 'Have an exciting project or want to consult? We\'re here to help.' ?></p>
             
             <div class="contact-card">
                 <div class="contact-method">
-                    <h3>WhatsApp</h3>
+                    <h3>WhatsApp Direct</h3>
                     <a href="https://wa.me/628814959247" class="contact-value">+62 881-4959-247</a>
                     <a href="https://wa.me/628814959247" class="btn btn-whatsapp"><?= $lang === 'id' ? 'Chat di WhatsApp' : 'Chat on WhatsApp' ?></a>
                 </div>
                 
-                <div style="border-top: 1px solid var(--border); padding-top: 32px;">
+                <div class="contact-method" style="margin-bottom: 0;">
                     <h3>Instagram</h3>
                     <a href="https://instagram.com/hasanarofid" target="_blank" style="color: var(--accent); text-decoration: none; font-weight: 600;">@hasanarofid</a>
                 </div>
@@ -69,11 +71,11 @@ $lang = $_SESSION['lang'] ?? 'en';
         <div class="container">
             <p>&copy; <?= date('Y') ?> Hasan Arofid. All rights reserved.</p>
             <div style="margin: 20px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; font-size: 0.9rem;">
-                <a href="about.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
-                <a href="privacy-policy.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
-                <a href="terms-of-service.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
-                <a href="disclaimer.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
-                <a href="contact.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
+                <a href="/terms-of-service" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
+                <a href="/disclaimer" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
+                <a href="/contact" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
             </div>
         </div>
     </footer>

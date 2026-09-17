@@ -1,11 +1,29 @@
 RewriteEngine On
+
+# 1. Redirect index.php to root /
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
 RewriteRule ^index\.php$ / [R=301,L]
-RewriteRule ^blog/([a-zA-Z0-9-]+)$ blog.php?slug=$1 [L]
-RewriteRule ^portofolio/([a-zA-Z0-9-]+)$ portofolio.php?project=$1 [QSA,L]
-RewriteRule ^trafik$ trafik.php [L]
-RewriteRule ^admin$ admin.php [L]
-RewriteRule ^form$ form.php [L]
-RewriteRule ^products$ products.php [L]
-RewriteRule ^portofolio$ portofolio.php [L]
 
+# 2. Redirect portofolio?project=slug or portofolio.php?project=slug to /portofolio/slug
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /portofolio(\.php)?\?project=([a-zA-Z0-9-]+)\ HTTP/ [NC]
+RewriteRule ^ /portofolio/%2? [R=301,L]
+
+# 3. Redirect blog?slug=slug or blog.php?slug=slug to /blog/slug
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /blog(\.php)?\?slug=([a-zA-Z0-9-]+)\ HTTP/ [NC]
+RewriteRule ^ /blog/%2? [R=301,L]
+
+# 4. Redirect direct request to static .php files to extensionless URLs
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(about|articles|contact|disclaimer|portofolio|privacy-policy|products|terms-of-service|trafik)\.php\ HTTP/ [NC]
+RewriteRule ^([a-zA-Z0-9_-]+)\.php$ /$1 [R=301,L]
+
+# 5. Route blog slugs
+RewriteRule ^blog/([a-zA-Z0-9-]+)$ blog.php?slug=$1 [QSA,L]
+
+# 6. Route portfolio slugs
+RewriteRule ^portofolio/([a-zA-Z0-9-]+)$ portofolio.php?project=$1 [QSA,L]
+
+# 7. Internal rewrite for extensionless URLs
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^([a-zA-Z0-9_-]+)$ $1.php [QSA,L]

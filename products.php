@@ -32,6 +32,8 @@ $active_t = $t[$lang];
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title><?= $active_t['title'] ?></title>
+  <meta name="description" content="<?= $active_t['subtitle'] ?>" />
+  <link rel="canonical" href="https://hasanarofid.site/products" />
   <meta name="google-site-verification" content="E-tyAYsOQMugMAc2KAkBnFdVc9mAbKbId7ZOAK3gpDQ" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -244,14 +246,14 @@ $active_t = $t[$lang];
 <body>
   <div class="container">
     <nav>
-      <a href="index.php" class="logo">
+      <a href="/" class="logo">
         <img src="images/logohasanarofid.png" alt="Hasan Arofid Logo" class="logo-img">
         <span>Hasan Arofid</span>
       </a>
 
       <div style="display: flex; align-items: center; gap: 20px;">
         <div class="theme-toggle" id="themeToggle">🌓</div>
-        <a href="index.php" class="back-link">← <?= $active_t['back'] ?></a>
+        <a href="/" class="back-link">← <?= $active_t['back'] ?></a>
       </div>
     </nav>
 
@@ -286,11 +288,11 @@ $active_t = $t[$lang];
     <div class="container">
       <p>&copy; <?= date('Y') ?> Hasan Arofid. All rights reserved.</p>
       <div style="margin: 20px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; font-size: 0.9rem;">
-        <a href="about.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
-        <a href="privacy-policy.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
-        <a href="terms-of-service.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
-        <a href="disclaimer.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
-        <a href="contact.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+        <a href="/about" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
+        <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
+        <a href="/terms-of-service" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
+        <a href="/disclaimer" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
+        <a href="/contact" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
       </div>
     </div>
   </footer>

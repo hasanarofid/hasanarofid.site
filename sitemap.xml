@@ -2,117 +2,105 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
         <loc>https://hasanarofid.site/</loc>
-        <lastmod>2026-09-06</lastmod>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/articles.php</loc>
-        <lastmod>2026-09-06</lastmod>
+        <loc>https://hasanarofid.site/about</loc>
+        <lastmod>2026-09-17</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hasanarofid.site/articles</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
         <loc>https://hasanarofid.site/portofolio</loc>
-        <lastmod>2026-09-06</lastmod>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/portofolio?project=mitrasyiar-baitullah</loc>
-        <lastmod>2026-09-06</lastmod>
+        <loc>https://hasanarofid.site/products</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/portofolio?project=amtech-ev</loc>
-        <lastmod>2026-09-06</lastmod>
-        <changefreq>weekly</changefreq>
+        <loc>https://hasanarofid.site/contact</loc>
+        <lastmod>2026-09-17</lastmod>
+        <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/portofolio?project=mr-lux</loc>
-        <lastmod>2026-09-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://hasanarofid.site/portofolio?project=school-system</loc>
-        <lastmod>2026-09-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://hasanarofid.site/portofolio?project=nitajaya</loc>
-        <lastmod>2026-09-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://hasanarofid.site/portofolio?project=afpro-aquarium</loc>
-        <lastmod>2026-09-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://hasanarofid.site/portofolio?project=nolimits-training</loc>
-        <lastmod>2026-09-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://hasanarofid.site/portofolio?project=gringgo</loc>
-        <lastmod>2026-09-06</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-    <url>
-        <loc>https://hasanarofid.site/privacy-policy.php</loc>
-        <lastmod>2026-09-06</lastmod>
+        <loc>https://hasanarofid.site/privacy-policy</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/terms-of-service.php</loc>
-        <lastmod>2026-09-06</lastmod>
+        <loc>https://hasanarofid.site/terms-of-service</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/contact.php</loc>
-        <lastmod>2026-09-06</lastmod>
+        <loc>https://hasanarofid.site/disclaimer</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://hasanarofid.site/portofolio/school-system</loc>
+        <lastmod>2026-09-17</lastmod>
+        <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/blog/transformasi-bisnis-integrasi-ai-website</loc>
-        <lastmod>2026-05-03</lastmod>
+        <loc>https://hasanarofid.site/portofolio/mr-lux</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/blog/pentingnya-core-web-vitals-ranking-google-2026</loc>
-        <lastmod>2026-05-03</lastmod>
+        <loc>https://hasanarofid.site/portofolio/nitajaya</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/blog/optimasi-performa-laravel-enterprise</loc>
-        <lastmod>2026-05-12</lastmod>
+        <loc>https://hasanarofid.site/portofolio/mitrasyiar-baitullah</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/blog/tren-ui-ux-2026-aksesibilitas-desain</loc>
-        <lastmod>2026-05-12</lastmod>
+        <loc>https://hasanarofid.site/portofolio/afpro-aquarium</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://hasanarofid.site/blog/strategi-seo-2026-algoritma-google</loc>
-        <lastmod>2026-05-12</lastmod>
+        <loc>https://hasanarofid.site/portofolio/nolimits-training</loc>
+        <lastmod>2026-09-17</lastmod>
         <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hasanarofid.site/portofolio/amtech-ev</loc>
+        <lastmod>2026-09-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://hasanarofid.site/portofolio/gringgo</loc>
+        <lastmod>2026-09-17</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
     </url>
     <url>
         <loc>https://hasanarofid.site/blog/membangun-arsitektur-microservices-nodejs</loc>
@@ -177,6 +165,36 @@
     <url>
         <loc>https://hasanarofid.site/blog/panduan-migrasi-php-7-ke-php-8</loc>
         <lastmod>2026-07-04</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://hasanarofid.site/blog/optimasi-performa-laravel-enterprise</loc>
+        <lastmod>2026-05-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://hasanarofid.site/blog/tren-ui-ux-2026-aksesibilitas-desain</loc>
+        <lastmod>2026-05-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://hasanarofid.site/blog/strategi-seo-2026-algoritma-google</loc>
+        <lastmod>2026-05-12</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://hasanarofid.site/blog/transformasi-bisnis-integrasi-ai-website</loc>
+        <lastmod>2026-05-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://hasanarofid.site/blog/pentingnya-core-web-vitals-ranking-google-2026</loc>
+        <lastmod>2026-05-03</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>

@@ -8,6 +8,8 @@ $lang = $_SESSION['lang'] ?? 'en';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?> | Hasan Arofid</title>
+    <meta name="description" content="<?= $lang === 'id' ? 'Tentang Hasan Arofid - Software Engineer & Web Developer profesional.' : 'About Hasan Arofid - Professional Software Engineer & Web Developer.' ?>">
+    <link rel="canonical" href="https://hasanarofid.site/about" />
     <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -33,11 +35,11 @@ $lang = $_SESSION['lang'] ?? 'en';
 <body>
     <div class="container">
         <nav>
-            <a href="index.php" class="logo">
+            <a href="/" class="logo">
                 <img src="images/logohasanarofid.png" alt="Logo">
                 <span>Hasan Arofid</span>
             </a>
-            <a href="index.php" class="back-link">← <?= $lang === 'id' ? 'Kembali' : 'Back' ?></a>
+            <a href="/" class="back-link">← <?= $lang === 'id' ? 'Kembali' : 'Back' ?></a>
         </nav>
 
         <article>
@@ -88,11 +90,11 @@ $lang = $_SESSION['lang'] ?? 'en';
         <div class="container">
             <p>&copy; <?= date('Y') ?> Hasan Arofid. All rights reserved.</p>
             <div class="footer-links">
-                <a href="about.php"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
-                <a href="privacy-policy.php"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
-                <a href="terms-of-service.php"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
-                <a href="disclaimer.php"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
-                <a href="contact.php"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+                <a href="/about"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
+                <a href="/privacy-policy"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
+                <a href="/terms-of-service"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
+                <a href="/disclaimer"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
+                <a href="/contact"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
             </div>
         </div>
     </footer>

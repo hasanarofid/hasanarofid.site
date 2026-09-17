@@ -1263,7 +1263,7 @@ try {
         <a href="#about"><?= $lang === 'id' ? 'Tentang' : 'About' ?></a>
         <a href="#expertise"><?= $lang === 'id' ? 'Layanan' : 'Services' ?></a>
         <a href="#projects"><?= $lang === 'id' ? 'Portofolio' : 'Portfolio' ?></a>
-        <a href="articles.php"><?= $lang === 'id' ? 'Artikel' : 'Blog' ?></a>
+        <a href="/articles"><?= $lang === 'id' ? 'Artikel' : 'Blog' ?></a>
         <a href="#testimonials"><?= $lang === 'id' ? 'Testimoni' : 'Testimonials' ?></a>
         <div class="theme-toggle" id="themeToggle">🌓</div>
         <a href="?lang=<?= $lang === 'id' ? 'en' : 'id' ?>" class="lang-toggle"><?= $lang === 'id' ? 'EN' : 'ID' ?></a>
@@ -1497,7 +1497,7 @@ try {
         </div>
 
         <div style="text-align: center; margin-top: 64px;" data-reveal>
-          <a href="products.php" class="btn btn-outline"><?= $t['more_products'] ?></a>
+          <a href="/products" class="btn btn-outline"><?= $t['more_products'] ?></a>
         </div>
       </div>
     </section>
@@ -1593,7 +1593,7 @@ try {
 
         <div class="article-grid">
           <?php foreach ($latestArticles as $a): ?>
-            <a href="blog.php?slug=<?= $a['slug'] ?>" class="article-card" data-reveal>
+            <a href="/blog/<?= $a['slug'] ?>" class="article-card" data-reveal>
               <span class="article-date"><?= date('M d, Y', strtotime($a['created_at'])) ?></span>
               <h3><?= htmlspecialchars($a['title']) ?></h3>
               <p><?= htmlspecialchars($a['excerpt']) ?></p>
@@ -1603,7 +1603,7 @@ try {
           <?php endforeach; ?>
         </div>
         <div style="text-align: center; margin-top: 60px;" data-reveal>
-          <a href="articles.php" class="btn btn-outline"
+          <a href="/articles" class="btn btn-outline"
             style="padding: 16px 40px;"><?= $lang === 'id' ? 'Lihat Semua Artikel' : 'View All Articles' ?></a>
         </div>
       </div>
@@ -1614,11 +1614,11 @@ try {
     <div class="container">
       <p><?= $t['footer_copy'] ?></p>
       <div style="margin: 20px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; font-size: 0.9rem;">
-        <a href="about.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
-        <a href="privacy-policy.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
-        <a href="terms-of-service.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
-        <a href="disclaimer.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
-        <a href="contact.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+        <a href="/about" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
+        <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
+        <a href="/terms-of-service" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
+        <a href="/disclaimer" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
+        <a href="/contact" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
       </div>
       <div class="social-links">
         <a href="https://github.com/hasanarofid" target="_blank">GitHub</a>

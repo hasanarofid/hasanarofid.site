@@ -3,35 +3,68 @@ $baseUrl = 'https://hasanarofid.site/';
 
 $urls = [
     ['loc' => $baseUrl, 'lastmod' => date('Y-m-d'), 'changefreq' => 'daily', 'priority' => '1.0'],
-    ['loc' => $baseUrl . 'articles.php', 'lastmod' => date('Y-m-d'), 'changefreq' => 'daily', 'priority' => '0.9'],
+    ['loc' => $baseUrl . 'about', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'articles', 'lastmod' => date('Y-m-d'), 'changefreq' => 'daily', 'priority' => '0.9'],
     ['loc' => $baseUrl . 'portofolio', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.9'],
-    ['loc' => $baseUrl . 'portofolio?project=mitrasyiar-baitullah', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
-    ['loc' => $baseUrl . 'portofolio?project=amtech-ev', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
-    ['loc' => $baseUrl . 'portofolio?project=mr-lux', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
-    ['loc' => $baseUrl . 'portofolio?project=school-system', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
-    ['loc' => $baseUrl . 'portofolio?project=nitajaya', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
-    ['loc' => $baseUrl . 'portofolio?project=afpro-aquarium', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
-    ['loc' => $baseUrl . 'portofolio?project=nolimits-training', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
-    ['loc' => $baseUrl . 'portofolio?project=gringgo', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
-    ['loc' => $baseUrl . 'privacy-policy.php', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.5'],
-
-    ['loc' => $baseUrl . 'terms-of-service.php', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.5'],
-    ['loc' => $baseUrl . 'contact.php', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'products', 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'contact', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.8'],
+    ['loc' => $baseUrl . 'privacy-policy', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.5'],
+    ['loc' => $baseUrl . 'terms-of-service', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.5'],
+    ['loc' => $baseUrl . 'disclaimer', 'lastmod' => date('Y-m-d'), 'changefreq' => 'monthly', 'priority' => '0.5'],
 ];
 
-// Fetch articles via CLI if PDO driver is missing
-$output = shell_exec("sqlite3 stats.db \"SELECT slug, created_at FROM articles WHERE status = 'published';\"");
-if ($output) {
-    $lines = explode("\n", trim($output));
-    foreach ($lines as $line) {
-        if (empty($line)) continue;
-        list($slug, $created_at) = explode("|", $line);
-        $urls[] = [
-            'loc' => $baseUrl . 'blog/' . $slug,
-            'lastmod' => date('Y-m-d', strtotime($created_at)),
-            'changefreq' => 'weekly',
-            'priority' => '0.7'
-        ];
+// Portfolio project detail clean URLs
+$portfolioProjects = [
+    'school-system',
+    'mr-lux',
+    'nitajaya',
+    'mitrasyiar-baitullah',
+    'afpro-aquarium',
+    'nolimits-training',
+    'amtech-ev',
+    'gringgo'
+];
+
+foreach ($portfolioProjects as $project) {
+    $urls[] = [
+        'loc' => $baseUrl . 'portofolio/' . $project,
+        'lastmod' => date('Y-m-d'),
+        'changefreq' => 'weekly',
+        'priority' => '0.8'
+    ];
+}
+
+// Fetch published articles
+$dbFile = __DIR__ . '/stats.db';
+if (file_exists($dbFile)) {
+    try {
+        $db = new PDO('sqlite:' . $dbFile);
+        $stmt = $db->query("SELECT slug, created_at FROM articles WHERE status = 'published' ORDER BY created_at DESC");
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $urls[] = [
+                'loc' => $baseUrl . 'blog/' . $row['slug'],
+                'lastmod' => date('Y-m-d', strtotime($row['created_at'])),
+                'changefreq' => 'weekly',
+                'priority' => '0.7'
+            ];
+        }
+    } catch (Exception $e) {
+        $output = shell_exec("sqlite3 " . escapeshellarg($dbFile) . " \"SELECT slug, created_at FROM articles WHERE status = 'published' ORDER BY created_at DESC;\"");
+        if ($output) {
+            $lines = explode("\n", trim($output));
+            foreach ($lines as $line) {
+                if (empty($line)) continue;
+                $parts = explode("|", $line);
+                if (count($parts) >= 2) {
+                    $urls[] = [
+                        'loc' => $baseUrl . 'blog/' . $parts[0],
+                        'lastmod' => date('Y-m-d', strtotime($parts[1])),
+                        'changefreq' => 'weekly',
+                        'priority' => '0.7'
+                    ];
+                }
+            }
+        }
     }
 }
 

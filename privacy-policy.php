@@ -8,6 +8,8 @@ $lang = $_SESSION['lang'] ?? 'en';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?> | Hasan Arofid</title>
+    <meta name="description" content="<?= $lang === 'id' ? 'Kebijakan privasi dan perlindungan data pengguna di situs Hasan Arofid.' : 'Privacy policy and data protection practices for Hasan Arofid website.' ?>">
+    <link rel="canonical" href="https://hasanarofid.site/privacy-policy" />
     <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -32,27 +34,17 @@ $lang = $_SESSION['lang'] ?? 'en';
 <body>
     <div class="container">
         <nav>
-            <a href="index.php" class="logo">
+            <a href="/" class="logo">
                 <img src="images/logohasanarofid.png" alt="Logo">
                 <span>Hasan Arofid</span>
             </a>
-            <a href="index.php" class="back-link">← <?= $lang === 'id' ? 'Kembali' : 'Back' ?></a>
+            <a href="/" class="back-link">← <?= $lang === 'id' ? 'Kembali' : 'Back' ?></a>
         </nav>
 
         <article>
             <?php if ($lang === 'id'): ?>
                 <h1>Kebijakan Privasi</h1>
                 <p>Terakhir diperbarui: <?= date('d F Y') ?></p>
-                <p>Di Hasan Arofid (hasanarofid.site), privasi pengunjung kami adalah salah satu prioritas utama kami. Dokumen Kebijakan Privasi ini berisi jenis informasi yang dikumpulkan dan dicatat oleh hasanarofid.site dan bagaimana kami menggunakannya.</p>
-                
-                <h2>Informasi yang Kami Kumpulkan</h2>
-                <p>Jika Anda menghubungi kami secara langsung, kami mungkin menerima informasi tambahan tentang Anda seperti nama, alamat email, nomor telepon, isi pesan dan/atau lampiran yang mungkin Anda kirimkan kepada kami.</p>
-                
-                <h2>Log Files</h2>
-                <p>hasanarofid.site mengikuti prosedur standar menggunakan file log. File-file ini mencatat pengunjung ketika mereka mengunjungi situs web. Informasi yang dikumpulkan oleh file log termasuk alamat protokol internet (IP), jenis browser, Penyedia Layanan Internet (ISP), stempel tanggal dan waktu, halaman rujukan/keluar, dan mungkin jumlah klik.</p>
-                
-                <h2>Cookie Google DoubleClick DART</h2>
-                <p>Google adalah salah satu vendor pihak ketiga di situs kami. Google juga menggunakan cookie, yang dikenal sebagai cookie DART, untuk menayangkan iklan kepada pengunjung situs kami berdasarkan kunjungan mereka ke www.website.com dan situs lain di internet.</p>
                 
                 <h2>Kebijakan Privasi Pihak Ketiga</h2>
                 <p>Kebijakan Privasi hasanarofid.site tidak berlaku untuk pengiklan atau situs web lain. Karena itu, kami menyarankan Anda untuk berkonsultasi dengan masing-masing Kebijakan Privasi dari server iklan pihak ketiga ini untuk informasi lebih rinci.</p>
@@ -80,11 +72,11 @@ $lang = $_SESSION['lang'] ?? 'en';
         <div class="container">
             <p>&copy; <?= date('Y') ?> Hasan Arofid. All rights reserved.</p>
             <div style="margin: 20px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; font-size: 0.9rem;">
-                <a href="about.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
-                <a href="privacy-policy.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
-                <a href="terms-of-service.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
-                <a href="disclaimer.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
-                <a href="contact.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
+                <a href="/terms-of-service" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
+                <a href="/disclaimer" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
+                <a href="/contact" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
             </div>
         </div>
     </footer>

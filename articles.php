@@ -34,6 +34,7 @@ $t = $translations[$lang];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $t['title'] ?> | Hasan Arofid</title>
     <meta name="description" content="<?= $t['subtitle'] ?>">
+    <link rel="canonical" href="https://hasanarofid.site/articles" />
     <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
@@ -75,11 +76,11 @@ $t = $translations[$lang];
 <body>
     <nav>
         <div class="container nav-content">
-            <a href="index.php" class="logo">
+            <a href="/" class="logo">
                 <img src="images/logohasanarofid.png" alt="Logo">
                 <span>Hasan Arofid</span>
             </a>
-            <a href="index.php" class="back-link">← <?= $t['back'] ?></a>
+            <a href="/" class="back-link">← <?= $t['back'] ?></a>
         </div>
     </nav>
 
@@ -94,7 +95,7 @@ $t = $translations[$lang];
                 <p style="text-align: center; grid-column: 1/-1; padding: 40px; color: var(--text-muted);"><?= $t['no_articles'] ?></p>
             <?php else: ?>
                 <?php foreach ($articles as $a): ?>
-                <a href="blog.php?slug=<?= $a['slug'] ?>" class="article-card">
+                <a href="/blog/<?= $a['slug'] ?>" class="article-card">
                     <span class="article-date"><?= date('M d, Y', strtotime($a['created_at'])) ?></span>
                     <h3><?= htmlspecialchars($a['title']) ?></h3>
                     <p><?= htmlspecialchars($a['excerpt']) ?></p>
@@ -109,11 +110,11 @@ $t = $translations[$lang];
         <div class="container">
             <p>&copy; <?= date('Y') ?> Hasan Arofid. All rights reserved.</p>
             <div style="margin: 20px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; font-size: 0.9rem;">
-                <a href="about.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
-                <a href="privacy-policy.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
-                <a href="terms-of-service.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
-                <a href="disclaimer.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
-                <a href="contact.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
+                <a href="/terms-of-service" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
+                <a href="/disclaimer" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
+                <a href="/contact" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
             </div>
         </div>
     </footer>

@@ -11,7 +11,37 @@ $stmt->execute([$slug]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$article) {
-    header("Location: index.php");
+    http_response_code(404);
+?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Halaman Tidak Ditemukan | Hasan Arofid</title>
+    <meta name="robots" content="noindex, follow">
+    <link rel="icon" type="image/png" href="/images/logohasanarofid.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #f8fafc; --text: #0f172a; --text-muted: #475569; --accent: #3b82f6; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; text-align: center; padding: 20px; }
+        .box { max-width: 500px; background: #fff; padding: 40px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        h1 { font-family: 'Poppins', sans-serif; font-size: 4rem; margin: 0; color: var(--accent); }
+        h2 { margin: 16px 0; font-size: 1.5rem; }
+        p { color: var(--text-muted); margin-bottom: 24px; }
+        a { display: inline-block; background: var(--accent); color: #fff; padding: 12px 24px; border-radius: 8px; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1>404</h1>
+        <h2>Artikel Tidak Ditemukan</h2>
+        <p>Maaf, artikel yang Anda cari telah dipindahkan atau tidak tersedia lagi.</p>
+        <a href="/articles">Lihat Semua Artikel</a>
+    </div>
+</body>
+</html>
+<?php
     exit;
 }
 
@@ -87,11 +117,11 @@ $lang = $_SESSION['lang'] ?? 'en';
 <body>
     <div class="container">
         <nav>
-            <a href="index.php" class="logo">
+            <a href="/" class="logo">
                 <img src="images/logohasanarofid.png" alt="Logo">
                 <span>Hasan Arofid</span>
             </a>
-            <a href="articles.php" class="back-link">← <?= $lang === 'id' ? 'Kembali ke Artikel' : 'Back to Articles' ?></a>
+            <a href="/articles" class="back-link">← <?= $lang === 'id' ? 'Kembali ke Artikel' : 'Back to Articles' ?></a>
         </nav>
 
         <article>
@@ -117,7 +147,7 @@ $lang = $_SESSION['lang'] ?? 'en';
             <div class="cta-box">
                 <h3><?= $lang === 'id' ? 'Butuh Solusi Web Profesional?' : 'Need Professional Web Solutions?' ?></h3>
                 <p><?= $lang === 'id' ? 'Kami membantu bisnis Anda tumbuh dengan teknologi terbaru.' : 'We help your business grow with the latest technology.' ?></p>
-                <a href="index.php#contact" class="btn-white"><?= $lang === 'id' ? 'Konsultasi Sekarang' : 'Consult Now' ?></a>
+                <a href="/#contact" class="btn-white"><?= $lang === 'id' ? 'Konsultasi Sekarang' : 'Consult Now' ?></a>
             </div>
         </article>
     </div>
@@ -126,11 +156,11 @@ $lang = $_SESSION['lang'] ?? 'en';
         <div class="container">
             <p>&copy; <?= date('Y') ?> Hasan Arofid. All rights reserved.</p>
             <div style="margin: 20px 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 24px; font-size: 0.9rem;">
-                <a href="about.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
-                <a href="privacy-policy.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
-                <a href="terms-of-service.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
-                <a href="disclaimer.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
-                <a href="contact.php" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
+                <a href="/about" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?></a>
+                <a href="/privacy-policy" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kebijakan Privasi' : 'Privacy Policy' ?></a>
+                <a href="/terms-of-service" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Syarat & Ketentuan' : 'Terms of Service' ?></a>
+                <a href="/disclaimer" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Penafian' : 'Disclaimer' ?></a>
+                <a href="/contact" style="color: var(--text-muted); text-decoration: none;"><?= $lang === 'id' ? 'Kontak' : 'Contact' ?></a>
             </div>
         </div>
     </footer>
