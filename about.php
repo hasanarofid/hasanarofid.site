@@ -8,9 +8,45 @@ $lang = $_SESSION['lang'] ?? 'en';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?> | Hasan Arofid</title>
-    <meta name="description" content="<?= $lang === 'id' ? 'Tentang Hasan Arofid - Software Engineer & Web Developer profesional.' : 'About Hasan Arofid - Professional Software Engineer & Web Developer.' ?>">
+    <meta name="description" content="<?= $lang === 'id' ? 'Tentang Hasan Arofid - Software Engineer & Web Developer profesional di Surabaya.' : 'About Hasan Arofid - Professional Software Engineer & Web Developer based in Surabaya.' ?>">
     <link rel="canonical" href="https://hasanarofid.site/about" />
     <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
+    <link rel="author" type="text/plain" href="https://hasanarofid.site/llms.txt" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hasanarofid.site/about" />
+    <meta property="og:title" content="<?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?> | Hasan Arofid" />
+    <meta property="og:description" content="<?= $lang === 'id' ? 'Tentang Hasan Arofid - Software Engineer & Web Developer profesional di Surabaya.' : 'About Hasan Arofid - Professional Software Engineer & Web Developer based in Surabaya.' ?>" />
+    <meta property="og:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://hasanarofid.site/about" />
+    <meta property="twitter:title" content="<?= $lang === 'id' ? 'Tentang Kami' : 'About Us' ?> | Hasan Arofid" />
+    <meta property="twitter:description" content="<?= $lang === 'id' ? 'Tentang Hasan Arofid - Software Engineer & Web Developer profesional di Surabaya.' : 'About Hasan Arofid - Professional Software Engineer & Web Developer based in Surabaya.' ?>" />
+    <meta property="twitter:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Beranda",
+          "item": "https://hasanarofid.site/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tentang Kami",
+          "item": "https://hasanarofid.site/about"
+        }
+      ]
+    }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #f8fafc; --surface: #ffffff; --border: rgba(0,0,0,0.08); --text: #0f172a; --text-muted: #475569; --accent: #3b82f6; }

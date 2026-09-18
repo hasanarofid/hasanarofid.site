@@ -71,7 +71,65 @@ $lang = $_SESSION['lang'] ?? 'en';
     <meta property="twitter:image" content="https://hasanarofid.site/images/logohasanarofid.png">
 
     <link rel="canonical" href="https://hasanarofid.site/blog/<?= $article['slug'] ?>" />
-    <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
+    <link rel="icon" type="image/png" href="/images/logohasanarofid.png" />
+    <link rel="author" type="text/plain" href="https://hasanarofid.site/llms.txt" />
+
+    <!-- Schema.org Article & Breadcrumb -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": <?= json_encode($article['title']) ?>,
+      "description": <?= json_encode($article['excerpt']) ?>,
+      "datePublished": <?= json_encode(date('c', strtotime($article['created_at']))) ?>,
+      "dateModified": <?= json_encode(date('c', strtotime($article['created_at']))) ?>,
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://hasanarofid.site/blog/<?= $article['slug'] ?>"
+      },
+      "author": {
+        "@type": "Person",
+        "name": "Hasan Arofid",
+        "url": "https://hasanarofid.site/"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Hasan Arofid",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://hasanarofid.site/images/logohasanarofid.png"
+        }
+      },
+      "image": "https://hasanarofid.site/images/logohasanarofid.png"
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Beranda",
+          "item": "https://hasanarofid.site/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Artikel",
+          "item": "https://hasanarofid.site/articles"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": <?= json_encode($article['title']) ?>,
+          "item": "https://hasanarofid.site/blog/<?= $article['slug'] ?>"
+        }
+      ]
+    }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #f8fafc; --surface: #ffffff; --border: rgba(0,0,0,0.08); --text: #0f172a; --text-muted: #475569; --accent: #3b82f6; }

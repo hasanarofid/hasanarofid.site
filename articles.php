@@ -36,6 +36,42 @@ $t = $translations[$lang];
     <meta name="description" content="<?= $t['subtitle'] ?>">
     <link rel="canonical" href="https://hasanarofid.site/articles" />
     <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
+    <link rel="author" type="text/plain" href="https://hasanarofid.site/llms.txt" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://hasanarofid.site/articles" />
+    <meta property="og:title" content="<?= $t['title'] ?> | Hasan Arofid" />
+    <meta property="og:description" content="<?= $t['subtitle'] ?>" />
+    <meta property="og:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://hasanarofid.site/articles" />
+    <meta property="twitter:title" content="<?= $t['title'] ?> | Hasan Arofid" />
+    <meta property="twitter:description" content="<?= $t['subtitle'] ?>" />
+    <meta property="twitter:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Beranda",
+          "item": "https://hasanarofid.site/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Artikel",
+          "item": "https://hasanarofid.site/articles"
+        }
+      ]
+    }
+    </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --bg: #f8fafc; --surface: #ffffff; --border: rgba(0,0,0,0.08); --text: #0f172a; --text-muted: #475569; --accent: #3b82f6; --gradient: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%); }

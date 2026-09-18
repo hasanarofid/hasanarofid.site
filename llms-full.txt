@@ -1,0 +1,71 @@
+# Hasan Arofid - Complete Technical & Service Documentation
+
+## About Hasan Arofid
+Hasan Arofid is a Senior Fullstack Software Engineer and Web Architecture Consultant with over 10 years of professional experience building web-based applications, SaaS products, e-commerce platforms, and custom business systems.
+
+### Business Details
+- **Brand Name**: Hasan Arofid Web Development Services
+- **Location**: Surabaya, East Java, Indonesia
+- **Address**: Dukuh Kupang Surabaya, Jawa Timur 60231, Indonesia
+- **Geo Coordinates**: Latitude -7.323285, Longitude 112.727786
+- **Contact Number / WhatsApp**: +62 881-4959-247
+- **Official URL**: https://hasanarofid.site/
+
+---
+
+## Technical Stack & Capabilities
+- **Backend Engineering**: PHP (Laravel, Native PHP), Node.js (Express, NestJS), Python.
+- **Frontend Development**: HTML5, CSS3, Modern JavaScript (ES6+), React, Vue.js, Tailwind CSS, Vanilla CSS design systems.
+- **Database Architecture**: PostgreSQL, MySQL, SQLite, Redis caching.
+- **System Architecture & Cloud**: Microservices, RESTful API design, Linux Server Administration, Nginx, Docker, CI/CD pipelines.
+- **Performance & SEO**: PageSpeed optimization, Schema.org JSON-LD structured data, Generative Engine Optimization (GEO), Responsive UI/UX.
+
+---
+
+## Key Portfolio Projects
+
+1. **School Management System** (Education Tech)
+   - *Description*: Internal monitoring and management system for educational institutions, streamlining administration, student records, and operational auditing.
+
+2. **Mr. Lux** (Automotive ERP & POS)
+   - *Description*: Comprehensive POS, inventory management, and financial reporting system for automotive detailing and service businesses.
+
+3. **Mitrasyiar Baitullah** (Umrah & Hajj Platform)
+   - *Description*: Web-based management software for travel agencies organizing Umrah and Hajj, handling pilgrim registration and payment tracking.
+
+4. **Amtech EV Infrastructure** (Enterprise SaaS)
+   - *Description*: Unified management platform for EV charging networks across Malaysia, processing real-time hardware telemetry and multi-tenant billing.
+
+5. **Nolimits Training** (Corporate LMS)
+   - *Description*: Learning management and event registration platform for executive training and corporate skill development.
+
+6. **Gringgo** (Environmental Tech Platform)
+   - *Description*: Technology platform focused on waste management tracking and environmental solutions to empower local communities.
+
+---
+
+## Frequently Asked Questions (FAQ)
+
+### Q: Layanan apa saja yang ditawarkan oleh Hasan Arofid?
+A: Hasan Arofid menawarkan layanan pembuatan Landing Page konversi tinggi, Company Profile profesional, Sistem Web Kustom (ERP, POS, SaaS, LMS), dan Toko Online / E-Commerce berperforma tinggi.
+
+### Q: Berapa lama waktu pengerjaan website?
+A: Durasi tergantung pada kompleksitas proyek:
+- Landing Page & Company Profile: 3 - 7 hari kerja.
+- Toko Online & Sistem Web Kustom: 2 - 4 minggu tergantung pada cakupan fitur.
+
+### Q: Apakah website yang dibuat sudah teroptimasi SEO dan GEO?
+A: Ya, setiap website yang dibangun menyertakan struktur HTML5 semantik, optimasi kecepatan muat halaman, OpenGraph, Schema.org JSON-LD terstruktur, serta file `llms.txt` agar ramah terhadap mesin pencari Google dan AI Search Engine (ChatGPT, Perplexity, Gemini).
+
+### Q: Bagaimana cara berkonsultasi mengenai proyek baru?
+A: Anda dapat berkonsultasi secara gratis via WhatsApp di nomor +62 881-4959-247 atau melalui formulir kontak di website https://hasanarofid.site/contact.
+
+---
+
+## Official Links
+- Homepage: https://hasanarofid.site/
+- About: https://hasanarofid.site/about
+- Portfolio: https://hasanarofid.site/portofolio
+- Products: https://hasanarofid.site/products
+- Blog & Articles: https://hasanarofid.site/articles
+- Contact: https://hasanarofid.site/contact

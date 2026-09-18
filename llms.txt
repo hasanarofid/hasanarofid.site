@@ -1,0 +1,28 @@
+# Hasan Arofid - Professional Web Development & Software Engineering Services
+
+> Senior Fullstack Engineer & Web Architect based in Surabaya, Indonesia with 10+ years of experience building scalable, high-performance web applications, enterprise systems, custom SaaS, and conversion-focused landing pages.
+
+## Core Services
+- **Landing Page Design & Development**: High-converting, fast-loading, mobile-optimized landing pages.
+- **Company Profile Websites**: Professional digital presence for corporate branding and business credibility.
+- **Custom Web Systems (POS, ERP, SaaS)**: Scalable, tailored enterprise web applications.
+- **E-Commerce Solutions**: Secure, high-scale online stores with seamless payment gateway integration.
+
+## Key Information
+- **Owner / Lead Engineer**: Hasan Arofid
+- **Location**: Dukuh Kupang Surabaya, East Java, Indonesia (Postal Code: 60231)
+- **Primary Tech Stack**: PHP (Laravel), Node.js, React, SQLite / PostgreSQL / MySQL, HTML5, CSS3, REST APIs, Cloud Infrastructure.
+- **Languages Supported**: Indonesian (Bahasa Indonesia), English.
+- **Contact / Phone / WhatsApp**: +62 881-4959-247
+- **Official Website**: https://hasanarofid.site/
+
+## Key Pages & Documentation
+- [Homepage](https://hasanarofid.site/): Overview of services, portfolio highlights, and value proposition.
+- [About Hasan Arofid](https://hasanarofid.site/about): Detailed experience, background, mission, and technical expertise.
+- [Portfolio Showcase](https://hasanarofid.site/portofolio): Real-world projects including enterprise systems, public web platforms, and mobile apps.
+- [Digital Products](https://hasanarofid.site/products): Developer tools, scripts, and business digital assets.
+- [Articles & Insights](https://hasanarofid.site/articles): Deep dives into web architecture, system scaling, and web performance.
+- [Contact Page](https://hasanarofid.site/contact): Direct consultation booking via WhatsApp or email.
+
+## Full Context & Details
+- For comprehensive technical context, project case studies, and detailed Q&A, see [llms-full.txt](https://hasanarofid.site/llms-full.txt).

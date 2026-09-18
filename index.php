@@ -106,6 +106,26 @@ try {
       'products_title' => 'Digital Assets',
       'products_subtitle' => 'Ready-to-use tools and resources to accelerate your business growth.',
       'more_products' => 'Browse All Products',
+      'faq_title' => 'Frequently Asked Questions',
+      'faq_subtitle' => 'Everything you need to know about our web development services and process.',
+      'faq_items' => [
+        [
+          'q' => 'What web development services do you offer?',
+          'a' => 'We specialize in high-converting Landing Pages, professional Company Profiles, Custom Web Systems (ERP, POS, SaaS), and scalable E-Commerce stores.'
+        ],
+        [
+          'q' => 'How long does it take to complete a project?',
+          'a' => 'Landing Pages and Company Profiles take 3–7 business days. Custom systems and complex online stores usually take 2–4 weeks depending on scope.'
+        ],
+        [
+          'q' => 'Is every website optimized for SEO & AI Search (GEO)?',
+          'a' => 'Yes! All our sites are built with semantic HTML5, high speed, Schema.org JSON-LD structured data, and llms.txt files for max visibility in Google & AI Search (ChatGPT, Perplexity, Gemini).'
+        ],
+        [
+          'q' => 'How do we start a consultation or order?',
+          'a' => 'You can reach out directly via WhatsApp at +62 881-4959-247 for a free consultation or fill out the contact form below.'
+        ]
+      ],
       'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Expertly crafted for performance.',
     ],
     'id' => [
@@ -147,6 +167,26 @@ try {
       'products_title' => 'Produk Digital',
       'products_subtitle' => 'Alat dan sumber daya siap pakai untuk mempercepat pertumbuhan bisnis Anda.',
       'more_products' => 'Lihat Semua Produk',
+      'faq_title' => 'Pertanyaan Umum (FAQ)',
+      'faq_subtitle' => 'Segala hal yang perlu Anda ketahui tentang layanan pembuatan website dan proses kerja kami.',
+      'faq_items' => [
+        [
+          'q' => 'Jasa pembuatan website apa saja yang disediakan?',
+          'a' => 'Kami menyediakan pembuatan Landing Page konversi tinggi, Company Profile profesional, Sistem Web Kustom (ERP, POS, SaaS), dan Toko Online / E-Commerce terintegrasi.'
+        ],
+        [
+          'q' => 'Berapa lama waktu pengerjaan pembuatan website?',
+          'a' => 'Landing Page & Company Profile membutuhkan 3–7 hari kerja. Sistem web kustom dan toko online kompleks membutuhkan 2–4 minggu sesuai cakupan fitur.'
+        ],
+        [
+          'q' => 'Apakah website yang dibuat sudah teroptimasi SEO & GEO?',
+          'a' => 'Ya! Setiap website dibangun dengan HTML5 semantik, performa tinggi, Schema.org JSON-LD terstruktur, serta file llms.txt agar optimal di Google dan AI Search Engine (ChatGPT, Perplexity, Gemini).'
+        ],
+        [
+          'q' => 'Bagaimana cara melakukan konsultasi atau pemesanan?',
+          'a' => 'Anda dapat langsung menghubungi via WhatsApp di +62 881-4959-247 untuk konsultasi gratis atau mengisi formulir kontak di bawah.'
+        ]
+      ],
       'footer_copy' => '© ' . date('Y') . ' Hasan Arofid. Dibuat secara ahli untuk performa tinggi.',
     ]
   ];
@@ -215,6 +255,12 @@ try {
   <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
 
 
+  <!-- Hreflang Tags -->
+  <link rel="alternate" hreflang="id" href="https://hasanarofid.site/?lang=id" />
+  <link rel="alternate" hreflang="en" href="https://hasanarofid.site/?lang=en" />
+  <link rel="alternate" hreflang="x-default" href="https://hasanarofid.site/" />
+  <link rel="author" type="text/plain" href="https://hasanarofid.site/llms.txt" />
+
   <!-- GEO Tags -->
   <meta name="geo.region" content="ID-JI" />
   <meta name="geo.placename" content="Surabaya" />
@@ -222,6 +268,30 @@ try {
   <meta name="ICBM" content="-7.323285, 112.727786" />
 
   <!-- Schema.org Markup -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Hasan Arofid",
+    "url": "https://hasanarofid.site/",
+    "inLanguage": ["id", "en"],
+    "description": "Jasa Pembuatan Website Profesional & Arsitektur Perangkat Lunak di Surabaya"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [{
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Beranda",
+      "item": "https://hasanarofid.site/"
+    }]
+  }
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -239,7 +309,7 @@ try {
       "@type": "Organization",
       "name": "Freelance / Self-Employed"
     },
-    "description": "Senior Fullstack Engineer with 10+ years of experience building scalable, production-ready systems."
+    "description": "Senior Fullstack Engineer dengan pengalaman 10+ tahun membangun sistem web berkinerja tinggi."
   }
   </script>
 
@@ -262,11 +332,34 @@ try {
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": -7.323285,
-      "longitude": -7.323285
+      "longitude": 112.727786
     },
-    "serviceType": "Web Development, SEO, E-commerce",
+    "serviceType": "Web Development, SEO, E-commerce, SaaS Development",
     "areaServed": "Indonesia",
     "priceRange": "$$"
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      <?php
+      $faqList = [];
+      foreach ($t['faq_items'] as $item) {
+        $faqList[] = json_encode([
+          '@type' => 'Question',
+          'name' => $item['q'],
+          'acceptedAnswer' => [
+            '@type' => 'Answer',
+            'text' => $item['a']
+          ]
+        ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+      }
+      echo implode(",\n      ", $faqList);
+      ?>
+    ]
   }
   </script>
 
@@ -1222,6 +1315,65 @@ try {
       color: var(--accent);
       gap: 16px;
     }
+
+    /* FAQ Section Styles */
+    .faq-container {
+      max-width: 850px;
+      margin: 0 auto;
+    }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 40px;
+    }
+    .faq-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+    .faq-item:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+    }
+    .faq-item details {
+      padding: 24px;
+    }
+    .faq-item summary {
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: 'Poppins', sans-serif;
+      color: var(--text);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .faq-item summary::-webkit-details-marker {
+      display: none;
+    }
+    .faq-item summary::after {
+      content: '+';
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--accent);
+      transition: transform 0.3s ease;
+    }
+    .faq-item details[open] summary::after {
+      content: '−';
+      transform: rotate(180deg);
+    }
+    .faq-answer {
+      margin-top: 16px;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7190047001129861"
     crossorigin="anonymous"></script>
@@ -1265,6 +1417,7 @@ try {
         <a href="#projects"><?= $lang === 'id' ? 'Portofolio' : 'Portfolio' ?></a>
         <a href="/articles"><?= $lang === 'id' ? 'Artikel' : 'Blog' ?></a>
         <a href="#testimonials"><?= $lang === 'id' ? 'Testimoni' : 'Testimonials' ?></a>
+        <a href="#faq">FAQ</a>
         <div class="theme-toggle" id="themeToggle">🌓</div>
         <a href="?lang=<?= $lang === 'id' ? 'en' : 'id' ?>" class="lang-toggle"><?= $lang === 'id' ? 'EN' : 'ID' ?></a>
         <a href="https://wa.me/628814959247"
@@ -1555,6 +1708,26 @@ try {
       <span>LARAVEL</span><span>NODE.JS</span><span>REACT</span><span>POSTGRESQL</span><span>DOCKER</span><span>REDIS</span><span>TYPESCRIPT</span>
     </div>
   </div>
+
+  <section id="faq">
+    <div class="container faq-container">
+      <div class="section-title" data-reveal><?= $t['faq_title'] ?></div>
+      <div class="section-subtitle" data-reveal><?= $t['faq_subtitle'] ?></div>
+
+      <div class="faq-list">
+        <?php foreach ($t['faq_items'] as $index => $item): ?>
+          <div class="faq-item" data-reveal data-delay="<?= $index * 100 ?>">
+            <details <?= $index === 0 ? 'open' : '' ?>>
+              <summary><?= htmlspecialchars($item['q']) ?></summary>
+              <div class="faq-answer">
+                <p><?= htmlspecialchars($item['a']) ?></p>
+              </div>
+            </details>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    </div>
+  </section>
 
   <section id="contact">
     <div class="container" style="max-width: 700px;">

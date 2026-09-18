@@ -35,10 +35,43 @@ $active_t = $t[$lang];
   <meta name="description" content="<?= $active_t['subtitle'] ?>" />
   <link rel="canonical" href="https://hasanarofid.site/products" />
   <meta name="google-site-verification" content="E-tyAYsOQMugMAc2KAkBnFdVc9mAbKbId7ZOAK3gpDQ" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
   <link rel="icon" type="image/png" href="images/logohasanarofid.png" />
+  <link rel="author" type="text/plain" href="https://hasanarofid.site/llms.txt" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://hasanarofid.site/products" />
+  <meta property="og:title" content="<?= $active_t['title'] ?>" />
+  <meta property="og:description" content="<?= $active_t['subtitle'] ?>" />
+  <meta property="og:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://hasanarofid.site/products" />
+  <meta property="twitter:title" content="<?= $active_t['title'] ?>" />
+  <meta property="twitter:description" content="<?= $active_t['subtitle'] ?>" />
+  <meta property="twitter:image" content="https://hasanarofid.site/images/hasanarofid.png" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "https://hasanarofid.site/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Produk Digital",
+        "item": "https://hasanarofid.site/products"
+      }
+    ]
+  }
+  </script>
 
   <style>
     :root {
