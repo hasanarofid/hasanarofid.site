@@ -94,7 +94,7 @@ Ketentuan Wajib:
    - excerpt: Ringkasan artikel untuk meta description (120-155 karakter).
    - content: Konten artikel lengkap dalam format HTML (gunakan <h2>, <h3>, <p>, <ul>, <ol>, <code>, <pre>, <blockquote>) dengan panjang minimal 800 - 1200 kata. Artikel harus memiliki studi kasus praktis, tips implementasi, contoh baris kode nyata jika relevan, dan kesimpulan.";
 
-    $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" . $geminiKey;
+    $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=" . $geminiKey;
     $postData = [
         "contents" => [
             ["parts" => [["text" => $prompt]]]
