@@ -94,7 +94,7 @@ Ketentuan Wajib:
    - excerpt: Ringkasan artikel untuk meta description (120-155 karakter).
    - content: Konten artikel lengkap dalam format HTML (gunakan <h2>, <h3>, <p>, <ul>, <ol>, <code>, <pre>, <blockquote>) dengan panjang minimal 800 - 1200 kata. Artikel harus memiliki studi kasus praktis, tips implementasi, contoh baris kode nyata jika relevan, dan kesimpulan.";
 
-    $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=" . $geminiKey;
+    $candidateModels = ['gemini-3.5-flash-lite', 'gemini-3.5-flash', 'gemini-flash-latest'];
     $postData = [
         "contents" => [
             ["parts" => [["text" => $prompt]]]
@@ -104,39 +104,43 @@ Ketentuan Wajib:
         ]
     ];
 
-    $ch = curl_init($apiUrl);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_POST, true);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
-    curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 60);
+    foreach ($candidateModels as $modelName) {
+        $apiUrl = "https://generativelanguage.googleapis.com/v1beta/models/{$modelName}:generateContent?key=" . $geminiKey;
 
-    $response = curl_exec($ch);
-    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+        $ch = curl_init($apiUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($postData));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 60);
 
-    if ($httpCode === 200 && $response) {
-        $result = json_decode($response, true);
-        $rawText = $result['candidates'][0]['content']['parts'][0]['text'] ?? '';
-        $data = json_decode($rawText, true);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
 
-        if (!empty($data['title']) && !empty($data['content'])) {
-            $title = $data['title'];
-            $slug = createSlug($title);
-            $excerpt = $data['excerpt'] ?? substr(strip_tags($data['content']), 0, 150);
-            $content = $data['content'];
+        if ($httpCode === 200 && $response) {
+            $result = json_decode($response, true);
+            $rawText = $result['candidates'][0]['content']['parts'][0]['text'] ?? '';
+            $data = json_decode($rawText, true);
 
-            // Insert new article
-            $stmt = $db->prepare("INSERT INTO articles (title, slug, excerpt, content, status, created_at) VALUES (?, ?, ?, ?, 'published', datetime('now'))");
-            $stmt->execute([$title, $slug, $excerpt, $content]);
+            if (!empty($data['title']) && !empty($data['content'])) {
+                $title = $data['title'];
+                $slug = createSlug($title);
+                $excerpt = $data['excerpt'] ?? substr(strip_tags($data['content']), 0, 150);
+                $content = $data['content'];
 
-            writeLog("SUCCESS: Generated and published new AI article: '$title' ($slug)", $logFile);
-            $articleCreated = true;
+                // Insert new article
+                $stmt = $db->prepare("INSERT INTO articles (title, slug, excerpt, content, status, created_at) VALUES (?, ?, ?, ?, 'published', datetime('now'))");
+                $stmt->execute([$title, $slug, $excerpt, $content]);
+
+                writeLog("SUCCESS: Generated and published new AI article via $modelName: '$title' ($slug)", $logFile);
+                $articleCreated = true;
+                break;
+            }
         } else {
-            writeLog("WARNING: Invalid JSON payload from Gemini API.", $logFile);
+            writeLog("Model $modelName returned HTTP $httpCode, trying next...", $logFile);
+            sleep(1);
         }
-    } else {
-        writeLog("WARNING: Gemini API request failed with HTTP code $httpCode. Falling back to draft promoter.", $logFile);
     }
 }
 
