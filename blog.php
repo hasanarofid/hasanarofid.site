@@ -10,6 +10,13 @@ $stmt = $db->prepare("SELECT * FROM articles WHERE slug = ? AND status = 'publis
 $stmt->execute([$slug]);
 $article = $stmt->fetch(PDO::FETCH_ASSOC);
 
+$relatedArticles = [];
+if ($article) {
+    $relStmt = $db->prepare("SELECT id, title, slug, excerpt, created_at FROM articles WHERE id != ? AND status = 'published' ORDER BY RANDOM() LIMIT 3");
+    $relStmt->execute([$article['id']]);
+    $relatedArticles = $relStmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 if (!$article) {
     http_response_code(404);
 ?>
@@ -165,7 +172,23 @@ $lang = $_SESSION['lang'] ?? 'en';
         .share-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
         .share-btn:active { transform: scale(0.95); }
 
-        .cta-box { margin-top: 40px; padding: 40px; background: var(--gradient); border-radius: 24px; color: white; text-align: center; }
+        .author-box { margin-top: 48px; padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; display: flex; align-items: center; gap: 24px; text-align: left; }
+        .author-box img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+        .author-info h4 { margin: 0 0 6px; font-family: 'Poppins', sans-serif; font-size: 1.2rem; }
+        .author-info p { margin: 0 0 10px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
+        .author-links a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem; margin-right: 16px; }
+        .author-links a:hover { text-decoration: underline; }
+
+        .related-section { margin-top: 60px; }
+        .related-section h3 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; margin-bottom: 24px; text-align: center; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
+        .related-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(0,0,0,0.06); }
+        .related-card h4 { margin: 0 0 12px; font-size: 1.1rem; line-height: 1.4; color: var(--text); }
+        .related-card p { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 16px; line-height: 1.5; flex-grow: 1; }
+        .related-meta { color: var(--accent); font-size: 0.8rem; font-weight: 600; }
+
+        .cta-box { margin-top: 50px; padding: 40px; background: var(--gradient); border-radius: 24px; color: white; text-align: center; }
         .cta-box h3 { margin-bottom: 16px; }
         .cta-box .btn-white { background: white; color: var(--accent); padding: 12px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; }
 
@@ -176,7 +199,7 @@ $lang = $_SESSION['lang'] ?? 'en';
     <div class="container">
         <nav>
             <a href="/" class="logo">
-                <img src="images/logohasanarofid.png" alt="Logo">
+                <img src="/images/logohasanarofid.png" alt="Logo">
                 <span>Hasan Arofid</span>
             </a>
             <a href="/articles" class="back-link">← <?= $lang === 'id' ? 'Kembali ke Artikel' : 'Back to Articles' ?></a>
@@ -192,6 +215,20 @@ $lang = $_SESSION['lang'] ?? 'en';
                 <?= $article['content'] ?>
             </div>
 
+            <!-- E-E-A-T Author Box -->
+            <div class="author-box">
+                <img src="/images/hasanarofid.png" alt="Hasan Arofid">
+                <div class="author-info">
+                    <h4>Hasan Arofid</h4>
+                    <p><?= $lang === 'id' ? 'Senior Fullstack Engineer & Konsultan Web dengan 10+ tahun pengalaman membangun sistem web skalabel, arsitektur cloud, dan solusi digital bisnis performa tinggi.' : 'Senior Fullstack Engineer & Web Consultant with 10+ years of experience crafting scalable web architectures, cloud systems, and high-performance business digital assets.' ?></p>
+                    <div class="author-links">
+                        <a href="https://github.com/hasanarofid" target="_blank" rel="noopener">GitHub Profile →</a>
+                        <a href="https://linkedin.com/in/hasan-arofid-47869a130/" target="_blank" rel="noopener">LinkedIn Profile →</a>
+                        <a href="/#contact"><?= $lang === 'id' ? 'Hubungi Saya' : 'Contact Author' ?> →</a>
+                    </div>
+                </div>
+            </div>
+
             <div class="share-section">
                 <p><strong><?= $lang === 'id' ? 'Sukai artikel ini? Bagikan ke rekan Anda:' : 'Like this article? Share it with your network:' ?></strong></p>
                 <div class="share-buttons">
@@ -201,6 +238,24 @@ $lang = $_SESSION['lang'] ?? 'en';
                     <button onclick="copyLink()" class="share-btn btn-copy" id="copyBtn"><?= $lang === 'id' ? 'Salin Link' : 'Copy Link' ?></button>
                 </div>
             </div>
+
+            <?php if (!empty($relatedArticles)): ?>
+            <!-- Related Articles (Internal Linking) -->
+            <div class="related-section">
+                <h3><?= $lang === 'id' ? 'Artikel Terkait Lainnya' : 'Related Articles' ?></h3>
+                <div class="related-grid">
+                    <?php foreach ($relatedArticles as $rel): ?>
+                    <a href="/blog/<?= htmlspecialchars($rel['slug']) ?>" class="related-card">
+                        <div>
+                            <h4><?= htmlspecialchars($rel['title']) ?></h4>
+                            <p><?= htmlspecialchars(mb_substr(strip_tags($rel['excerpt'] ?: $rel['title']), 0, 100)) ?>...</p>
+                        </div>
+                        <span class="related-meta"><?= $lang === 'id' ? 'Baca Selengkapnya →' : 'Read More →' ?></span>
+                    </a>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <?php endif; ?>
 
             <div class="cta-box">
                 <h3><?= $lang === 'id' ? 'Butuh Solusi Web Profesional?' : 'Need Professional Web Solutions?' ?></h3>
