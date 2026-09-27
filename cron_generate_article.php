@@ -94,7 +94,7 @@ Ketentuan Wajib:
    - excerpt: Ringkasan artikel untuk meta description (120-155 karakter).
    - content: Konten artikel lengkap dalam format HTML (gunakan <h2>, <h3>, <p>, <ul>, <ol>, <code>, <pre>, <blockquote>) dengan panjang minimal 800 - 1200 kata. Artikel harus memiliki studi kasus praktis, tips implementasi, contoh baris kode nyata jika relevan, dan kesimpulan.";
 
-    $candidateModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
+    $candidateModels = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-flash-latest'];
     $postData = [
         "contents" => [
             ["parts" => [["text" => $prompt]]]
