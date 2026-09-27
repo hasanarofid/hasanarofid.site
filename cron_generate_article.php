@@ -94,7 +94,13 @@ Ketentuan Wajib:
    - excerpt: Ringkasan artikel untuk meta description (120-155 karakter).
    - content: Konten artikel lengkap dalam format HTML (gunakan <h2>, <h3>, <p>, <ul>, <ol>, <code>, <pre>, <blockquote>) dengan panjang minimal 800 - 1200 kata. Artikel harus memiliki studi kasus praktis, tips implementasi, contoh baris kode nyata jika relevan, dan kesimpulan.";
 
-    $candidateModels = ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.6-flash', 'gemini-flash-latest'];
+    $candidateModels = [
+        'gemini-3.1-flash-lite',
+        'gemini-flash-lite-latest',
+        'gemini-3.8-flash',
+        'gemini-3.7-flash',
+        'gemini-flash-latest'
+    ];
     $postData = [
         "contents" => [
             ["parts" => [["text" => $prompt]]]
@@ -145,7 +151,7 @@ Ketentuan Wajib:
         } else {
             $errDetail = !empty($curlError) ? "cURL error: $curlError" : "HTTP $httpCode";
             writeLog("Model $modelName returned $errDetail, trying next...", $logFile);
-            sleep(1);
+            sleep(2);
         }
     }
 }
