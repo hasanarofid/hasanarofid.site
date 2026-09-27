@@ -94,7 +94,7 @@ Ketentuan Wajib:
    - excerpt: Ringkasan artikel untuk meta description (120-155 karakter).
    - content: Konten artikel lengkap dalam format HTML (gunakan <h2>, <h3>, <p>, <ul>, <ol>, <code>, <pre>, <blockquote>) dengan panjang minimal 800 - 1200 kata. Artikel harus memiliki studi kasus praktis, tips implementasi, contoh baris kode nyata jika relevan, dan kesimpulan.";
 
-    $candidateModels = ['gemini-3.5-flash-lite', 'gemini-3.5-flash', 'gemini-flash-latest'];
+    $candidateModels = ['gemini-2.5-flash', 'gemini-2.0-flash', 'gemini-1.5-flash', 'gemini-1.5-pro'];
     $postData = [
         "contents" => [
             ["parts" => [["text" => $prompt]]]
@@ -116,11 +116,14 @@ Ketentuan Wajib:
 
         $response = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
         curl_close($ch);
 
         if ($httpCode === 200 && $response) {
             $result = json_decode($response, true);
             $rawText = $result['candidates'][0]['content']['parts'][0]['text'] ?? '';
+            // Sanitize markdown fences if present
+            $rawText = trim(preg_replace('/^```(?:json)?\s*|\s*```$/i', '', trim($rawText)));
             $data = json_decode($rawText, true);
 
             if (!empty($data['title']) && !empty($data['content'])) {
@@ -136,9 +139,12 @@ Ketentuan Wajib:
                 writeLog("SUCCESS: Generated and published new AI article via $modelName: '$title' ($slug)", $logFile);
                 $articleCreated = true;
                 break;
+            } else {
+                writeLog("Model $modelName responded with invalid JSON structure, trying next...", $logFile);
             }
         } else {
-            writeLog("Model $modelName returned HTTP $httpCode, trying next...", $logFile);
+            $errDetail = !empty($curlError) ? "cURL error: $curlError" : "HTTP $httpCode";
+            writeLog("Model $modelName returned $errDetail, trying next...", $logFile);
             sleep(1);
         }
     }
