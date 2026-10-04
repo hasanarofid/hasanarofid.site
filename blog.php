@@ -53,41 +53,84 @@ if (!$article) {
 }
 
 session_start();
-$lang = $_SESSION['lang'] ?? 'en';
+$lang = $_SESSION['lang'] ?? 'id';
+
+// Calculate reading time
+$wordCount = str_word_count(strip_tags($article['content']));
+$readingTime = max(1, ceil($wordCount / 200));
+
+// Process Content: Auto generate IDs for H2 and H3, and build Table of Contents (TOC)
+$toc = [];
+$contentWithIds = preg_replace_callback('/<h([23])(.*?)>(.*?)<\/h[23]>/i', function($matches) use (&$toc) {
+    $level = $matches[1];
+    $attrs = $matches[2];
+    $titleText = strip_tags($matches[3]);
+    $slugId = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $titleText)));
+    if (empty($slugId)) $slugId = 'section-' . count($toc);
+    $toc[] = [
+        'level' => (int)$level,
+        'id' => $slugId,
+        'title' => $titleText
+    ];
+    return "<h{$level}{$attrs} id=\"{$slugId}\">{$matches[3]}</h{$level}>";
+}, $article['content']);
+
+// Auto extract FAQ for FAQ schema if present
+$faqSchema = [];
+if (preg_match('/<h2>.*?(?:FAQ|Pertanyaan).*?<\/h2>(.*)/is', $article['content'], $faqMatch)) {
+    preg_match_all('/<h3>(.*?)<\/h3>\s*<p>(.*?)<\/p>/is', $faqMatch[1], $faqItems, PREG_SET_ORDER);
+    foreach ($faqItems as $item) {
+        $q = trim(strip_tags($item[1]));
+        $a = trim(strip_tags($item[2]));
+        if (!empty($q) && !empty($a)) {
+            $faqSchema[] = [
+                "@type" => "Question",
+                "name" => $q,
+                "acceptedAnswer" => [
+                    "@type" => "Answer",
+                    "text" => $a
+                ]
+            ];
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="<?= $lang ?>">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= htmlspecialchars($article['title']) ?> | Hasan Arofid Blog</title>
+    <title><?= htmlspecialchars($article['title']) ?> | Hasan Arofid</title>
     <meta name="description" content="<?= htmlspecialchars($article['excerpt']) ?>">
+    <meta name="keywords" content="web development, laravel, fullstack, database, devops, performance, tutorial web, hasan arofid">
     
     <!-- Open Graph / Facebook / Threads -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://hasanarofid.site/blog/<?= $article['slug'] ?>">
     <meta property="og:title" content="<?= htmlspecialchars($article['title']) ?>">
     <meta property="og:description" content="<?= htmlspecialchars($article['excerpt']) ?>">
-    <meta property="og:image" content="https://hasanarofid.site/images/logohasanarofid.png">
+    <meta property="og:image" content="https://hasanarofid.site/images/hasanarofid.png">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://hasanarofid.site/blog/<?= $article['slug'] ?>">
     <meta property="twitter:title" content="<?= htmlspecialchars($article['title']) ?>">
     <meta property="twitter:description" content="<?= htmlspecialchars($article['excerpt']) ?>">
-    <meta property="twitter:image" content="https://hasanarofid.site/images/logohasanarofid.png">
+    <meta property="twitter:image" content="https://hasanarofid.site/images/hasanarofid.png">
 
     <link rel="canonical" href="https://hasanarofid.site/blog/<?= $article['slug'] ?>" />
     <link rel="icon" type="image/png" href="/images/logohasanarofid.png" />
     <link rel="author" type="text/plain" href="https://hasanarofid.site/llms.txt" />
 
-    <!-- Schema.org Article & Breadcrumb -->
+    <!-- Schema.org BlogPosting Structured Data -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "BlogPosting",
       "headline": <?= json_encode($article['title']) ?>,
       "description": <?= json_encode($article['excerpt']) ?>,
+      "wordCount": <?= (int)$wordCount ?>,
+      "inLanguage": "id-ID",
       "datePublished": <?= json_encode(date('c', strtotime($article['created_at']))) ?>,
       "dateModified": <?= json_encode(date('c', strtotime($article['created_at']))) ?>,
       "mainEntityOfPage": {
@@ -97,19 +140,36 @@ $lang = $_SESSION['lang'] ?? 'en';
       "author": {
         "@type": "Person",
         "name": "Hasan Arofid",
-        "url": "https://hasanarofid.site/"
+        "url": "https://hasanarofid.site/",
+        "jobTitle": "Senior Full-Stack Engineer",
+        "sameAs": [
+          "https://github.com/hasanarofid",
+          "https://linkedin.com/in/hasan-arofid-47869a130/"
+        ]
       },
       "publisher": {
         "@type": "Organization",
         "name": "Hasan Arofid",
+        "url": "https://hasanarofid.site/",
         "logo": {
           "@type": "ImageObject",
           "url": "https://hasanarofid.site/images/logohasanarofid.png"
         }
       },
-      "image": "https://hasanarofid.site/images/logohasanarofid.png"
+      "image": "https://hasanarofid.site/images/hasanarofid.png"
     }
     </script>
+
+    <?php if (!empty($faqSchema)): ?>
+    <!-- Schema.org FAQPage Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": <?= json_encode($faqSchema, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES) ?>
+    }
+    </script>
+    <?php endif; ?>
 
     <script type="application/ld+json">
     {
@@ -137,62 +197,116 @@ $lang = $_SESSION['lang'] ?? 'en';
       ]
     }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #f8fafc; --surface: #ffffff; --border: rgba(0,0,0,0.08); --text: #0f172a; --text-muted: #475569; --accent: #3b82f6; }
-        [data-theme="dark"] { --bg: #030712; --surface: #0f172a; --border: rgba(255,255,255,0.08); --text: #f8fafc; --text-muted: #94a3b8; }
+        :root {
+            --bg: #f8fafc;
+            --surface: #ffffff;
+            --border: rgba(0,0,0,0.08);
+            --text: #0f172a;
+            --text-muted: #475569;
+            --accent: #2563eb;
+            --accent-light: #dbeafe;
+            --code-bg: #0f172a;
+            --gradient: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        }
+        [data-theme="dark"] {
+            --bg: #030712;
+            --surface: #0f172a;
+            --border: rgba(255,255,255,0.08);
+            --text: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-light: rgba(59, 130, 246, 0.15);
+            --code-bg: #030712;
+        }
+        html { scroll-behavior: smooth; }
         body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.8; margin: 0; padding: 0; }
-        .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
-        nav { padding: 32px 0; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-weight: 800; font-size: 1.5rem; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px; }
-        .logo img { height: 40px; }
-        .back-link { color: var(--text-muted); text-decoration: none; font-weight: 500; }
+        .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
         
-        article { padding: 60px 0 120px; }
-        .article-header { margin-bottom: 48px; text-align: center; }
-        .article-header h1 { font-family: 'Poppins', sans-serif; font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1.2; margin-bottom: 24px; }
-        .article-meta { color: var(--text-muted); font-size: 0.95rem; font-weight: 500; }
+        nav { padding: 24px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--bg); backdrop-filter: blur(12px); z-index: 100; }
+        .logo { font-weight: 800; font-size: 1.4rem; text-decoration: none; color: inherit; display: flex; align-items: center; gap: 12px; }
+        .logo img { height: 36px; }
+        .back-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; transition: 0.2s; }
+        .back-link:hover { color: var(--accent); }
         
+        article { padding: 40px 0 100px; }
+        .article-header { margin-bottom: 36px; text-align: left; }
+        .article-badges { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-bottom: 16px; }
+        .badge-category { background: var(--accent-light); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+        .badge-reading { color: var(--text-muted); font-size: 0.9rem; font-weight: 500; display: flex; align-items: center; gap: 4px; }
+        .article-header h1 { font-family: 'Poppins', sans-serif; font-size: clamp(2rem, 4.5vw, 3.2rem); line-height: 1.25; margin: 0 0 20px; font-weight: 800; }
+        .article-meta-row { display: flex; align-items: center; gap: 14px; color: var(--text-muted); font-size: 0.95rem; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+        .author-mini-img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
+        
+        /* Table of Contents Box */
+        .toc-box { background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--accent); border-radius: 16px; padding: 24px 28px; margin: 36px 0 48px; box-shadow: 0 8px 24px rgba(0,0,0,0.03); }
+        .toc-header { font-family: 'Poppins', sans-serif; font-size: 1.15rem; font-weight: 700; margin: 0 0 16px; display: flex; justify-content: space-between; align-items: center; }
+        .toc-list { list-style: none; padding: 0; margin: 0; }
+        .toc-list li { margin-bottom: 10px; line-height: 1.5; }
+        .toc-list li.toc-level-3 { padding-left: 20px; font-size: 0.95rem; }
+        .toc-list a { color: var(--text-muted); text-decoration: none; transition: 0.2s; }
+        .toc-list a:hover { color: var(--accent); text-decoration: underline; }
+
+        /* Article Typography */
         .article-content { font-size: 1.15rem; color: var(--text); }
-        .article-content h1, .article-content h2, .article-content h3 { margin-top: 48px; margin-bottom: 16px; font-family: 'Poppins', sans-serif; }
-        .article-content p { margin-bottom: 24px; }
-        .article-content img { max-width: 100%; border-radius: 16px; margin: 32px 0; box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .article-content ul, .article-content ol { margin-bottom: 24px; padding-left: 24px; }
+        .article-content h2 { margin-top: 52px; margin-bottom: 18px; font-family: 'Poppins', sans-serif; font-size: 1.85rem; font-weight: 700; line-height: 1.3; color: var(--text); border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+        .article-content h3 { margin-top: 36px; margin-bottom: 14px; font-family: 'Poppins', sans-serif; font-size: 1.4rem; font-weight: 600; line-height: 1.4; color: var(--text); }
+        .article-content p { margin-bottom: 24px; font-size: 1.12rem; }
+        .article-content img { max-width: 100%; border-radius: 16px; margin: 32px 0; box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
+        .article-content ul, .article-content ol { margin-bottom: 28px; padding-left: 28px; }
         .article-content li { margin-bottom: 12px; }
-        .article-content blockquote { border-left: 4px solid var(--accent); padding-left: 24px; font-style: italic; color: var(--text-muted); margin: 32px 0; }
+        .article-content strong { font-weight: 700; color: var(--text); }
+        .article-content blockquote { border-left: 4px solid var(--accent); background: var(--surface); padding: 20px 24px; font-style: normal; border-radius: 0 16px 16px 0; color: var(--text); margin: 32px 0; box-shadow: 0 4px 16px rgba(0,0,0,0.02); }
         
+        /* Code Box */
+        .code-container { position: relative; margin: 28px 0; border-radius: 14px; overflow: hidden; background: var(--code-bg); }
+        .article-content pre { margin: 0; padding: 20px 24px; overflow-x: auto; font-family: 'JetBrains Mono', monospace; font-size: 0.95rem; color: #f8fafc; line-height: 1.6; }
+        .article-content code { font-family: 'JetBrains Mono', monospace; font-size: 0.92em; background: rgba(125,125,125,0.12); padding: 2px 6px; border-radius: 6px; color: var(--accent); }
+        .article-content pre code { background: transparent; padding: 0; color: inherit; }
+        .btn-copy-code { position: absolute; top: 12px; right: 12px; background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2); color: white; padding: 5px 12px; border-radius: 8px; font-size: 0.75rem; font-weight: 600; cursor: pointer; transition: 0.2s; }
+        .btn-copy-code:hover { background: var(--accent); border-color: var(--accent); }
+
+        /* Social Share */
         .share-section { margin-top: 60px; padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; text-align: center; }
-        .share-buttons { display: flex; justify-content: center; gap: 16px; margin-top: 20px; }
+        .share-buttons { display: flex; justify-content: center; gap: 14px; margin-top: 16px; flex-wrap: wrap; }
         .share-btn { padding: 10px 20px; border-radius: 12px; text-decoration: none; font-weight: 700; color: white; font-size: 0.9rem; transition: 0.3s; }
         .btn-wa { background: #25d366; }
         .btn-tw { background: #1da1f2; }
         .btn-li { background: #0077b5; }
-        .btn-th { background: #000000; }
         .btn-copy { background: #64748b; cursor: pointer; border: none; font-family: inherit; }
-        .share-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
-        .share-btn:active { transform: scale(0.95); }
+        .share-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
 
+        /* E-E-A-T Author Box */
         .author-box { margin-top: 48px; padding: 32px; background: var(--surface); border: 1px solid var(--border); border-radius: 20px; display: flex; align-items: center; gap: 24px; text-align: left; }
-        .author-box img { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); }
-        .author-info h4 { margin: 0 0 6px; font-family: 'Poppins', sans-serif; font-size: 1.2rem; }
-        .author-info p { margin: 0 0 10px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; }
-        .author-links a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.85rem; margin-right: 16px; }
+        .author-box img { width: 84px; height: 84px; border-radius: 50%; object-fit: cover; border: 2px solid var(--accent); flex-shrink: 0; }
+        .author-info h4 { margin: 0 0 6px; font-family: 'Poppins', sans-serif; font-size: 1.25rem; font-weight: 700; }
+        .author-info p { margin: 0 0 12px; color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+        .author-links a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.9rem; margin-right: 18px; }
         .author-links a:hover { text-decoration: underline; }
 
+        /* Related Articles */
         .related-section { margin-top: 60px; }
-        .related-section h3 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; margin-bottom: 24px; text-align: center; }
-        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
+        .related-section h3 { font-family: 'Poppins', sans-serif; font-size: 1.6rem; margin-bottom: 24px; text-align: center; font-weight: 700; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
         .related-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; text-decoration: none; color: inherit; display: flex; flex-direction: column; justify-content: space-between; transition: 0.3s; }
         .related-card:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: 0 12px 24px rgba(0,0,0,0.06); }
         .related-card h4 { margin: 0 0 12px; font-size: 1.1rem; line-height: 1.4; color: var(--text); }
         .related-card p { color: var(--text-muted); font-size: 0.85rem; margin: 0 0 16px; line-height: 1.5; flex-grow: 1; }
-        .related-meta { color: var(--accent); font-size: 0.8rem; font-weight: 600; }
+        .related-meta { color: var(--accent); font-size: 0.85rem; font-weight: 700; }
 
         .cta-box { margin-top: 50px; padding: 40px; background: var(--gradient); border-radius: 24px; color: white; text-align: center; }
-        .cta-box h3 { margin-bottom: 16px; }
-        .cta-box .btn-white { background: white; color: var(--accent); padding: 12px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; }
+        .cta-box h3 { margin: 0 0 12px; font-size: 1.6rem; font-family: 'Poppins', sans-serif; }
+        .cta-box p { margin: 0 0 24px; opacity: 0.9; }
+        .cta-box .btn-white { background: white; color: var(--accent); padding: 12px 32px; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; transition: 0.3s; }
+        .cta-box .btn-white:hover { transform: scale(1.03); }
 
         footer { padding: 60px 0; border-top: 1px solid var(--border); text-align: center; color: var(--text-muted); }
+
+        @media (max-width: 640px) {
+            .author-box { flex-direction: column; text-align: center; }
+            .article-meta-row { flex-direction: column; align-items: flex-start; gap: 8px; }
+        }
     </style>
 </head>
 <body>
@@ -207,34 +321,59 @@ $lang = $_SESSION['lang'] ?? 'en';
 
         <article>
             <div class="article-header">
-                <div class="article-meta"><?= date('F d, Y', strtotime($article['created_at'])) ?></div>
+                <div class="article-badges">
+                    <span class="badge-category">Arsitektur & Web</span>
+                    <span class="badge-reading">⏱️ <?= $readingTime ?> menit baca</span>
+                </div>
                 <h1><?= htmlspecialchars($article['title']) ?></h1>
+                <div class="article-meta-row">
+                    <img src="/images/hasanarofid.png" alt="Hasan Arofid" class="author-mini-img">
+                    <div>
+                        <strong>Hasan Arofid</strong> • Ditulis pada <?= date('d F Y', strtotime($article['created_at'])) ?>
+                    </div>
+                </div>
             </div>
+
+            <?php if (!empty($toc)): ?>
+            <!-- Table of Contents (TOC) -->
+            <div class="toc-box">
+                <div class="toc-header">
+                    <span>📑 Daftar Isi Artikel</span>
+                </div>
+                <ul class="toc-list">
+                    <?php foreach ($toc as $item): ?>
+                    <li class="toc-level-<?= $item['level'] ?>">
+                        <a href="#<?= htmlspecialchars($item['id']) ?>"><?= htmlspecialchars($item['title']) ?></a>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <?php endif; ?>
             
-            <div class="article-content ql-editor">
-                <?= $article['content'] ?>
+            <div class="article-content" id="articleBody">
+                <?= $contentWithIds ?>
             </div>
 
             <!-- E-E-A-T Author Box -->
             <div class="author-box">
                 <img src="/images/hasanarofid.png" alt="Hasan Arofid">
                 <div class="author-info">
-                    <h4>Hasan Arofid</h4>
-                    <p><?= $lang === 'id' ? 'Senior Fullstack Engineer & Konsultan Web dengan 10+ tahun pengalaman membangun sistem web skalabel, arsitektur cloud, dan solusi digital bisnis performa tinggi.' : 'Senior Fullstack Engineer & Web Consultant with 10+ years of experience crafting scalable web architectures, cloud systems, and high-performance business digital assets.' ?></p>
+                    <h4>Tentang Penulis: Hasan Arofid</h4>
+                    <p><?= $lang === 'id' ? 'Senior Fullstack Software Engineer & Konsultan Web dengan pengalaman 10+ tahun merancang arsitektur sistem skala tinggi, optimasi performa web, dan keamanan aplikasi bisnis.' : 'Senior Fullstack Software Engineer & Web Consultant with 10+ years of experience crafting scalable web architectures, cloud systems, and high-performance business digital assets.' ?></p>
                     <div class="author-links">
                         <a href="https://github.com/hasanarofid" target="_blank" rel="noopener">GitHub Profile →</a>
                         <a href="https://linkedin.com/in/hasan-arofid-47869a130/" target="_blank" rel="noopener">LinkedIn Profile →</a>
-                        <a href="/#contact"><?= $lang === 'id' ? 'Hubungi Saya' : 'Contact Author' ?> →</a>
+                        <a href="/#contact"><?= $lang === 'id' ? 'Konsultasi Proyek' : 'Contact Author' ?> →</a>
                     </div>
                 </div>
             </div>
 
             <div class="share-section">
-                <p><strong><?= $lang === 'id' ? 'Sukai artikel ini? Bagikan ke rekan Anda:' : 'Like this article? Share it with your network:' ?></strong></p>
+                <p><strong><?= $lang === 'id' ? 'Bagikan artikel ini kepada rekan developer Anda:' : 'Like this article? Share it with your network:' ?></strong></p>
                 <div class="share-buttons">
-                    <a href="https://api.whatsapp.com/send?text=Baca artikel menarik ini: <?= urlencode($article['title']) ?> - https://hasanarofid.site/blog/<?= $article['slug'] ?>" target="_blank" class="share-btn btn-wa">WhatsApp</a>
-                    <a href="https://www.threads.net/intent/post?text=<?= urlencode($article['title'] . ' - https://hasanarofid.site/blog/' . $article['slug']) ?>" target="_blank" class="share-btn btn-th">Threads</a>
+                    <a href="https://api.whatsapp.com/send?text=Baca artikel teknis menarik ini: <?= urlencode($article['title']) ?> - https://hasanarofid.site/blog/<?= $article['slug'] ?>" target="_blank" class="share-btn btn-wa">WhatsApp</a>
                     <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://hasanarofid.site/blog/<?= $article['slug'] ?>" target="_blank" class="share-btn btn-li">LinkedIn</a>
+                    <a href="https://twitter.com/intent/tweet?text=<?= urlencode($article['title'] . ' https://hasanarofid.site/blog/' . $article['slug']) ?>" target="_blank" class="share-btn btn-tw">Twitter / X</a>
                     <button onclick="copyLink()" class="share-btn btn-copy" id="copyBtn"><?= $lang === 'id' ? 'Salin Link' : 'Copy Link' ?></button>
                 </div>
             </div>
@@ -242,7 +381,7 @@ $lang = $_SESSION['lang'] ?? 'en';
             <?php if (!empty($relatedArticles)): ?>
             <!-- Related Articles (Internal Linking) -->
             <div class="related-section">
-                <h3><?= $lang === 'id' ? 'Artikel Terkait Lainnya' : 'Related Articles' ?></h3>
+                <h3><?= $lang === 'id' ? 'Panduan & Artikel Terkait Lainnya' : 'Related Articles' ?></h3>
                 <div class="related-grid">
                     <?php foreach ($relatedArticles as $rel): ?>
                     <a href="/blog/<?= htmlspecialchars($rel['slug']) ?>" class="related-card">
@@ -250,7 +389,7 @@ $lang = $_SESSION['lang'] ?? 'en';
                             <h4><?= htmlspecialchars($rel['title']) ?></h4>
                             <p><?= htmlspecialchars(mb_substr(strip_tags($rel['excerpt'] ?: $rel['title']), 0, 100)) ?>...</p>
                         </div>
-                        <span class="related-meta"><?= $lang === 'id' ? 'Baca Selengkapnya →' : 'Read More →' ?></span>
+                        <span class="related-meta"><?= $lang === 'id' ? 'Baca Panduan →' : 'Read More →' ?></span>
                     </a>
                     <?php endforeach; ?>
                 </div>
@@ -258,9 +397,9 @@ $lang = $_SESSION['lang'] ?? 'en';
             <?php endif; ?>
 
             <div class="cta-box">
-                <h3><?= $lang === 'id' ? 'Butuh Solusi Web Profesional?' : 'Need Professional Web Solutions?' ?></h3>
-                <p><?= $lang === 'id' ? 'Kami membantu bisnis Anda tumbuh dengan teknologi terbaru.' : 'We help your business grow with the latest technology.' ?></p>
-                <a href="/#contact" class="btn-white"><?= $lang === 'id' ? 'Konsultasi Sekarang' : 'Consult Now' ?></a>
+                <h3><?= $lang === 'id' ? 'Butuh Konsultasi Arsitektur Web atau Optimasi SEO?' : 'Need Professional Web Solutions?' ?></h3>
+                <p><?= $lang === 'id' ? 'Bangun sistem web cepat, aman, dan siap scale-up bersama engineer berpengalaman.' : 'We help your business grow with the latest technology.' ?></p>
+                <a href="/#contact" class="btn-white"><?= $lang === 'id' ? 'Konsultasi Gratis Sekarang' : 'Consult Now' ?></a>
             </div>
         </article>
     </div>
@@ -295,39 +434,26 @@ $lang = $_SESSION['lang'] ?? 'en';
                 }, 2000);
             });
         }
-    </script>
 
-  <style>
-    /* Floating WhatsApp */
-    .whatsapp-float {
-      position: fixed;
-      bottom: 30px;
-      right: 30px;
-      background: #25d366;
-      color: white;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 32px;
-      box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
-      z-index: 2000;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    .whatsapp-float:hover {
-      transform: scale(1.1) translateY(-5px);
-      box-shadow: 0 15px 30px rgba(37, 211, 102, 0.4);
-    }
-  </style>
-  <a href="https://wa.me/628814959247?text=Halo%20Hasan,%20saya%20ingin%20konsultasi%20mengenai%20pembuatan%20website"
-    class="whatsapp-float" target="_blank" aria-label="Chat on WhatsApp">
-    <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z" />
-    </svg>
-  </a>
+        // Add copy button to pre code blocks
+        document.querySelectorAll('pre').forEach(pre => {
+            const container = document.createElement('div');
+            container.className = 'code-container';
+            pre.parentNode.insertBefore(container, pre);
+            container.appendChild(pre);
+
+            const copyBtn = document.createElement('button');
+            copyBtn.className = 'btn-copy-code';
+            copyBtn.innerText = 'Salin Kode';
+            copyBtn.addEventListener('click', () => {
+                const code = pre.querySelector('code') ? pre.querySelector('code').innerText : pre.innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    copyBtn.innerText = 'Tersalin!';
+                    setTimeout(() => { copyBtn.innerText = 'Salin Kode'; }, 2000);
+                });
+            });
+            container.appendChild(copyBtn);
+        });
+    </script>
 </body>
 </html>

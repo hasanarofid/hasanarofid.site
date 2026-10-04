@@ -68,38 +68,63 @@ $articleCreated = false;
 if (!empty($geminiKey)) {
     writeLog("Using Gemini API for fresh article generation...", $logFile);
 
-    // List of high-value topics & search intents
+    // List of high-value, problem-solving, long-tail topics targeting search intent & real developer problems
     $topics = [
-        "Tips Optimasi Kecepatan Website Laravel dan LiteSpeed untuk Skor PageSpeed 100",
-        "Panduan Lengkap Arsitektur Clean Code untuk Fullstack Developer Modern",
-        "Membangun API RESTful yang Aman: Best Practice Autentikasi JWT dan Rate Limiting",
-        "Strategi SEO On-Page 2026: Cara Cepat Agar Website Masuk Halaman 1 Google",
-        "Mengapa Bisnis Anda Wajib Memiliki Website Company Profile yang Cepat dan Mobile-Friendly",
-        "Panduan Lengkap Migrasi Database SQLite ke PostgreSQL untuk Aplikasi Skalabilitas Tinggi",
-        "Mencegah Serangan Cyber pada Website: Panduan Perlindungan CSRF, XSS, dan SQL Injection",
-        "Perbandingan Next.js vs Vite React: Mana yang Lebih Efisien untuk Startup Web App",
-        "Cara Mengatur Cron Job cPanel untuk Otomatisasi Sistem dan Pengiriman Email",
-        "Pentingnya Schema Markup Structured Data untuk Menaikkan CTR di Google Search"
+        "Cara Mengatasi Error SQLite Database is Locked pada Aplikasi PHP dan Web Cron Job",
+        "Panduan Konfigurasi LiteSpeed Cache & OPcache untuk Optimasi Performa PHP Skala Tinggi",
+        "Tutorial Lengkap Implementasi JWT Authentication dengan Refresh Token & Rate Limiting di Node.js",
+        "Studi Kasus: Cara Menurunkan LCP dan INP (Core Web Vitals) di Bawah 1.2 Detik Tanpa Framework Berat",
+        "Panduan Migrasi Database SQLite ke PostgreSQL Menggunakan pgloader Tanpa Downtime",
+        "Cara Mencegah Serangan SQL Injection, XSS, dan CSRF pada Aplikasi PHP Native dan Framework",
+        "Perbandingan Mendalam Next.js Server Components vs Vite SPA: Kapan Harus Menggunakan Masing-Masing?",
+        "Panduan Setup Automated Backup Database SQLite dan MySQL ke Cloud Storage Menggunakan Bash Script & Cron Job",
+        "Optimalisasi Query Database Relasional: Menggunakan Indexing B-Tree, Explain Analyze, dan Partitioning",
+        "Cara Membangun WhatsApp Notification Gateway Menggunakan Node.js dan Midtrans Webhook",
+        "Panduan Lengkap Implementasi Structured Data Schema.org (Article, FAQ, Breadcrumb) untuk Meningkatkan CTR Google",
+        "Teknik Debouncing dan Throttling pada JavaScript Modern untuk Optimasi Kinerja DOM",
+        "Mengamankan REST API dengan Cloudflare WAF, Rate Limiter, dan IP Whitelisting",
+        "Panduan Clean Architecture pada PHP Modern: Memisahkan Domain, Repository, dan Service Layer",
+        "Cara Mengurangi Ukuran Bundle JavaScript Frontend Hingga 60% dengan Dynamic Import dan Tree Shaking"
     ];
-    $selectedTopic = $topics[array_rand($topics)];
 
-    // Check existing titles to avoid duplicate
+    // Filter out topics that already exist in titles
     $existing = $db->query("SELECT title FROM articles")->fetchAll(PDO::FETCH_COLUMN);
+    $availableTopics = array_filter($topics, function($t) use ($existing) {
+        foreach ($existing as $e) {
+            if (stripos($e, substr($t, 0, 25)) !== false) return false;
+        }
+        return true;
+    });
 
-    $prompt = "Tulis artikel blog teknologi / web development mendalam dalam bahasa Indonesia tentang: '{$selectedTopic}'.
-Ketentuan Wajib:
-1. Format output HANYA JSON murni tanpa markdown wrapper (jangan gunakan ```json).
-2. JSON harus memiliki field:
-   - title: Judul artikel yang menarik dan SEO-friendly (maksimal 70 karakter).
-   - excerpt: Ringkasan artikel untuk meta description (120-155 karakter).
-   - content: Konten artikel lengkap dalam format HTML (gunakan <h2>, <h3>, <p>, <ul>, <ol>, <code>, <pre>, <blockquote>) dengan panjang minimal 800 - 1200 kata. Artikel harus memiliki studi kasus praktis, tips implementasi, contoh baris kode nyata jika relevan, dan kesimpulan.";
+    if (empty($availableTopics)) {
+        $selectedTopic = $topics[array_rand($topics)];
+    } else {
+        $selectedTopic = $availableTopics[array_rand($availableTopics)];
+    }
+
+    $prompt = "Anda adalah Senior Fullstack Software Engineer & Web Architect (Hasan Arofid) dengan pengalaman 10+ tahun. Tulis artikel panduan teknis mendalam, profesional, dan kaya solusi praktis dalam bahasa Indonesia tentang topik: '{$selectedTopic}'.
+
+Ketentuan Kualitas Konten (Standar AdSense E-E-A-T & SEO On-Page):
+1. Format output HANYA JSON murni (tanpa tanda ```json atau markdown codeblock di luar JSON).
+2. JSON harus berisi field:
+   - title: Judul artikel yang spesifik, solutif, dan memikat pembaca teknis (maksimal 70 karakter).
+   - category: Kategori yang sesuai (pilih salah satu: 'Web Development', 'Backend & Database', 'DevOps & Cloud', 'Keamanan & SEO', 'Arsitektur Web').
+   - excerpt: Ringkasan artikel padat informasi untuk meta description Google (130-155 karakter).
+   - content: Isi konten artikel lengkap dalam format HTML bersih (panjang 1.200 - 1.800 kata).
+     Struktur konten Wajib mencakup:
+     - <h2>Pendahuluan & Konteks Masalah</h2> (Latar belakang teknis nyata mengapa masalah ini penting diatasi).
+     - <h2>Penyebab Akar Masalah (Root Cause) & Analisis Teknis</h2>.
+     - <h2>Solusi Praktis & Panduan Langkah Demi Langkah</h2> (Gunakan <h3>, <pre><code> untuk contoh baris kode nyata yang siap pakai, dan <ol>/<ul>).
+     - <h2>Benchmark / Perbandingan / Studi Kasus Proyek</h2> (Sertakan data perbandingan atau skenario kasus nyata).
+     - <h2>Best Practice & Kesalahan Umum yang Harus Dihindari</h2> (Gunakan <blockquote> untuk tips penting atau peringatan).
+     - <h2>Pertanyaan yang Sering Diajukan (FAQ)</h2> (Sertakan minimal 3 pertanyaan dan jawaban menggunakan <h3> dan <p>).
+     - <h2>Kesimpulan & Rekomendasi Arsitektur</h2>.";
 
     $candidateModels = [
         'gemini-3.1-flash-lite',
-        'gemini-flash-lite-latest',
+        'gemini-flash-latest',
         'gemini-3.8-flash',
-        'gemini-3.7-flash',
-        'gemini-flash-latest'
+        'gemini-3.7-flash'
     ];
     $postData = [
         "contents" => [
@@ -142,7 +167,7 @@ Ketentuan Wajib:
                 $stmt = $db->prepare("INSERT INTO articles (title, slug, excerpt, content, status, created_at) VALUES (?, ?, ?, ?, 'published', datetime('now'))");
                 $stmt->execute([$title, $slug, $excerpt, $content]);
 
-                writeLog("SUCCESS: Generated and published new AI article via $modelName: '$title' ($slug)", $logFile);
+                writeLog("SUCCESS: Generated and published high-value E-E-A-T article via $modelName: '$title' ($slug)", $logFile);
                 $articleCreated = true;
                 break;
             } else {
