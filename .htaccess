@@ -1,5 +1,18 @@
 RewriteEngine On
 
+# 0. Canonical Domain & Subdomain Fix (Redirect www, mail, dll ke domain utama)
+RewriteCond %{HTTP_HOST} !^studio\.hasanarofid\.site$ [NC]
+RewriteCond %{HTTP_HOST} !^hasanarofid\.site$ [NC]
+RewriteRule ^(.*)$ https://hasanarofid.site/$1 [R=301,L]
+
+# 0. Force HTTPS
+RewriteCond %{HTTPS} off
+RewriteCond %{HTTP:X-Forwarded-Proto} !https [NC]
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# 0. Redirect old/renamed article slugs
+RewriteRule ^blog/tutorial-jwt-authentication-implementasi-refresh-token-rate-limiting$ /blog/panduan-membangun-api-restful-aman-dengan-jwt-dan-rate-limiting [R=301,L]
+
 # 1. Redirect index.php to root /
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.php\ HTTP/
 RewriteRule ^index\.php$ / [R=301,L]
