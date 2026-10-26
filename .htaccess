@@ -29,6 +29,10 @@ RewriteRule ^ /blog/%2? [R=301,L]
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /(about|articles|contact|disclaimer|portofolio|privacy-policy|products|terms-of-service|trafik)\.php\ HTTP/ [NC]
 RewriteRule ^([a-zA-Z0-9_-]+)\.php$ /$1 [R=301,L]
 
+# 4b. Redirect URLs with trailing slash to non-trailing slash (except directories)
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)/$ /$1 [R=301,L]
+
 # 5. Route blog slugs
 RewriteRule ^blog/([a-zA-Z0-9-]+)$ blog.php?slug=$1 [QSA,L]
 

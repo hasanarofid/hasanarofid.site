@@ -198,7 +198,7 @@ try {
       <h1>Traffic & SEO Analytics</h1>
       <div style="display: flex; align-items: center; gap: 20px;">
         <div class="theme-toggle" id="themeToggle">🌓</div>
-        <a href="index.php" class="btn-back">← Back to Site</a>
+        <a href="/" class="btn-back">← Back to Site</a>
       </div>
     </div>
 
