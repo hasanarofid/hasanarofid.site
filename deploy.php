@@ -29,8 +29,8 @@ if (!$authorized) {
 // Path repository di server cPanel Rumahweb
 $repoPath = '/home/nitw3991/public_html/hasanarofid.site';
 
-// Eksekusi git pull
-$output = shell_exec("cd $repoPath && git pull origin main 2>&1");
+// Eksekusi git pull (abaikan perubahan lokal sitemap agar tidak konflik)
+$output = shell_exec("cd $repoPath && git checkout -- sitemap.xml 2>&1 && git pull origin main 2>&1");
 
 header('Content-Type: text/plain');
 echo "Deployment Output:\n$output";
